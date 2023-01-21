@@ -1,14 +1,30 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "impression",
+  "version": "1.0.0",
+  "description": "Make your impression better",
+  "keywords": [
+    "semantic-analysis",
+    "nlp",
+    "speech-recognition",
+    "productivity",
+    "career"
+  ],
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
+    "@fluentui/react-components": "9.11.0",
+    "compendium-js": "0.0.31",
+    "compromise": "14.7.1",
+    "detectrtc": "1.4.1",
+    "framer-motion": "8.2.4",
+    "lodash": "4.17.21",
+    "react-speech-recognition": "3.9.1",
+    "typewriter-effect": "2.19.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

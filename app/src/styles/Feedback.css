@@ -1,0 +1,23 @@
+.feedback-btn {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.feedback-btn p {
+  padding: 5px;
+  margin: 0;
+}
+
+.feedback-btn[data-user-feedback="positive"] {
+  background-color: hsl(133, 44%, 8%);
+}
+
+.feedback-btn[data-user-feedback="negative"] {
+  background-color: hsl(148, 66%, 24%);
+}
+
+.feedback-btn[data-user-feedback="neutral"] {
+  background-color: hsl(34, 71%, 15%);
+}
