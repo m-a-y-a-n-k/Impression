@@ -1,0 +1,20 @@
+.Landing {
+  width: 100%;
+  height: 100%;
+  background-color: hsl(240, 72%, 60%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Landing[data-user-feedback="positive"] {
+  background-color: hsl(128, 69%, 40%);
+}
+
+.Landing[data-user-feedback="negative"] {
+  background-color: hsl(60, 1%, 14%);
+}
+
+.Landing[data-user-feedback="neutral"] {
+  background-color: hsl(19, 93%, 48%);
+}

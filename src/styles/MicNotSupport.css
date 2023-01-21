@@ -1,0 +1,32 @@
+.mic-support-container {
+  align-self: flex-start;
+  background: rgb(94, 56, 231);
+  height: 100vh;
+  width: 100vw;
+}
+.mic-support-container .feedback {
+  font-size: 1em;
+}
+
+.mic-support-container .hint {
+  font-size: 0.6em;
+  font-style: italic;
+}
+
+.mic-support-submit-btn {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  cursor: pointer;
+  background-color: rgb(3, 12, 58);
+}
+
+.mic-support-submit-btn p {
+  padding: 5px;
+  margin: 0;
+}
+
+.mic-support-submit-btn[data-enabled="false"] {
+  background-color: rgb(43, 42, 42);
+  cursor: not-allowed;
+}
