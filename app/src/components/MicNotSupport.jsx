@@ -6,30 +6,53 @@ import { Textarea } from "@fluentui/react-components";
 import { feedbackCTAMotionConfig } from "../config/feedbackCTAMotion";
 import { motion } from "framer-motion";
 
-const MicNotSupport = ({ updateUserFeedback }) => {
+const MicNotSupport = (props) => {
+  const { updateUserFeedback, explicitMode = false, setImplicitMode } = props;
   const [rtcIssue, setRtcIssue] = useState("device");
   const [text, setText] = useState("");
 
   useEffect(() => {
     const getRTCProblem = () => {
+      if(explicitMode){
+        setRtcIssue("explicit");
+        return ;
+      }
+ 
       if (!DetectRTC.isWebRTCSupported) {
         setRtcIssue("browser");
-      } else if (!DetectRTC.isWebsiteHasMicrophonePermissions) {
+        return ;
+      } 
+      if (!DetectRTC.isWebsiteHasMicrophonePermissions) {
         setRtcIssue("permission");
-      } else if (!DetectRTC.hasMicrophone) {
+        return ;
+      } 
+      if (!DetectRTC.hasMicrophone) {
         setRtcIssue("device");
+        return ;
       }
     };
 
     getRTCProblem();
-  }, []);
+  }, [explicitMode]);
 
   const { feedback, hint } = micSupportConfig[rtcIssue] || {};
 
   return (
     <div className="mic-support-container">
       {feedback && <h3 className="feedback">{feedback}</h3>}
-      {hint && <p className="hint">{hint}</p>}
+      {hint && (
+        <p 
+          className="hint" 
+          data-explicit={explicitMode} 
+          onClick={() => {
+            if(explicitMode){
+              setImplicitMode();
+            }
+          }}
+        >
+          {hint}
+        </p>
+      )}
       <Textarea
         value={text}
         onChange={(event) => {

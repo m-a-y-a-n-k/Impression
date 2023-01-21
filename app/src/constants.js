@@ -1,1 +1,1 @@
-export const INTRO_DURATION = 12500;
+export const INTRO_DURATION = 14000;

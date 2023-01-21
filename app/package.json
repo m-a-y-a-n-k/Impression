@@ -1,13 +1,18 @@
 {
   "name": "impression",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Make your impression better",
   "keywords": [
-    "semantic-analysis",
+    "semantic analysis",
     "nlp",
-    "speech-recognition",
+    "speech recognition",
     "productivity",
-    "career"
+    "career",
+    "personal use",
+    "feedback",
+    "utility",
+    "react app",
+    "modern web"
   ],
   "homepage": "https://m-a-y-a-n-k.github.io/Impression/",
   "private": true,

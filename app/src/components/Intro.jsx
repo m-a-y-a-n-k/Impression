@@ -6,13 +6,14 @@ const Intro = () => {
     <Typewriter
       onInit={(typewriter) => {
         typewriter
+          .changeDeleteSpeed(50)
           .typeString("Hi ,")
           .pauseFor(500)
           .deleteAll()
-          .typeString("Let's help you sound impressive")
+          .typeString("Let's help you sound more impressive.")
           .deleteAll()
           .pauseFor(250)
-          .typeString("Try it out")
+          .typeString("Try it.")
           .start();
       }}
     />

@@ -10,6 +10,7 @@ import MicNotSupport from "./MicNotSupport";
 
 const AnimatedMic = ({ updateUserFeedback }) => {
   const [listen, setListen] = useState(false);
+  const [useText, setUseText] = useState(false);
 
   const {
     listening,
@@ -36,6 +37,10 @@ const AnimatedMic = ({ updateUserFeedback }) => {
     });
   };
 
+  const useTextOption = () => {
+    setUseText(true);
+  }
+
   useEffect(() => {
     if (!listening) {
       setListen(false);
@@ -56,8 +61,14 @@ const AnimatedMic = ({ updateUserFeedback }) => {
   const micNotSupported =
     !browserSupportsSpeechRecognition || !isMicrophoneAvailable;
 
-  if (micNotSupported) {
-    return <MicNotSupport updateUserFeedback={updateUserFeedback} />;
+  if (micNotSupported || useText) {
+    return (
+      <MicNotSupport 
+        updateUserFeedback={updateUserFeedback} 
+        explicitMode={useText}
+        setImplicitMode={() => setUseText(false)}
+      />
+    );
   }
 
   return (
@@ -74,6 +85,9 @@ const AnimatedMic = ({ updateUserFeedback }) => {
         <div className={"mic"} data-listen={listen}></div>
       </motion.div>
       {!listen && <p>Tap Mic</p>}
+      {!listen && (<div className="use-text-intead" onClick={useTextOption}>
+        <p>Don't use Mic? Go with <strong>Text</strong> instead</p>
+      </div>)}
     </div>
   );
 };

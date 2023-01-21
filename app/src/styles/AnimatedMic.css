@@ -32,3 +32,12 @@
   background-color: red;
   scale: 1.2;
 }
+
+.use-text-intead {
+  color: rgba(237, 240, 248, 0.7);
+  cursor: pointer;
+}
+
+.use-text-intead:hover {
+  color: white;
+}
