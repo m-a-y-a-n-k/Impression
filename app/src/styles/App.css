@@ -17,8 +17,12 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;
-  font-size: 1.6em;
+  font-size: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+h1 , h2 , h3 , h4, h5, h6 , p {
+  padding: 6px;
 }

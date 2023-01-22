@@ -9,8 +9,8 @@ export default function FeedBack({ userFeedback, resetFeedback }) {
 
   return (
     <>
-      {customFeedback}
-      <motion.div
+      {customFeedback && <p>{customFeedback}</p>}
+      {customCTAText && (<motion.div
         className="feedback-btn"
         data-user-feedback={userFeedback}
         onClick={() => {
@@ -21,7 +21,7 @@ export default function FeedBack({ userFeedback, resetFeedback }) {
         transition={feedbackCTAMotionConfig.transition}
       >
         <p>{customCTAText}</p>
-      </motion.div>
+      </motion.div>)}
     </>
   );
 }
