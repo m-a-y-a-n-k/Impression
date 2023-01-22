@@ -14,8 +14,8 @@ export const micSupportConfig = {
       "Try enabling your mic and refresh the page or type below and submit instead"
   },
   explicit: {
-    feedback: "Like the old conventional way ?. Got you covered.",
+    feedback: "Like the old conventional way ? Got you covered",
     hint:
-      "Type below and submit. You can try out the mic also by tapping here."
+      "Type below and submit. You can try out the mic also by tapping here"
   },
 };

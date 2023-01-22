@@ -19,5 +19,9 @@
 }
 
 .feedback-btn[data-user-feedback="neutral"] {
+  background-color: hsl(0, 80%, 17%);
+}
+
+.feedback-btn[data-user-feedback="mixed"] {
   background-color: hsl(34, 71%, 15%);
 }

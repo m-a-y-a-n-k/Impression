@@ -58,7 +58,7 @@ const MicNotSupport = (props) => {
         onChange={(event) => {
           setText(event.target.value);
         }}
-        placeholder="Resize for more space"
+        placeholder="Resize from bottom right corner for more space"
         size="large"
         resize="both"
         style={{
@@ -66,7 +66,8 @@ const MicNotSupport = (props) => {
           color: text ? "white" : "rgb(175, 173, 209)",
           fontSize: "0.6em",
           padding: "12px 0 0 12px",
-          border: "none"
+          border: "none",
+          minWidth: 300,
         }}
       />
       <motion.div

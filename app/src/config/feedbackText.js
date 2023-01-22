@@ -10,5 +10,9 @@ export const feebackTextConfig = {
   neutral: {
     feedback: "Your point is taken",
     ctaText: "Start Fresh"
+  },
+  mixed: {
+    feedback: "Not sure what that means. Sarcasm ?",
+    ctaText: "Clarify",
   }
 };

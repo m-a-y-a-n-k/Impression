@@ -16,5 +16,9 @@
 }
 
 .Landing[data-user-feedback="neutral"] {
+  background-color: hsl(0, 89%, 51%);
+}
+
+.Landing[data-user-feedback="mixed"] {
   background-color: hsl(19, 93%, 48%);
 }
