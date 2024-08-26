@@ -13,7 +13,6 @@ body {
   height: 100vh;
   text-align: center;
   background-color: hsl(240, 72%, 60%);
-  background-repeat: no-repeat;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;

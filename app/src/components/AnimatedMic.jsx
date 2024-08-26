@@ -8,7 +8,7 @@ import _debounce from "lodash/debounce";
 import { micMotionConfig } from "../config/micMotion";
 import MicNotSupport from "./MicNotSupport";
 
-const AnimatedMic = ({ updateUserFeedback }) => {
+const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
   const [listen, setListen] = useState(false);
   const [useText, setUseText] = useState(false);
 
@@ -23,6 +23,7 @@ const AnimatedMic = ({ updateUserFeedback }) => {
 
   const handleToggleListen = (on) => {
     if (on) {
+      stopAudio();
       SpeechRecognition.startListening();
     } else {
       SpeechRecognition.stopListening();
@@ -47,6 +48,11 @@ const AnimatedMic = ({ updateUserFeedback }) => {
     }
   }, [listening]);
 
+  useEffect(() => {
+    listen && stopAudio();
+    !listen && playAudio();
+  }, [listen, stopAudio, playAudio])
+
   const transcriptFinished =
     finalTranscript.length > 0 && interimTranscript === "";
 
@@ -63,8 +69,8 @@ const AnimatedMic = ({ updateUserFeedback }) => {
 
   if (micNotSupported || useText) {
     return (
-      <MicNotSupport 
-        updateUserFeedback={updateUserFeedback} 
+      <MicNotSupport
+        updateUserFeedback={updateUserFeedback}
         explicitMode={useText}
         setImplicitMode={() => setUseText(false)}
       />
@@ -84,9 +90,9 @@ const AnimatedMic = ({ updateUserFeedback }) => {
       >
         <div className={"mic"} data-listen={listen}></div>
       </motion.div>
-      {!listen && <p>Tap Mic</p>}
+      {!listen && <p>Tap the Mic</p>}
       {!listen && (<div className="use-text-intead" onClick={useTextOption}>
-        <p>Don't use Mic? Go with <strong>Text</strong> instead</p>
+        <p>Can't use Mic? Go with <strong>Text</strong> instead</p>
       </div>)}
     </div>
   );

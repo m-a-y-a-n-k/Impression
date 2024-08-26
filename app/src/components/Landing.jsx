@@ -4,7 +4,7 @@ import AnimatedMic from "./AnimatedMic";
 import FeedBack from "./Feedback";
 import compendium from "compendium-js";
 
-const Landing = () => {
+const Landing = ({ playAudio, stopAudio }) => {
   const [userFeedback, setUserFeedback] = useState("");
 
   const updateUserFeedback = (transcript) => {
@@ -26,7 +26,7 @@ const Landing = () => {
   return (
     <div className="Landing" data-user-feedback={userFeedback}>
       {/* <Locale />   */}
-      {!userFeedback && <AnimatedMic updateUserFeedback={updateUserFeedback} />}
+      {!userFeedback && <AnimatedMic updateUserFeedback={updateUserFeedback} playAudio={playAudio} stopAudio={stopAudio} />}
       {userFeedback && (
         <FeedBack userFeedback={userFeedback} resetFeedback={resetFeedback} />
       )}
