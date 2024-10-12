@@ -7,6 +7,7 @@ import SpeechRecognition, {
 import _debounce from "lodash/debounce";
 import { micMotionConfig } from "../config/micMotion";
 import MicNotSupport from "./MicNotSupport";
+import impressionLogo from "../assets/impression.webp";
 
 const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
   const [listen, setListen] = useState(false);
@@ -79,6 +80,7 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
 
   return (
     <div className="speech-input-banner">
+      <h1><img src={impressionLogo} alt="impression logo" width={36} height={36} /> Welcome , Let's make you sound <em><strong>Impressive</strong></em>.</h1>
       <motion.div
         layout
         className={"wrap"}
