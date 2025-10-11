@@ -1,36 +1,210 @@
 .mic-support-container {
-  align-self: flex-start;
-  background: rgb(94, 56, 231);
-  height: 100vh;
-  width: 100vw;
-}
-.mic-support-container .feedback {
-  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.mic-support-container .hint {
-  font-size: 0.6em;
+.mic-support-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mic-support-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.feedback {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.hint {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-style: italic;
+  line-height: 1.4;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.hint[data-explicit="true"] {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.hint[data-explicit="true"]:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.textarea-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 300px;
+}
+
+.custom-textarea {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: #2d3748 !important;
+  padding: 0 !important;
+  resize: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.custom-textarea::placeholder {
+  color: #a0aec0 !important;
   font-style: italic;
 }
 
-.mic-support-container .hint[data-explicit="true"] {
-  cursor: pointer;
+.textarea-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.char-count {
+  font-size: 0.875rem;
+  color: #718096;
+  font-weight: 500;
 }
 
 .mic-support-submit-btn {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 1.25rem 2rem;
   cursor: pointer;
-  background-color: rgb(3, 12, 58);
-}
-
-.mic-support-submit-btn p {
-  padding: 5px;
-  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
 }
 
 .mic-support-submit-btn[data-enabled="false"] {
-  background-color: rgb(43, 42, 42);
+  background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
   cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.submit-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.submit-icon {
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mic-support-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .feedback {
+    font-size: 1.125rem;
+  }
+  
+  .hint {
+    font-size: 0.9rem;
+  }
+  
+  .textarea-container {
+    padding: 1rem;
+    min-height: 250px;
+  }
+  
+  .mic-support-submit-btn {
+    padding: 1rem 1.5rem;
+  }
+  
+  .submit-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mic-support-content {
+    padding: 1rem 0.75rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .icon {
+    font-size: 2rem;
+  }
+  
+  .textarea-container {
+    padding: 0.75rem;
+    min-height: 200px;
+  }
 }

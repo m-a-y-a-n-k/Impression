@@ -12,7 +12,7 @@ body {
   width: 100vw;
   height: 100vh;
   text-align: center;
-  background-color: hsl(200, 10%, 75%);
+  background: linear-gradient(to right, #1e0a0a, #020b33);
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;

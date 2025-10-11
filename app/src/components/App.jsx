@@ -9,15 +9,21 @@ export default function App() {
     sessionStorage.getItem("intro-done") ? false : true;
 
   const [showIntro, setShowIntro] = useState(fetchIntroStatus);
-  const {
-    handlePlayAudio,
-    handleStopAudio
-  } = useSiteAudio();
+
+  const handleCloseIntro = () => {
+    setShowIntro(false);
+  };
+
+  const { handlePlayAudio, handleStopAudio } = useSiteAudio();
 
   return (
     <div className="App">
-      {showIntro && <Intro closeIntro={() => setShowIntro(false)} playAudio={handlePlayAudio} />}
-      {!showIntro && <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />}
+      {showIntro && (
+        <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
+      )}
+      {!showIntro && (
+        <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
+      )}
     </div>
   );
 }

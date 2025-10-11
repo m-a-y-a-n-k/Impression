@@ -13,76 +13,115 @@ const MicNotSupport = (props) => {
 
   useEffect(() => {
     const getRTCProblem = () => {
-      if(explicitMode){
+      if (explicitMode) {
         setRtcIssue("explicit");
-        return ;
+        return;
       }
- 
+
       if (!DetectRTC.isWebRTCSupported) {
         setRtcIssue("browser");
-        return ;
-      } 
+        return;
+      }
       if (!DetectRTC.isWebsiteHasMicrophonePermissions) {
         setRtcIssue("permission");
-        return ;
-      } 
+        return;
+      }
       if (!DetectRTC.hasMicrophone) {
         setRtcIssue("device");
-        return ;
+        return;
       }
     };
 
     getRTCProblem();
   }, [explicitMode]);
 
-  const { feedback, hint } = micSupportConfig[rtcIssue] || {};
+  const { feedback, hint, title, icon } =
+    micSupportConfig[rtcIssue] || {};
 
   return (
     <div className="mic-support-container">
-      {feedback && <h3 className="feedback">{feedback}</h3>}
-      {hint && (
-        <p 
-          className="hint" 
-          data-explicit={explicitMode} 
-          onClick={() => {
-            if(explicitMode){
-              setImplicitMode();
-            }
-          }}
+      <div className="mic-support-content">
+        <div className="mic-support-header">
+          {title && (
+            <motion.div 
+              className="title-section"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {icon && <span className="icon">{icon}</span>}
+              <h2 className="title">{title}</h2>
+            </motion.div>
+          )}
+          
+          {feedback && (
+            <motion.p 
+              className="feedback"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {feedback}
+            </motion.p>
+          )}
+          
+          {hint && (
+            <motion.p
+              className="hint"
+              data-explicit={explicitMode}
+              onClick={() => {
+                if (explicitMode) {
+                  setImplicitMode();
+                }
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={explicitMode ? { scale: 1.02 } : {}}
+            >
+              {hint}
+            </motion.p>
+          )}
+        </div>
+
+        <motion.div 
+          className="textarea-container"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
         >
-          {hint}
-        </p>
-      )}
-      <Textarea
-        value={text}
-        onChange={(event) => {
-          setText(event.target.value);
-        }}
-        placeholder="Resize from bottom right corner for more space"
-        size="large"
-        resize="both"
-        style={{
-          backgroundColor: "rgb(4, 3, 31)",
-          color: text ? "white" : "rgb(175, 173, 209)",
-          fontSize: "0.6em",
-          padding: "12px 0 0 12px",
-          border: "none",
-          minWidth: 300,
-        }}
-      />
+          <Textarea
+            value={text}
+            onChange={(event) => {
+              setText(event.target.value);
+            }}
+            placeholder="Type your message here..."
+            size="large"
+            resize="both"
+            className="custom-textarea"
+          />
+          <div className="textarea-footer">
+            <span className="char-count">{text.length} characters</span>
+          </div>
+        </motion.div>
+      </div>
+
       <motion.div
         className="mic-support-submit-btn"
         onClick={() => {
-          if (text) {
+          if (text.trim()) {
             updateUserFeedback(text);
           }
         }}
-        data-enabled={text ? "true" : "false"}
+        data-enabled={text.trim() ? "true" : "false"}
         initial={feedbackCTAMotionConfig.initial}
         animate={feedbackCTAMotionConfig.animate}
         transition={feedbackCTAMotionConfig.transition}
+        whileHover={text.trim() ? { scale: 1.02 } : {}}
+        whileTap={text.trim() ? { scale: 0.98 } : {}}
       >
-        <p>Submit</p>
+        <span className="submit-text">Submit Message</span>
+        <span className="submit-icon">📤</span>
       </motion.div>
     </div>
   );

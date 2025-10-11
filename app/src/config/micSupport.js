@@ -1,21 +1,39 @@
 export const micSupportConfig = {
   device: {
-    feedback: "Your device does not have a mic",
-    hint:
-      "Try using external mic and refresh the page or type and submit instead"
+    feedback: "Device lacks microphone capability",
+    hint: "Use a device with a built-in microphone",
+    title: "No Microphone Found",
+    icon: "🎤❌",
   },
   browser: {
-    feedback: "Your browser does not support microphone",
-    hint: "Try a different browser or type below and submit instead"
+    feedback: "Browser microphone API not available",
+    hint: "Enable microphone permissions in browser settings",
+    title: "Browser Not Supported",
+    icon: "🌐❌",
   },
   permission: {
-    feedback: "You have disabled mic access",
-    hint:
-      "Try enabling your mic and refresh the page or type below and submit instead"
+    feedback: 
+      "Microphone permission is disabled",
+    hint: "Refresh the page and allow microphone when prompted",
+    title: "Permission Denied",
+    icon: "🔒❌",
   },
   explicit: {
-    feedback: "Like the old conventional way ? Got you covered",
-    hint:
-      "Type below and submit. You can try out the mic also by tapping here"
+    feedback: "Type away - we're listening!",
+    hint: "Type your message below and hit submit",
+    title: "Text Input Mode",
+    icon: "⌨️✨",
+  },
+  network: {
+    feedback: "Connect to the internet to use microphone",
+    hint: "Check your WiFi or mobile data connection",
+    title: "Connection Required",
+    icon: "📶❌",
+  },
+  error: {
+    feedback: "Technical issue with audio capture",
+    hint: "Use text input as a backup option",
+    title: "Technical Issue",
+    icon: "⚠️❌",
   },
 };
