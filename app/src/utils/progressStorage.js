@@ -52,7 +52,9 @@ export const saveProgressEntry = (entry) => {
       transcript: transcript,
       score: entry.score || 0,
       feedback: entry.feedback || '',
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      // Enhanced analysis metrics
+      analysis: entry.analysis || null
     };
     
     // Add to beginning of array (most recent first)

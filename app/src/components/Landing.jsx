@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedMic from "./AnimatedMic";
 import FeedBack from "./Feedback";
-import compendium from "compendium-js";
+import { analyzeText } from "../utils/nlpAnalysis";
 import { saveProgressEntry } from "../utils/progressStorage";
 import { feebackTextConfig } from "../config/feedbackText";
 
@@ -13,6 +13,7 @@ const Landing = ({ playAudio, stopAudio }) => {
   const [error, setError] = useState(null);
   const [currentTranscript, setCurrentTranscript] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [analysisData, setAnalysisData] = useState(null);
   const lastSavedTranscriptRef = useRef("");
 
   const updateUserFeedback = async (transcript) => {
@@ -32,56 +33,77 @@ const Landing = ({ playAudio, stopAudio }) => {
       // Add a small delay to show processing state
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      let analysis = compendium.analyse(transcript, null, [
-        "entities",
-        "negation",
-        "type",
-        "numeric"
-      ]);
-
-      if (analysis && analysis.length > 0 && analysis[0].profile) {
-        const sentiment = analysis[0].profile.label;
-        setUserFeedback(sentiment);
-        
-        // Get feedback config for this sentiment
-        const config = feebackTextConfig[sentiment] || feebackTextConfig.neutral;
-        const feedbackIndex = Math.floor(Math.random() * config.feedback.length);
-        const feedback = config.feedback[feedbackIndex];
-        const score = config.score || 0;
-        
-        setFeedbackMessage(feedback);
-        
-        // Save to progress history (only once per transcript)
-        saveProgressEntry({
-          sentiment,
-          transcript,
-          score,
-          feedback
-        });
-      } else {
-        throw new Error("Unable to analyze sentiment");
-      }
-    } catch (err) {
-      console.error("Sentiment analysis error:", err);
-      setError("Failed to analyze your message. Please try again.");
-      // Fallback to neutral sentiment
-      const sentiment = "neutral";
+      // Enhanced NLP analysis using compromise
+      const enhancedAnalysis = analyzeText(transcript);
+      setAnalysisData(enhancedAnalysis);
+      
+      const sentiment = enhancedAnalysis.sentiment.label;
       setUserFeedback(sentiment);
       
-      const config = feebackTextConfig[sentiment];
+      // Get feedback config for this sentiment
+      const config = feebackTextConfig[sentiment] || feebackTextConfig.neutral;
       const feedbackIndex = Math.floor(Math.random() * config.feedback.length);
       const feedback = config.feedback[feedbackIndex];
-      const score = config.score || 0;
+      
+      // Use enhanced overall score if available, otherwise fallback to sentiment score
+      const score = enhancedAnalysis.overallScore || config.score || 0;
       
       setFeedbackMessage(feedback);
       
-      // Save to progress history even on error (only once per transcript)
+      // Save to progress history with enhanced metrics (only once per transcript)
       saveProgressEntry({
         sentiment,
         transcript,
         score,
-        feedback
+        feedback,
+        analysis: {
+          fillerWords: enhancedAnalysis.fillerWords.count,
+          repetition: enhancedAnalysis.repetition.count,
+          pace: enhancedAnalysis.pace.wordsPerMinute,
+          vocabulary: enhancedAnalysis.vocabulary.diversity,
+          suggestions: enhancedAnalysis.suggestions.length
+        }
       });
+    } catch (err) {
+      console.error("Analysis error:", err);
+      setError("Failed to analyze your message. Please try again.");
+      
+      // Fallback: try basic analysis
+      try {
+        const fallbackAnalysis = analyzeText(transcript);
+        setAnalysisData(fallbackAnalysis);
+        const sentiment = fallbackAnalysis.sentiment.label;
+        setUserFeedback(sentiment);
+        
+        const config = feebackTextConfig[sentiment] || feebackTextConfig.neutral;
+        const feedbackIndex = Math.floor(Math.random() * config.feedback.length);
+        const feedback = config.feedback[feedbackIndex];
+        const score = fallbackAnalysis.overallScore || config.score || 0;
+        
+        setFeedbackMessage(feedback);
+        
+        saveProgressEntry({
+          sentiment,
+          transcript,
+          score,
+          feedback,
+          analysis: {
+            fillerWords: fallbackAnalysis.fillerWords.count,
+            repetition: fallbackAnalysis.repetition.count,
+            pace: fallbackAnalysis.pace.wordsPerMinute,
+            vocabulary: fallbackAnalysis.vocabulary.diversity,
+            suggestions: fallbackAnalysis.suggestions.length
+          }
+        });
+      } catch (fallbackErr) {
+        // Ultimate fallback
+        const sentiment = "neutral";
+        setUserFeedback(sentiment);
+        const config = feebackTextConfig[sentiment];
+        const feedback = config.feedback[0];
+        setFeedbackMessage(feedback);
+        setAnalysisData(null);
+      }
     } finally {
       setIsProcessing(false);
     }
@@ -92,6 +114,7 @@ const Landing = ({ playAudio, stopAudio }) => {
     setError(null);
     setCurrentTranscript("");
     setFeedbackMessage("");
+    setAnalysisData(null);
     // Reset the ref so the same transcript can be processed again if needed
     lastSavedTranscriptRef.current = "";
   };
@@ -128,7 +151,7 @@ const Landing = ({ playAudio, stopAudio }) => {
               <div className="processing-content">
                 <div className="processing-spinner"></div>
                 <h2 className="processing-title">Analyzing your message...</h2>
-                <p className="processing-subtitle">Understanding the sentiment</p>
+                <p className="processing-subtitle">Analyzing sentiment, clarity, and delivery</p>
                 {currentTranscript && (
                   <div className="transcript-preview">
                     <p className="transcript-text">"{currentTranscript}"</p>
@@ -190,6 +213,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                 resetFeedback={resetFeedback}
                 transcript={currentTranscript}
                 feedbackMessage={feedbackMessage}
+                analysisData={analysisData}
               />
             </motion.div>
           )}

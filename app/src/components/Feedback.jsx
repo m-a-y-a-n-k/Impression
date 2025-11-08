@@ -1,11 +1,14 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { feebackTextConfig } from "../config/feedbackText";
 import { feedbackCTAMotionConfig } from "../config/feedbackCTAMotion";
 import "../styles/Feedback.css";
 
-export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage }) {
+export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage, analysisData }) {
+  const [showDetails, setShowDetails] = useState(false);
   const config = feebackTextConfig[userFeedback];
-  const score = config.score;
+  // Use enhanced score if available, otherwise fallback to sentiment-based score
+  const score = analysisData?.overallScore || config.score;
   // Use provided feedbackMessage if available, otherwise select randomly
   const customFeedback = feedbackMessage || (() => {
     const customFeedbackIndex = Math.floor(
@@ -76,7 +79,7 @@ export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage 
           >
             <div className="score-display">
               <div className="score-label">
-                <span className="score-text">Score</span>
+                <span className="score-text">Impression Score</span>
                 <span className="score-value" style={{ color: getScoreColor(score) }}>
                   {score}
                 </span>
@@ -96,6 +99,106 @@ export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage 
                 </span>
               </div>
             </div>
+          </motion.div>
+        )}
+
+        {/* Enhanced Analysis Metrics */}
+        {analysisData && (
+          <motion.div
+            className="analysis-metrics"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <div className="metrics-grid">
+              {analysisData.fillerWords.count > 0 && (
+                <div className="metric-item">
+                  <span className="metric-icon">🗣️</span>
+                  <div className="metric-content">
+                    <span className="metric-label">Filler Words</span>
+                    <span className="metric-value">{analysisData.fillerWords.count}</span>
+                  </div>
+                </div>
+              )}
+              {analysisData.pace.wordsPerMinute > 0 && (
+                <div className="metric-item">
+                  <span className="metric-icon">⚡</span>
+                  <div className="metric-content">
+                    <span className="metric-label">Speaking Pace</span>
+                    <span className="metric-value">{analysisData.pace.wordsPerMinute} WPM</span>
+                  </div>
+                </div>
+              )}
+              {analysisData.vocabulary.totalWords > 0 && (
+                <div className="metric-item">
+                  <span className="metric-icon">📚</span>
+                  <div className="metric-content">
+                    <span className="metric-label">Vocabulary</span>
+                    <span className="metric-value">{analysisData.vocabulary.diversity}% diverse</span>
+                  </div>
+                </div>
+              )}
+              {analysisData.repetition.count > 0 && (
+                <div className="metric-item">
+                  <span className="metric-icon">🔄</span>
+                  <div className="metric-content">
+                    <span className="metric-label">Repetitions</span>
+                    <span className="metric-value">{analysisData.repetition.count}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Improvement Suggestions */}
+            {analysisData.suggestions && analysisData.suggestions.length > 0 && (
+              <motion.div
+                className="suggestions-section"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <button
+                  className="toggle-suggestions-btn"
+                  onClick={() => setShowDetails(!showDetails)}
+                >
+                  <span>{showDetails ? 'Hide' : 'Show'} Improvement Tips</span>
+                  <span className="toggle-icon">{showDetails ? '▲' : '▼'}</span>
+                </button>
+                <AnimatePresence>
+                  {showDetails && (
+                    <motion.div
+                      className="suggestions-list"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {analysisData.suggestions.map((suggestion, index) => (
+                        <motion.div
+                          key={index}
+                          className="suggestion-item"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="suggestion-priority" data-priority={suggestion.priority}>
+                            {suggestion.priority === 'high' && '🔴'}
+                            {suggestion.priority === 'medium' && '🟡'}
+                            {suggestion.priority === 'low' && '🟢'}
+                          </div>
+                          <div className="suggestion-content">
+                            <p className="suggestion-message">{suggestion.message}</p>
+                            {suggestion.tip && (
+                              <p className="suggestion-tip">💡 {suggestion.tip}</p>
+                            )}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )}
           </motion.div>
         )}
 
