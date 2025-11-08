@@ -62,12 +62,13 @@
 }
 
 .score-display {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px var(--shadow);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--card-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .score-label {
@@ -80,7 +81,8 @@
 .score-text {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--card-text);
+  transition: color 0.3s ease;
 }
 
 .score-value {
@@ -92,10 +94,11 @@
 .score-bar-container {
   width: 100%;
   height: 12px;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--overlay);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 1rem;
+  transition: background 0.3s ease;
 }
 
 .score-bar {
@@ -268,16 +271,16 @@
 }
 
 .metric-item {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px var(--shadow);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: transform 0.2s ease;
+  border: 1px solid var(--card-border);
+  transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .metric-item:hover {
@@ -300,19 +303,21 @@
 
 .metric-label {
   font-size: 0.75rem;
-  color: #718096;
+  color: var(--card-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .metric-value {
   font-size: 1rem;
   font-weight: 700;
-  color: #2d3748;
+  color: var(--card-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.3s ease;
 }
 
 /* Suggestions Section */
@@ -323,7 +328,7 @@
 
 .toggle-suggestions-btn {
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   border: none;
   border-radius: 12px;
   padding: 1rem 1.5rem;
@@ -333,17 +338,18 @@
   justify-content: space-between;
   font-size: 1rem;
   font-weight: 600;
-  color: #2d3748;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: var(--card-text);
+  box-shadow: 0 4px 16px var(--shadow);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.2s ease;
+  border: 1px solid var(--card-border);
+  transition: all 0.2s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .toggle-suggestions-btn:hover {
-  background: rgba(255, 255, 255, 1);
+  background: var(--card-bg);
+  opacity: 0.9;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px var(--shadow);
 }
 
 .toggle-icon {
@@ -360,16 +366,16 @@
 }
 
 .suggestion-item {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1rem 1.25rem;
   display: flex;
   gap: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--card-border);
   border-left: 4px solid;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .suggestion-item:hover {
@@ -407,16 +413,18 @@
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--card-text);
   line-height: 1.5;
+  transition: color 0.3s ease;
 }
 
 .suggestion-tip {
   margin: 0;
   font-size: 0.875rem;
-  color: #718096;
+  color: var(--card-text-secondary);
   line-height: 1.4;
   font-style: italic;
+  transition: color 0.3s ease;
 }
 
 /* Responsive adjustments for metrics */

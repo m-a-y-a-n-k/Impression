@@ -22,7 +22,6 @@ export const detectFillerWords = (text) => {
     return { count: 0, words: [], percentage: 0 };
   }
 
-  const lowerText = text.toLowerCase();
   const words = text.split(/\s+/);
   const foundFillers = [];
   const fillerCounts = {};

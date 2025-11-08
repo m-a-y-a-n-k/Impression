@@ -3,6 +3,7 @@ import { useState } from "react";
 import Intro from "./Intro";
 import Landing from "./Landing";
 import Progress from "./Progress";
+import DarkModeToggle from "./DarkModeToggle";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
 
   return (
     <div className="App">
+      {!showIntro && <DarkModeToggle />}
       {showIntro && (
         <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
       )}

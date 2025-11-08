@@ -8,18 +8,45 @@ body {
   box-sizing: border-box;
 }
 
+:root {
+  --bg-primary: linear-gradient(to right, #1e0a0a, #020b33);
+  --bg-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --text-primary: white;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --card-text: #2d3748;
+  --card-text-secondary: #718096;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --overlay: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  --bg-primary: linear-gradient(to right, #0a0a0a, #1a1a2e);
+  --bg-secondary: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  --text-primary: #f7fafc;
+  --text-secondary: rgba(247, 250, 252, 0.7);
+  --card-bg: rgba(26, 32, 44, 0.95);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-text: #f7fafc;
+  --card-text-secondary: rgba(247, 250, 252, 0.7);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
 .App {
   width: 100vw;
   height: 100vh;
   text-align: center;
-  background: linear-gradient(to right, #1e0a0a, #020b33);
+  background: var(--bg-primary);
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  color: white;
+  color: var(--text-primary);
   font-size: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
 h1 , h2 , h3 , h4, h5, h6 , p {
@@ -34,9 +61,9 @@ h1 , h2 , h3 , h4, h5, h6 , p {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   border: none;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 20px var(--shadow);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -62,10 +89,10 @@ h1 , h2 , h3 , h4, h5, h6 , p {
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 20px var(--shadow);
   }
   50% {
-    box-shadow: 0 4px 30px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 4px 30px var(--shadow);
   }
 }
 
