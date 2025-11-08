@@ -4,6 +4,8 @@ import Intro from "./Intro";
 import Landing from "./Landing";
 import Progress from "./Progress";
 import DarkModeToggle from "./DarkModeToggle";
+import InstallPrompt from "./InstallPrompt";
+import OfflineIndicator from "./OfflineIndicator";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 
 export default function App() {
@@ -21,7 +23,9 @@ export default function App() {
 
   return (
     <div className="App">
+      <OfflineIndicator />
       {!showIntro && <DarkModeToggle />}
+      {!showIntro && <InstallPrompt />}
       {showIntro && (
         <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
       )}

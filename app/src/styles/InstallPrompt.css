@@ -1,0 +1,113 @@
+.install-prompt {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 400px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.install-prompt-content {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px var(--shadow);
+}
+
+.install-prompt-icon {
+  font-size: 2.5rem;
+  text-align: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.install-prompt-text {
+  text-align: center;
+}
+
+.install-prompt-text h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--card-text);
+}
+
+.install-prompt-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--card-text-secondary);
+  line-height: 1.4;
+}
+
+.install-prompt-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.install-btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.install-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.install-btn-primary:active {
+  transform: translateY(0);
+}
+
+.install-btn-secondary {
+  flex: 1;
+  background: transparent;
+  color: var(--card-text-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.install-btn-secondary:hover {
+  background: var(--overlay);
+  color: var(--card-text);
+}
+
+@media (max-width: 768px) {
+  .install-prompt {
+    bottom: calc(2rem + 80px); /* Make room for progress button */
+    width: calc(100% - 1rem);
+  }
+  
+  .install-prompt-content {
+    padding: 1.25rem;
+  }
+  
+  .install-prompt-text h3 {
+    font-size: 1.125rem;
+  }
+  
+  .install-prompt-text p {
+    font-size: 0.85rem;
+  }
+}
+
