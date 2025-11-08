@@ -211,18 +211,106 @@ export const getRecentEntries = (days = 7) => {
 };
 
 /**
- * Export progress history as JSON
- * @returns {string} JSON string of history
+ * Escape CSV field value (handles commas, quotes, and newlines)
+ * @param {string} value - Value to escape
+ * @returns {string} Escaped value
+ */
+const escapeCSVField = (value) => {
+  if (value === null || value === undefined) return '';
+  
+  const stringValue = String(value);
+  
+  // If value contains comma, quote, or newline, wrap in quotes and escape quotes
+  if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+    return `"${stringValue.replace(/"/g, '""')}"`;
+  }
+  
+  return stringValue;
+};
+
+/**
+ * Export progress history as CSV
+ * @returns {string} CSV string of history
  */
 export const exportProgressHistory = () => {
   try {
     const history = getProgressHistory();
+    
+    if (history.length === 0) {
+      return null;
+    }
+    
+    // CSV Headers
+    const headers = [
+      'Date',
+      'Time',
+      'Score',
+      'Sentiment',
+      'Filler Words',
+      'Speaking Pace (WPM)',
+      'Vocabulary Diversity (%)',
+      'Repetitions',
+      'Suggestions Count',
+      'Transcript',
+      'Feedback'
+    ];
+    
+    // Create CSV rows
+    const rows = [headers.join(',')];
+    
+    // Add data rows
+    history.forEach(entry => {
+      const date = new Date(entry.timestamp);
+      const dateStr = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+      const timeStr = date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      
+      const row = [
+        escapeCSVField(dateStr),
+        escapeCSVField(timeStr),
+        escapeCSVField(entry.score || 0),
+        escapeCSVField(entry.sentiment || 'neutral'),
+        escapeCSVField(entry.analysis?.fillerWords || 0),
+        escapeCSVField(entry.analysis?.pace || 0),
+        escapeCSVField(entry.analysis?.vocabulary || 0),
+        escapeCSVField(entry.analysis?.repetition || 0),
+        escapeCSVField(entry.analysis?.suggestions || 0),
+        escapeCSVField(entry.transcript || ''),
+        escapeCSVField(entry.feedback || '')
+      ];
+      
+      rows.push(row.join(','));
+    });
+    
+    // Add summary statistics at the end
     const stats = getProgressStats();
-    return JSON.stringify({
-      exportDate: new Date().toISOString(),
-      statistics: stats,
-      history: history
-    }, null, 2);
+    rows.push(''); // Empty row separator
+    rows.push('Summary Statistics');
+    rows.push('Metric,Value');
+    rows.push(`Total Entries,${stats.totalEntries}`);
+    rows.push(`Average Score,${stats.averageScore}`);
+    rows.push(`Highest Score,${stats.highestScore}`);
+    rows.push(`Lowest Score,${stats.lowestScore}`);
+    rows.push(`Recent Trend,${stats.recentTrend}`);
+    rows.push(''); // Empty row separator
+    rows.push('Sentiment Distribution');
+    rows.push('Sentiment,Count,Percentage');
+    Object.entries(stats.sentimentDistribution).forEach(([sentiment, count]) => {
+      const percentage = stats.totalEntries > 0 
+        ? ((count / stats.totalEntries) * 100).toFixed(1) 
+        : '0.0';
+      rows.push(`${sentiment},${count},${percentage}%`);
+    });
+    
+    return rows.join('\n');
   } catch (error) {
     console.error('Error exporting progress:', error);
     return null;

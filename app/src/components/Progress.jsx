@@ -31,11 +31,13 @@ const Progress = ({ isOpen, onClose }) => {
   const handleExport = () => {
     const data = exportProgressHistory();
     if (data) {
-      const blob = new Blob([data], { type: 'application/json' });
+      // Add UTF-8 BOM for proper Excel compatibility
+      const BOM = '\uFEFF';
+      const blob = new Blob([BOM + data], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `impression-progress-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `impression-progress-${new Date().toISOString().split('T')[0]}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
