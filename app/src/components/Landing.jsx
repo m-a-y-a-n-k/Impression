@@ -1,21 +1,33 @@
 import "../styles/Landing.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedMic from "./AnimatedMic";
 import FeedBack from "./Feedback";
 import compendium from "compendium-js";
+import { saveProgressEntry } from "../utils/progressStorage";
+import { feebackTextConfig } from "../config/feedbackText";
 
 const Landing = ({ playAudio, stopAudio }) => {
   const [userFeedback, setUserFeedback] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [currentTranscript, setCurrentTranscript] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const lastSavedTranscriptRef = useRef("");
 
   const updateUserFeedback = async (transcript) => {
+    // Prevent duplicate processing of the same transcript
+    if (!transcript || transcript.trim() === "" || transcript === lastSavedTranscriptRef.current) {
+      return;
+    }
+
     try {
       setIsProcessing(true);
       setError(null);
       setCurrentTranscript(transcript);
+      
+      // Mark this transcript as being processed
+      lastSavedTranscriptRef.current = transcript;
       
       // Add a small delay to show processing state
       await new Promise(resolve => setTimeout(resolve, 800));
@@ -30,6 +42,22 @@ const Landing = ({ playAudio, stopAudio }) => {
       if (analysis && analysis.length > 0 && analysis[0].profile) {
         const sentiment = analysis[0].profile.label;
         setUserFeedback(sentiment);
+        
+        // Get feedback config for this sentiment
+        const config = feebackTextConfig[sentiment] || feebackTextConfig.neutral;
+        const feedbackIndex = Math.floor(Math.random() * config.feedback.length);
+        const feedback = config.feedback[feedbackIndex];
+        const score = config.score || 0;
+        
+        setFeedbackMessage(feedback);
+        
+        // Save to progress history (only once per transcript)
+        saveProgressEntry({
+          sentiment,
+          transcript,
+          score,
+          feedback
+        });
       } else {
         throw new Error("Unable to analyze sentiment");
       }
@@ -37,7 +65,23 @@ const Landing = ({ playAudio, stopAudio }) => {
       console.error("Sentiment analysis error:", err);
       setError("Failed to analyze your message. Please try again.");
       // Fallback to neutral sentiment
-      setUserFeedback("neutral");
+      const sentiment = "neutral";
+      setUserFeedback(sentiment);
+      
+      const config = feebackTextConfig[sentiment];
+      const feedbackIndex = Math.floor(Math.random() * config.feedback.length);
+      const feedback = config.feedback[feedbackIndex];
+      const score = config.score || 0;
+      
+      setFeedbackMessage(feedback);
+      
+      // Save to progress history even on error (only once per transcript)
+      saveProgressEntry({
+        sentiment,
+        transcript,
+        score,
+        feedback
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -47,6 +91,9 @@ const Landing = ({ playAudio, stopAudio }) => {
     setUserFeedback("");
     setError(null);
     setCurrentTranscript("");
+    setFeedbackMessage("");
+    // Reset the ref so the same transcript can be processed again if needed
+    lastSavedTranscriptRef.current = "";
   };
 
   const getBackgroundGradient = (feedback) => {
@@ -142,6 +189,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                 userFeedback={userFeedback} 
                 resetFeedback={resetFeedback}
                 transcript={currentTranscript}
+                feedbackMessage={feedbackMessage}
               />
             </motion.div>
           )}

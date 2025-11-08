@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import "../styles/AnimatedMic.css";
 import SpeechRecognition, {
@@ -15,6 +15,8 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [showTranscript, setShowTranscript] = useState(false);
+  const processedTranscriptRef = useRef("");
+  const debouncedUpdateRef = useRef(null);
 
   const {
     listening,
@@ -76,19 +78,45 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
     }
   }, [interimTranscript, finalTranscript]);
 
-  const transcriptFinished =
-    finalTranscript.length > 0 && interimTranscript === "";
-
-  if (transcriptFinished) {
-    const onTranscriptFinished = _debounce(() => {
-      setIsProcessing(true);
-      updateUserFeedback(finalTranscript);
-      resetTranscript();
-      setShowTranscript(false);
-      setIsProcessing(false);
+  // Create debounced function once using useRef
+  useEffect(() => {
+    debouncedUpdateRef.current = _debounce((transcript) => {
+      // Only process if this transcript hasn't been processed yet
+      if (transcript && transcript !== processedTranscriptRef.current) {
+        processedTranscriptRef.current = transcript;
+        setIsProcessing(true);
+        updateUserFeedback(transcript);
+        resetTranscript();
+        setShowTranscript(false);
+        // Note: setIsProcessing(false) will be handled by Landing component
+      }
     }, 500);
-    onTranscriptFinished();
-  }
+
+    return () => {
+      if (debouncedUpdateRef.current) {
+        debouncedUpdateRef.current.cancel();
+      }
+    };
+  }, [updateUserFeedback, resetTranscript]);
+
+  // Handle transcript finished
+  useEffect(() => {
+    const transcriptFinished = finalTranscript.length > 0 && interimTranscript === "";
+    
+    if (transcriptFinished && debouncedUpdateRef.current) {
+      // Only process if this transcript hasn't been processed yet
+      if (finalTranscript !== processedTranscriptRef.current) {
+        debouncedUpdateRef.current(finalTranscript);
+      }
+    }
+  }, [finalTranscript, interimTranscript]);
+
+  // Reset processed transcript when listening stops
+  useEffect(() => {
+    if (!listening && !listen) {
+      processedTranscriptRef.current = "";
+    }
+  }, [listening, listen]);
 
   const micNotSupported =
     !browserSupportsSpeechRecognition || !isMicrophoneAvailable;

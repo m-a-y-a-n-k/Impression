@@ -25,3 +25,59 @@ body {
 h1 , h2 , h3 , h4, h5, h6 , p {
   padding: 6px;
 }
+
+/* Progress Toggle Button */
+.progress-toggle-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.progress-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(102, 126, 234, 0.6);
+}
+
+.progress-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.progress-btn-icon {
+  font-size: 1.75rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(102, 126, 234, 0.6);
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-toggle-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .progress-btn-icon {
+    font-size: 1.5rem;
+  }
+}

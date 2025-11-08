@@ -2,6 +2,7 @@ import "../styles/App.css";
 import { useState } from "react";
 import Intro from "./Intro";
 import Landing from "./Landing";
+import Progress from "./Progress";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
     sessionStorage.getItem("intro-done") ? false : true;
 
   const [showIntro, setShowIntro] = useState(fetchIntroStatus);
+  const [showProgress, setShowProgress] = useState(false);
 
   const handleCloseIntro = () => {
     setShowIntro(false);
@@ -22,7 +24,18 @@ export default function App() {
         <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
       )}
       {!showIntro && (
-        <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
+        <>
+          <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
+          <button
+            className="progress-toggle-btn"
+            onClick={() => setShowProgress(true)}
+            aria-label="View progress"
+            title="View your progress"
+          >
+            <span className="progress-btn-icon">📊</span>
+          </button>
+          <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
+        </>
       )}
     </div>
   );

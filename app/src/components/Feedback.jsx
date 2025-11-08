@@ -3,13 +3,16 @@ import { feebackTextConfig } from "../config/feedbackText";
 import { feedbackCTAMotionConfig } from "../config/feedbackCTAMotion";
 import "../styles/Feedback.css";
 
-export default function FeedBack({ userFeedback, resetFeedback }) {
+export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage }) {
   const config = feebackTextConfig[userFeedback];
   const score = config.score;
-  const customFeedbackIndex = Math.floor(
-    Math.random() * config.feedback.length
-  );
-  const customFeedback = config.feedback[customFeedbackIndex];
+  // Use provided feedbackMessage if available, otherwise select randomly
+  const customFeedback = feedbackMessage || (() => {
+    const customFeedbackIndex = Math.floor(
+      Math.random() * config.feedback.length
+    );
+    return config.feedback[customFeedbackIndex];
+  })();
   const customCTAText = config.ctaText;
 
   const getScoreColor = (score) => {
