@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { feebackTextConfig } from "../config/feedbackText";
 import { feedbackCTAMotionConfig } from "../config/feedbackCTAMotion";
+import { isFavorite, toggleFavorite } from "../utils/progressStorage";
 import "../styles/Feedback.css";
 
-export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage, analysisData }) {
+export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage, analysisData, entryId }) {
   const [showDetails, setShowDetails] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+  
+  useEffect(() => {
+    if (entryId) {
+      setIsFavorited(isFavorite(entryId));
+    }
+  }, [entryId]);
+
+  const handleToggleFavorite = () => {
+    if (entryId) {
+      const newFavoriteStatus = toggleFavorite(entryId);
+      setIsFavorited(newFavoriteStatus);
+    }
+  };
+
   const config = feebackTextConfig[userFeedback];
   // Use enhanced score if available, otherwise fallback to sentiment-based score
   const score = analysisData?.overallScore || config.score;
@@ -208,23 +224,40 @@ export default function FeedBack({ userFeedback, resetFeedback, feedbackMessage,
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          {customCTAText && (
-            <motion.button
-              className="feedback-btn"
-              data-user-feedback={userFeedback}
-              onClick={resetFeedback}
-              initial={feedbackCTAMotionConfig.initial}
-              animate={feedbackCTAMotionConfig.animate}
-              transition={feedbackCTAMotionConfig.transition}
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              style={{ background: getFeedbackGradient(userFeedback) }}
-              aria-label={`${customCTAText} - Start new feedback session`}
-            >
-              <span className="btn-text">{customCTAText}</span>
-              <span className="btn-icon">✨</span>
-            </motion.button>
-          )}
+          <div className="feedback-actions-row">
+            {entryId && (
+              <motion.button
+                className="favorite-btn"
+                onClick={handleToggleFavorite}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.9 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+              >
+                <span className="favorite-icon">{isFavorited ? "⭐" : "☆"}</span>
+              </motion.button>
+            )}
+            {customCTAText && (
+              <motion.button
+                className="feedback-btn"
+                data-user-feedback={userFeedback}
+                onClick={resetFeedback}
+                initial={feedbackCTAMotionConfig.initial}
+                animate={feedbackCTAMotionConfig.animate}
+                transition={feedbackCTAMotionConfig.transition}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                style={{ background: getFeedbackGradient(userFeedback) }}
+                aria-label={`${customCTAText} - Start new feedback session`}
+              >
+                <span className="btn-text">{customCTAText}</span>
+                <span className="btn-icon">✨</span>
+              </motion.button>
+            )}
+          </div>
         </motion.div>
       </motion.div>
     </div>

@@ -14,6 +14,7 @@ const Landing = ({ playAudio, stopAudio }) => {
   const [currentTranscript, setCurrentTranscript] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [analysisData, setAnalysisData] = useState(null);
+  const [currentEntryId, setCurrentEntryId] = useState(null);
   const lastSavedTranscriptRef = useRef("");
 
   const updateUserFeedback = async (transcript) => {
@@ -51,7 +52,7 @@ const Landing = ({ playAudio, stopAudio }) => {
       setFeedbackMessage(feedback);
       
       // Save to progress history with enhanced metrics (only once per transcript)
-      saveProgressEntry({
+      const savedEntry = saveProgressEntry({
         sentiment,
         transcript,
         score,
@@ -64,6 +65,11 @@ const Landing = ({ playAudio, stopAudio }) => {
           suggestions: enhancedAnalysis.suggestions.length
         }
       });
+      
+      // Store the entry ID for favorite functionality
+      if (savedEntry && savedEntry.id) {
+        setCurrentEntryId(savedEntry.id);
+      }
     } catch (err) {
       console.error("Analysis error:", err);
       setError("Failed to analyze your message. Please try again.");
@@ -82,7 +88,7 @@ const Landing = ({ playAudio, stopAudio }) => {
         
         setFeedbackMessage(feedback);
         
-        saveProgressEntry({
+        const savedEntry = saveProgressEntry({
           sentiment,
           transcript,
           score,
@@ -95,6 +101,10 @@ const Landing = ({ playAudio, stopAudio }) => {
             suggestions: fallbackAnalysis.suggestions.length
           }
         });
+        
+        if (savedEntry && savedEntry.id) {
+          setCurrentEntryId(savedEntry.id);
+        }
       } catch (fallbackErr) {
         // Ultimate fallback
         const sentiment = "neutral";
@@ -115,6 +125,7 @@ const Landing = ({ playAudio, stopAudio }) => {
     setCurrentTranscript("");
     setFeedbackMessage("");
     setAnalysisData(null);
+    setCurrentEntryId(null);
     // Reset the ref so the same transcript can be processed again if needed
     lastSavedTranscriptRef.current = "";
   };
@@ -214,6 +225,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                 transcript={currentTranscript}
                 feedbackMessage={feedbackMessage}
                 analysisData={analysisData}
+                entryId={currentEntryId}
               />
             </motion.div>
           )}

@@ -3,6 +3,7 @@
  */
 
 const STORAGE_KEY = 'impression_progress_history';
+const FAVORITES_KEY = 'impression_favorites';
 
 /**
  * Get all progress entries from localStorage
@@ -314,6 +315,95 @@ export const exportProgressHistory = () => {
   } catch (error) {
     console.error('Error exporting progress:', error);
     return null;
+  }
+};
+
+/**
+ * Get all favorite entry IDs
+ * @returns {Array} Array of favorite entry IDs
+ */
+export const getFavorites = () => {
+  try {
+    const favorites = localStorage.getItem(FAVORITES_KEY);
+    return favorites ? JSON.parse(favorites) : [];
+  } catch (error) {
+    console.error('Error reading favorites:', error);
+    return [];
+  }
+};
+
+/**
+ * Check if an entry is favorited
+ * @param {string} entryId - Entry ID to check
+ * @returns {boolean} True if entry is favorited
+ */
+export const isFavorite = (entryId) => {
+  try {
+    const favorites = getFavorites();
+    return favorites.includes(entryId);
+  } catch (error) {
+    console.error('Error checking favorite:', error);
+    return false;
+  }
+};
+
+/**
+ * Toggle favorite status for an entry
+ * @param {string} entryId - Entry ID to toggle
+ * @returns {boolean} New favorite status (true if now favorited, false if unfavorited)
+ */
+export const toggleFavorite = (entryId) => {
+  try {
+    const favorites = getFavorites();
+    const index = favorites.indexOf(entryId);
+    
+    if (index > -1) {
+      // Remove from favorites
+      favorites.splice(index, 1);
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+      return false;
+    } else {
+      // Add to favorites
+      favorites.push(entryId);
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+      return true;
+    }
+  } catch (error) {
+    console.error('Error toggling favorite:', error);
+    return false;
+  }
+};
+
+/**
+ * Get all favorite entries with full details
+ * @returns {Array} Array of favorite entries
+ */
+export const getFavoriteEntries = () => {
+  try {
+    const favorites = getFavorites();
+    const history = getProgressHistory();
+    
+    // Filter history to only include favorited entries
+    const favoriteEntries = history.filter(entry => favorites.includes(entry.id));
+    
+    // Sort by timestamp (most recent first)
+    return favoriteEntries.sort((a, b) => b.timestamp - a.timestamp);
+  } catch (error) {
+    console.error('Error getting favorite entries:', error);
+    return [];
+  }
+};
+
+/**
+ * Remove all favorites
+ */
+export const clearFavorites = () => {
+  try {
+    localStorage.removeItem(FAVORITES_KEY);
+    return true;
+  } catch (error) {
+    console.error('Error clearing favorites:', error);
+    return false;
   }
 };
 

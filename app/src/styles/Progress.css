@@ -469,3 +469,48 @@
   }
 }
 
+/* Favorites Styles */
+.favorites-content {
+  min-height: 400px;
+}
+
+.favorite-item {
+  border-left: 3px solid #ffd700;
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.favorite-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.history-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.favorite-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+}
+
+.favorite-toggle-btn:hover {
+  transform: scale(1.2) rotate(15deg);
+  filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.5));
+}
+
+.favorite-toggle-btn:active {
+  transform: scale(0.95);
+}
+

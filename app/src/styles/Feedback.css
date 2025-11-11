@@ -124,7 +124,52 @@
   max-width: 400px;
 }
 
+.feedback-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.favorite-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 16px var(--shadow);
+  backdrop-filter: blur(10px);
+  min-width: 48px;
+  height: 48px;
+}
+
+.favorite-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.favorite-btn:active {
+  transform: scale(0.95);
+}
+
+.favorite-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover .favorite-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
 .feedback-btn {
+  flex: 1;
   width: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
@@ -223,6 +268,16 @@
   
   .btn-text {
     font-size: 1rem;
+  }
+
+  .favorite-btn {
+    min-width: 44px;
+    height: 44px;
+    padding: 0.75rem;
+  }
+
+  .favorite-icon {
+    font-size: 1.25rem;
   }
 }
 

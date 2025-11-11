@@ -5,19 +5,24 @@ import {
   getProgressStats,
   getProgressHistory,
   clearProgressHistory,
-  exportProgressHistory
+  exportProgressHistory,
+  getFavoriteEntries,
+  isFavorite,
+  toggleFavorite
 } from "../utils/progressStorage";
 
 const Progress = ({ isOpen, onClose }) => {
   const [stats, setStats] = useState(null);
   const [history, setHistory] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [showConfirmClear, setShowConfirmClear] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview' or 'history'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'history', or 'favorites'
 
   useEffect(() => {
     if (isOpen) {
       setStats(getProgressStats());
       setHistory(getProgressHistory());
+      setFavorites(getFavoriteEntries());
     }
   }, [isOpen]);
 
@@ -131,6 +136,15 @@ const Progress = ({ isOpen, onClose }) => {
                 onClick={() => setActiveTab('history')}
               >
                 History ({history.length})
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'favorites' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab('favorites');
+                  setFavorites(getFavoriteEntries());
+                }}
+              >
+                ⭐ Favorites ({favorites.length})
               </button>
             </div>
 
@@ -282,21 +296,106 @@ const Progress = ({ isOpen, onClose }) => {
                     </div>
                   ) : (
                     <div className="history-list">
-                      {history.map((entry) => (
+                      {history.map((entry) => {
+                        const entryIsFavorite = isFavorite(entry.id);
+                        return (
+                          <motion.div
+                            key={entry.id}
+                            className={`history-item ${entryIsFavorite ? 'favorite-item' : ''}`}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: history.indexOf(entry) * 0.05 }}
+                          >
+                            <div className="history-item-header">
+                              <div className="history-date">{formatDate(entry.timestamp)}</div>
+                              <div className="history-item-actions">
+                                <button
+                                  className="favorite-toggle-btn"
+                                  onClick={() => {
+                                    toggleFavorite(entry.id);
+                                    setFavorites(getFavoriteEntries());
+                                  }}
+                                  aria-label={entryIsFavorite ? "Remove from favorites" : "Add to favorites"}
+                                  title={entryIsFavorite ? "Remove from favorites" : "Add to favorites"}
+                                >
+                                  {entryIsFavorite ? "⭐" : "☆"}
+                                </button>
+                                <div
+                                  className="history-sentiment-badge"
+                                  style={{ backgroundColor: getSentimentColor(entry.sentiment) }}
+                                >
+                                  {entry.sentiment}
+                                </div>
+                              </div>
+                            </div>
+                          {entry.transcript && (
+                            <div className="history-transcript">
+                              "{entry.transcript.length > 100 
+                                ? entry.transcript.substring(0, 100) + '...' 
+                                : entry.transcript}"
+                            </div>
+                          )}
+                          <div className="history-item-footer">
+                            <div
+                              className="history-score"
+                              style={{ color: getScoreColor(entry.score) }}
+                            >
+                              Score: {entry.score}
+                            </div>
+                            {entry.feedback && (
+                              <div className="history-feedback">{entry.feedback}</div>
+                            )}
+                          </div>
+                        </motion.div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </motion.div>
+              )}
+
+              {activeTab === 'favorites' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="favorites-content"
+                >
+                  {favorites.length === 0 ? (
+                    <div className="empty-history">
+                      <div className="empty-icon">⭐</div>
+                      <p>No favorites yet</p>
+                      <p className="empty-hint">Mark your best performances as favorites to easily find them later!</p>
+                    </div>
+                  ) : (
+                    <div className="history-list">
+                      {favorites.map((entry) => (
                         <motion.div
                           key={entry.id}
-                          className="history-item"
+                          className="history-item favorite-item"
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: history.indexOf(entry) * 0.05 }}
+                          transition={{ delay: favorites.indexOf(entry) * 0.05 }}
                         >
                           <div className="history-item-header">
                             <div className="history-date">{formatDate(entry.timestamp)}</div>
-                            <div
-                              className="history-sentiment-badge"
-                              style={{ backgroundColor: getSentimentColor(entry.sentiment) }}
-                            >
-                              {entry.sentiment}
+                            <div className="history-item-actions">
+                              <button
+                                className="favorite-toggle-btn"
+                                onClick={() => {
+                                  toggleFavorite(entry.id);
+                                  setFavorites(getFavoriteEntries());
+                                }}
+                                aria-label="Remove from favorites"
+                                title="Remove from favorites"
+                              >
+                                ⭐
+                              </button>
+                              <div
+                                className="history-sentiment-badge"
+                                style={{ backgroundColor: getSentimentColor(entry.sentiment) }}
+                              >
+                                {entry.sentiment}
+                              </div>
                             </div>
                           </div>
                           {entry.transcript && (
