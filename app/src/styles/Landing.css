@@ -96,6 +96,62 @@
   transition: color 0.3s ease;
 }
 
+.progress-bar-container {
+  width: 100%;
+  max-width: 350px;
+  margin: 1.5rem auto 0;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px;
+  backdrop-filter: blur(10px);
+}
+
+.progress-bar {
+  width: 0%;
+  height: 10px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.2s ease-out;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-text {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
 /* Error Overlay */
 .error-overlay {
   position: absolute;
@@ -217,6 +273,124 @@
   
   .retry-button {
     padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mode Selector */
+.mode-selector {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mode-selector-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 2rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.mode-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  color: white;
+  text-align: center;
+}
+
+.mode-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.mode-icon {
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.mode-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.mode-description {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .mode-selector {
+    padding: 1.5rem;
+  }
+
+  .mode-selector-title {
+    font-size: 1.75rem;
+  }
+
+  .mode-buttons {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .mode-btn {
+    padding: 2rem 1.5rem;
+  }
+
+  .mode-icon {
+    font-size: 3rem;
+  }
+
+  .mode-label {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-selector-title {
+    font-size: 1.5rem;
+  }
+
+  .mode-btn {
+    padding: 1.5rem 1rem;
+  }
+
+  .mode-icon {
+    font-size: 2.5rem;
+  }
+
+  .mode-label {
+    font-size: 1.125rem;
+  }
+
+  .mode-description {
     font-size: 0.9rem;
   }
 }
