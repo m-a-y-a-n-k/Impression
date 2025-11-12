@@ -159,6 +159,14 @@ const Landing = ({ playAudio, stopAudio }) => {
     setAnalysisProgress(0);
   };
 
+  // Reset to landing screen (mode selector)
+  const resetToLanding = () => {
+    resetFeedback();
+    setMode('audio');
+    setHasSelectedMode(false);
+    setShowScenarioSelector(false);
+  };
+
   // Handle scenario selection
   const handleScenarioSelect = (scenarioId) => {
     setSelectedScenarioId(scenarioId);
@@ -358,12 +366,7 @@ const Landing = ({ playAudio, stopAudio }) => {
         {showScenarioSelector && (
           <ScenarioSelector
             onSelectScenario={handleScenarioSelect}
-            onClose={() => {
-              setShowScenarioSelector(false);
-              if (!selectedScenarioId) {
-                setMode('audio');
-              }
-            }}
+            onClose={resetToLanding}
           />
         )}
 
@@ -373,6 +376,7 @@ const Landing = ({ playAudio, stopAudio }) => {
             scenarioId={selectedScenarioId}
             onComplete={handleVideoComplete}
             onCancel={handleVideoCancel}
+            onBack={resetToLanding}
           />
         )}
 
@@ -448,7 +452,8 @@ const Landing = ({ playAudio, stopAudio }) => {
               <AnimatedMic 
                 updateUserFeedback={updateUserFeedback} 
                 playAudio={playAudio} 
-                stopAudio={stopAudio} 
+                stopAudio={stopAudio}
+                onBack={resetToLanding}
               />
             </motion.div>
           )}
@@ -489,6 +494,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                 scenarioId={selectedScenarioId}
                 entryId={videoEntryId}
                 resetFeedback={resetFeedback}
+                onBack={resetToLanding}
               />
             </motion.div>
           )}

@@ -32,11 +32,48 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .scenario-selector-header h2 {
   margin: 0;
   font-size: 1.75rem;
   color: white;
   font-weight: 600;
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.home-icon {
+  font-size: 1.25rem;
+}
+
+.home-text {
+  font-size: 0.95rem;
 }
 
 .close-btn {
@@ -185,6 +222,29 @@
 
   .scenario-selector-header {
     padding: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .header-left {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .scenario-selector-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .home-button {
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .home-icon {
+    font-size: 1.125rem;
+  }
+
+  .home-text {
+    font-size: 0.875rem;
   }
 
   .scenario-selector-footer {

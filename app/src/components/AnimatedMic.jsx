@@ -9,7 +9,7 @@ import { micMotionConfig } from "../config/micMotion";
 import MicNotSupport from "./MicNotSupport";
 import impressionLogo from "../assets/impression.webp";
 
-const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
+const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
   const [listen, setListen] = useState(false);
   const [useText, setUseText] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -130,6 +130,7 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
         updateUserFeedback={updateUserFeedback}
         explicitMode={useText}
         setImplicitMode={handleImplicitMode}
+        onBack={onBack}
       />
     );
   }
@@ -148,8 +149,37 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio }) => {
     return "🎤";
   };
 
+  const handleHome = () => {
+    // Stop listening if active
+    if (listen && listening) {
+      SpeechRecognition.stopListening();
+      setListen(false);
+      stopAudio();
+    }
+    // Call the onBack callback
+    if (onBack) {
+      onBack();
+    }
+  };
+
   return (
     <div className="speech-input-banner">
+      {onBack && (
+        <motion.button
+          className="home-button"
+          onClick={handleHome}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Go to home"
+          title="Go to home"
+        >
+          <span className="home-icon">🏠</span>
+          <span className="home-text">Home</span>
+        </motion.button>
+      )}
       <motion.div 
         className="header-section"
         initial={{ opacity: 0, y: -20 }}

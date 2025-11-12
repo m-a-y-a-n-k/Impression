@@ -7,9 +7,15 @@ import { feedbackCTAMotionConfig } from "../config/feedbackCTAMotion";
 import { motion } from "framer-motion";
 
 const MicNotSupport = (props) => {
-  const { updateUserFeedback, explicitMode = false, setImplicitMode } = props;
+  const { updateUserFeedback, explicitMode = false, setImplicitMode, onBack } = props;
   const [rtcIssue, setRtcIssue] = useState("device");
   const [text, setText] = useState("");
+
+  const handleHome = () => {
+    if (onBack) {
+      onBack();
+    }
+  };
 
   useEffect(() => {
     const getRTCProblem = () => {
@@ -40,6 +46,22 @@ const MicNotSupport = (props) => {
 
   return (
     <div className="mic-support-container">
+      {onBack && (
+        <motion.button
+          className="home-button"
+          onClick={handleHome}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Go to home"
+          title="Go to home"
+        >
+          <span className="home-icon">🏠</span>
+          <span className="home-text">Home</span>
+        </motion.button>
+      )}
       <div className="mic-support-content">
         <div className="mic-support-header">
           {title && (

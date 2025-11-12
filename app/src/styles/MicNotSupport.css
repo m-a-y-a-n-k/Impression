@@ -8,6 +8,41 @@
   overflow: hidden;
 }
 
+.home-button {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.home-icon {
+  font-size: 1.25rem;
+}
+
+.home-text {
+  font-size: 0.95rem;
+}
+
 .mic-support-content {
   flex: 1;
   display: flex;
@@ -163,6 +198,21 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .home-button {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .home-icon {
+    font-size: 1.125rem;
+  }
+
+  .home-text {
+    font-size: 0.875rem;
+  }
+
   .mic-support-content {
     padding: 1.5rem 1rem;
   }
@@ -194,6 +244,21 @@
 }
 
 @media (max-width: 480px) {
+  .home-button {
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.85rem;
+  }
+
+  .home-icon {
+    font-size: 1rem;
+  }
+
+  .home-text {
+    font-size: 0.8rem;
+  }
+
   .mic-support-content {
     padding: 1rem 0.75rem;
   }

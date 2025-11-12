@@ -17,6 +17,43 @@
   margin-bottom: 2rem;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.home-icon {
+  font-size: 1.25rem;
+}
+
+.home-text {
+  font-size: 0.95rem;
+}
+
 .video-recorder-header h2 {
   display: flex;
   align-items: center;
@@ -345,6 +382,24 @@
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .home-button {
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .home-icon {
+    font-size: 1.125rem;
+  }
+
+  .home-text {
+    font-size: 0.875rem;
   }
 
   .video-recorder-header h2 {

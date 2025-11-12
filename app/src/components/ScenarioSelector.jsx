@@ -28,7 +28,25 @@ const ScenarioSelector = ({ onSelectScenario, onClose }) => {
         transition={{ duration: 0.3 }}
       >
         <div className="scenario-selector-header">
-          <h2>Choose a Practice Scenario</h2>
+          <div className="header-left">
+            {onClose && (
+              <motion.button
+                className="home-button"
+                onClick={onClose}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Go to home"
+                title="Go to home"
+              >
+                <span className="home-icon">🏠</span>
+                <span className="home-text">Home</span>
+              </motion.button>
+            )}
+            <h2>Choose a Practice Scenario</h2>
+          </div>
           <button
             className="close-btn"
             onClick={onClose}

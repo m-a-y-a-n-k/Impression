@@ -10,7 +10,8 @@ export default function VideoFeedback({
   overallScore, 
   scenarioId,
   entryId,
-  resetFeedback 
+  resetFeedback,
+  onBack
 }) {
   const [showDetails, setShowDetails] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
@@ -49,8 +50,30 @@ export default function VideoFeedback({
     return value >= threshold ? "#38a169" : value >= threshold * 0.8 ? "#d69e2e" : "#e53e3e";
   };
 
+  const handleHome = () => {
+    if (onBack) {
+      onBack();
+    }
+  };
+
   return (
     <div className="video-feedback-container">
+      {onBack && (
+        <motion.button
+          className="home-button"
+          onClick={handleHome}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Go to home"
+          title="Go to home"
+        >
+          <span className="home-icon">🏠</span>
+          <span className="home-text">Home</span>
+        </motion.button>
+      )}
       <motion.div 
         className="video-feedback-content"
         initial={{ opacity: 0, y: 30 }}

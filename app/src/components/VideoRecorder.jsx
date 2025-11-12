@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { getScenario } from "../config/practiceScenarios";
 import "../styles/VideoRecorder.css";
 
-const VideoRecorder = ({ scenarioId, onComplete, onCancel }) => {
+const VideoRecorder = ({ scenarioId, onComplete, onCancel, onBack }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
@@ -316,6 +316,21 @@ const VideoRecorder = ({ scenarioId, onComplete, onCancel }) => {
     return formatTime(remaining);
   };
 
+  const handleHome = () => {
+    // Stop recording if active
+    if (isRecording && mediaRecorderRef.current) {
+      stopRecording();
+    }
+    // Call onCancel to clean up camera stream
+    if (onCancel) {
+      onCancel();
+    }
+    // Call onBack to return to landing
+    if (onBack) {
+      onBack();
+    }
+  };
+
   return (
     <div className="video-recorder-container">
       <div className="video-recorder-header">
@@ -323,13 +338,31 @@ const VideoRecorder = ({ scenarioId, onComplete, onCancel }) => {
           <span className="scenario-icon">{scenario.icon}</span>
           {scenario.name}
         </h2>
-        <button
-          className="cancel-recording-btn"
-          onClick={onCancel}
-          disabled={isProcessing}
-        >
-          Cancel
-        </button>
+        <div className="header-actions">
+          {onBack && !isRecording && (
+            <motion.button
+              className="home-button"
+              onClick={handleHome}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Go to home"
+              title="Go to home"
+            >
+              <span className="home-icon">🏠</span>
+              <span className="home-text">Home</span>
+            </motion.button>
+          )}
+          <button
+            className="cancel-recording-btn"
+            onClick={onCancel}
+            disabled={isProcessing}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
 
       <div className="video-preview-container">
