@@ -11,7 +11,6 @@ import impressionLogo from "../assets/impression.webp";
 
 const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
   const [listen, setListen] = useState(false);
-  const [useText, setUseText] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [showTranscript, setShowTranscript] = useState(false);
@@ -55,10 +54,6 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
       return on;
     });
   };
-
-  const useTextOption = () => {
-    setUseText(true);
-  }
 
   useEffect(() => {
     if (!listening) {
@@ -121,15 +116,12 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
   const micNotSupported =
     !browserSupportsSpeechRecognition || !isMicrophoneAvailable;
 
-  if (micNotSupported || useText) {
-    const handleImplicitMode = () => {
-      setUseText(false);
-    }
+  if (micNotSupported) {
     return (
       <MicNotSupport
         updateUserFeedback={updateUserFeedback}
-        explicitMode={useText}
-        setImplicitMode={handleImplicitMode}
+        explicitMode={false}
+        setImplicitMode={() => {}}
         onBack={onBack}
       />
     );
@@ -271,20 +263,6 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
           )}
         </motion.div>
       </motion.div>
-
-      {!listen && !isProcessing && !error && (
-        <motion.div 
-          className="use-text-intead" 
-          onClick={useTextOption}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <p>Can't use Mic? Go with <strong>Text</strong> instead</p>
-        </motion.div>
-      )}
     </div>
   );
 };

@@ -2,14 +2,14 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 6rem 2rem 2rem;
   box-sizing: border-box;
   background: var(--bg-secondary);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .home-button {

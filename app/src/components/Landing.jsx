@@ -2,6 +2,7 @@ import "../styles/Landing.css";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedMic from "./AnimatedMic";
+import TextInput from "./TextInput";
 import FeedBack from "./Feedback";
 import VideoRecorder from "./VideoRecorder";
 import ScenarioSelector from "./ScenarioSelector";
@@ -13,11 +14,11 @@ import { feebackTextConfig } from "../config/feedbackText";
 import { getScenarioFeedback, getScenario } from "../config/practiceScenarios";
 
 const Landing = ({ playAudio, stopAudio }) => {
-  // Mode selection: 'audio' or 'video'
-  const [mode, setMode] = useState('audio');
+  // Mode selection: 'text', 'audio', or 'video'
+  const [mode, setMode] = useState(null);
   const [hasSelectedMode, setHasSelectedMode] = useState(false);
   
-  // Audio mode states
+  // Text & Audio mode states (shared since both analyze text)
   const [userFeedback, setUserFeedback] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
@@ -149,20 +150,21 @@ const Landing = ({ playAudio, stopAudio }) => {
     // Reset the ref so the same transcript can be processed again if needed
     lastSavedTranscriptRef.current = "";
     
-    // Reset video mode states
+    // Reset video mode states and show scenario selector again
     setVideoAnalysis(null);
     setVideoAudioAnalysis(null);
     setVideoOverallScore(null);
     setVideoEntryId(null);
     setShowVideoRecorder(false);
     setSelectedScenarioId(null);
+    setShowScenarioSelector(true); // Show scenario selector for "Practice Again"
     setAnalysisProgress(0);
   };
 
   // Reset to landing screen (mode selector)
   const resetToLanding = () => {
     resetFeedback();
-    setMode('audio');
+    setMode(null);
     setHasSelectedMode(false);
     setShowScenarioSelector(false);
   };
@@ -332,6 +334,19 @@ const Landing = ({ playAudio, stopAudio }) => {
             <h2 className="mode-selector-title">Choose Your Practice Mode</h2>
             <div className="mode-buttons">
               <motion.button
+                className={`mode-btn ${mode === 'text' ? 'active' : ''}`}
+                onClick={() => {
+                  setMode('text');
+                  setHasSelectedMode(true);
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="mode-icon">✍️</span>
+                <span className="mode-label">Text Mode</span>
+                <span className="mode-description">Type and analyze your speech</span>
+              </motion.button>
+              <motion.button
                 className={`mode-btn ${mode === 'audio' ? 'active' : ''}`}
                 onClick={() => {
                   setMode('audio');
@@ -341,8 +356,8 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="mode-icon">🎤</span>
-                <span className="mode-label">Audio Only</span>
-                <span className="mode-description">Quick speech analysis</span>
+                <span className="mode-label">Audio Mode</span>
+                <span className="mode-description">Speak and get instant feedback</span>
               </motion.button>
               <motion.button
                 className={`mode-btn ${mode === 'video' ? 'active' : ''}`}
@@ -355,8 +370,8 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="mode-icon">📹</span>
-                <span className="mode-label">Video Practice</span>
-                <span className="mode-description">Practice scenarios with video</span>
+                <span className="mode-label">Video Mode</span>
+                <span className="mode-description">Record with video analysis</span>
               </motion.button>
             </div>
           </motion.div>
@@ -394,7 +409,11 @@ const Landing = ({ playAudio, stopAudio }) => {
               <div className="processing-content">
                 <div className="processing-spinner"></div>
                 <h2 className="processing-title">
-                  {mode === 'video' ? 'Analyzing your video...' : 'Analyzing your message...'}
+                  {mode === 'video' 
+                    ? 'Analyzing your video...' 
+                    : mode === 'text'
+                    ? 'Analyzing your text...'
+                    : 'Analyzing your message...'}
                 </h2>
                 <p className="processing-subtitle">
                   {mode === 'video' 
@@ -407,7 +426,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                     <span className="progress-text">{analysisProgress}%</span>
                   </div>
                 )}
-                {currentTranscript && mode === 'audio' && (
+                {currentTranscript && (mode === 'audio' || mode === 'text') && (
                   <div className="transcript-preview">
                     <p className="transcript-text">"{currentTranscript}"</p>
                   </div>
@@ -440,6 +459,22 @@ const Landing = ({ playAudio, stopAudio }) => {
             </motion.div>
           )}
 
+          {/* Text Mode - Text Input */}
+          {mode === 'text' && !userFeedback && !isProcessing && !error && !showModeSelector && (
+            <motion.div
+              key="text"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TextInput
+                updateUserFeedback={updateUserFeedback}
+                onBack={resetToLanding}
+              />
+            </motion.div>
+          )}
+
           {/* Audio Mode - Mic Input */}
           {mode === 'audio' && !userFeedback && !isProcessing && !error && !showModeSelector && (
             <motion.div
@@ -458,8 +493,8 @@ const Landing = ({ playAudio, stopAudio }) => {
             </motion.div>
           )}
 
-          {/* Audio Mode - Feedback */}
-          {mode === 'audio' && userFeedback && !isProcessing && (
+          {/* Text & Audio Mode - Feedback */}
+          {(mode === 'text' || mode === 'audio') && userFeedback && !isProcessing && (
             <motion.div
               key="feedback"
               initial={{ opacity: 0, y: 30 }}
