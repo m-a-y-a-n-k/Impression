@@ -10,13 +10,16 @@ import {
   isFavorite,
   toggleFavorite
 } from "../utils/progressStorage";
+import { exportProgressToPDF } from "../utils/pdfExport";
+import AnalyticsTab from "./AnalyticsTab";
+import InsightsTab from "./InsightsTab";
 
 const Progress = ({ isOpen, onClose }) => {
   const [stats, setStats] = useState(null);
   const [history, setHistory] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [showConfirmClear, setShowConfirmClear] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'history', or 'favorites'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'analytics', 'insights', 'history', or 'favorites'
 
   useEffect(() => {
     if (isOpen) {
@@ -47,6 +50,13 @@ const Progress = ({ isOpen, onClose }) => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+    }
+  };
+
+  const handlePDFExport = async () => {
+    const success = await exportProgressToPDF();
+    if (!success) {
+      alert('Failed to generate PDF report. Please try again.');
     }
   };
 
@@ -130,6 +140,18 @@ const Progress = ({ isOpen, onClose }) => {
                 onClick={() => setActiveTab('overview')}
               >
                 Overview
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'analytics' ? 'active' : ''}`}
+                onClick={() => setActiveTab('analytics')}
+              >
+                📊 Analytics
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'insights' ? 'active' : ''}`}
+                onClick={() => setActiveTab('insights')}
+              >
+                💡 Insights
               </button>
               <button
                 className={`tab-btn ${activeTab === 'history' ? 'active' : ''}`}
@@ -249,7 +271,11 @@ const Progress = ({ isOpen, onClose }) => {
                   <div className="progress-actions">
                     <button className="action-btn export-btn" onClick={handleExport}>
                       <span className="btn-icon">📥</span>
-                      Export Data
+                      Export CSV
+                    </button>
+                    <button className="action-btn pdf-btn" onClick={handlePDFExport}>
+                      <span className="btn-icon">📄</span>
+                      Export PDF
                     </button>
                     {!showConfirmClear ? (
                       <button
@@ -281,6 +307,10 @@ const Progress = ({ isOpen, onClose }) => {
                   </div>
                 </motion.div>
               )}
+
+              {activeTab === 'analytics' && <AnalyticsTab />}
+
+              {activeTab === 'insights' && <InsightsTab />}
 
               {activeTab === 'history' && (
                 <motion.div
