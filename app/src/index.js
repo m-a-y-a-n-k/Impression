@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import { DarkModeProvider } from './contexts/DarkModeContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import * as serviceWorkerRegistration from './utils/serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <DarkModeProvider>
+    <ThemeProvider>
       <App />
-    </DarkModeProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

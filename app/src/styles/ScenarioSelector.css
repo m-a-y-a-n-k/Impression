@@ -122,9 +122,9 @@
 }
 
 .scenario-card.selected {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.2);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  border-color: var(--theme-primary);
+  background: var(--overlay);
+  box-shadow: 0 8px 24px var(--shadow);
 }
 
 .scenario-icon {
@@ -157,7 +157,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #667eea;
+  background: var(--theme-primary);
   color: white;
   width: 32px;
   height: 32px;
@@ -199,9 +199,9 @@
 }
 
 .confirm-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .confirm-btn:hover:not(:disabled) {

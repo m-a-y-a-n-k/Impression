@@ -7,7 +7,7 @@
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
 }
@@ -97,7 +97,7 @@
 }
 
 .retry-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -147,7 +147,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   display: flex;
   justify-content: center;
   align-items: center;

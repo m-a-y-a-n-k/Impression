@@ -6,7 +6,7 @@
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
 }
@@ -379,7 +379,7 @@
 .feedback-btn {
   flex: 1;
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-secondary);
   border: none;
   border-radius: 16px;
   padding: 1.25rem 2rem;
