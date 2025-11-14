@@ -13,6 +13,9 @@ import {
 import { exportProgressToPDF } from "../utils/pdfExport";
 import AnalyticsTab from "./AnalyticsTab";
 import InsightsTab from "./InsightsTab";
+import PricingModal from "./PricingModal";
+import { useSubscription } from "../contexts/SubscriptionContext";
+import { getSessionLimitInfo } from "../utils/sessionTracking";
 
 const Progress = ({ isOpen, onClose }) => {
   const [stats, setStats] = useState(null);
@@ -20,12 +23,17 @@ const Progress = ({ isOpen, onClose }) => {
   const [favorites, setFavorites] = useState([]);
   const [showConfirmClear, setShowConfirmClear] = useState(false);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'analytics', 'insights', 'history', or 'favorites'
+  const [showPricingModal, setShowPricingModal] = useState(false);
+  
+  const { isPremium, isPro, isFree, getCurrentPlan } = useSubscription();
+  const [sessionInfo, setSessionInfo] = useState(getSessionLimitInfo());
 
   useEffect(() => {
     if (isOpen) {
       setStats(getProgressStats());
       setHistory(getProgressHistory());
       setFavorites(getFavoriteEntries());
+      setSessionInfo(getSessionLimitInfo());
     }
   }, [isOpen]);
 
@@ -131,6 +139,46 @@ const Progress = ({ isOpen, onClose }) => {
               >
                 ✕
               </button>
+            </div>
+
+            {/* Subscription Status Card */}
+            <div className={`subscription-status-card ${isFree() ? 'free-tier' : 'premium-tier'}`}>
+              <div className="subscription-info">
+                <div className="subscription-plan-badge">
+                  {isPro() && '👑'}
+                  {isPremium() && !isPro() && '⚡'}
+                  {isFree() && '📦'}
+                  <span className="plan-name">{getCurrentPlan().name}</span>
+                </div>
+                {isFree() && (
+                  <div className="subscription-details">
+                    <div className="sessions-remaining">
+                      <span className="sessions-text">
+                        {sessionInfo.remaining} of {sessionInfo.total} free sessions left
+                      </span>
+                      <div className="sessions-progress-bar">
+                        <div 
+                          className="sessions-progress-fill"
+                          style={{ width: `${sessionInfo.percentage}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {(isPremium() || isPro()) && (
+                  <div className="subscription-details premium">
+                    <span className="unlimited-badge">♾️ Unlimited Sessions</span>
+                  </div>
+                )}
+              </div>
+              {isFree() && (
+                <button 
+                  className="upgrade-btn-small"
+                  onClick={() => setShowPricingModal(true)}
+                >
+                  ⚡ Upgrade
+                </button>
+              )}
             </div>
 
             {/* Tabs */}
@@ -454,6 +502,13 @@ const Progress = ({ isOpen, onClose }) => {
               )}
             </div>
           </motion.div>
+
+          {/* Pricing Modal */}
+          <PricingModal
+            isOpen={showPricingModal}
+            onClose={() => setShowPricingModal(false)}
+            currentSessionCount={sessionInfo.used}
+          />
         </>
       )}
     </AnimatePresence>

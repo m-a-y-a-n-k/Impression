@@ -23,7 +23,7 @@
 .theme-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 6px 30px var(--shadow);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--card-border);
 }
 
 .theme-icon {
@@ -105,7 +105,7 @@
 }
 
 .theme-option.active {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: var(--card-text-secondary);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -120,7 +120,7 @@
 .theme-option-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-on-primary);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 1;

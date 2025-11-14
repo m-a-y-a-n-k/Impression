@@ -120,7 +120,7 @@
 .grade-badge {
   padding: 0.5rem 1.5rem;
   border-radius: 12px;
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1.5rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -450,7 +450,7 @@
 
 .action-btn.primary {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   box-shadow: 0 4px 12px var(--shadow);
 }
 

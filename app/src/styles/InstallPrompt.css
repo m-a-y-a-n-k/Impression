@@ -54,7 +54,7 @@
 .install-btn-primary {
   flex: 1;
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   border: none;
   border-radius: 12px;
   padding: 0.875rem 1.5rem;

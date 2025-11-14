@@ -12,12 +12,12 @@
 
 .offline-indicator.offline {
   background: rgba(229, 62, 62, 0.95);
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .offline-indicator.online {
   background: rgba(56, 161, 105, 0.95);
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .offline-indicator-content {
@@ -43,7 +43,7 @@
 .offline-indicator-close {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1.25rem;
   cursor: pointer;
   padding: 0.25rem;

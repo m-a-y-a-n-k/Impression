@@ -158,7 +158,7 @@
   top: 1rem;
   right: 1rem;
   background: var(--theme-primary);
-  color: white;
+  color: var(--text-on-primary);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -200,7 +200,7 @@
 
 .confirm-btn {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   box-shadow: 0 4px 12px var(--shadow);
 }
 

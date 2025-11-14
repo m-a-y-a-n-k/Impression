@@ -8,6 +8,7 @@ import InstallPrompt from "./InstallPrompt";
 import OfflineIndicator from "./OfflineIndicator";
 import ErrorBoundary from "./ErrorBoundary";
 import { useSiteAudio } from "../hooks/useSiteAudio";
+import { SubscriptionProvider } from "../contexts/SubscriptionContext";
 
 export default function App() {
   const fetchIntroStatus = () =>
@@ -24,28 +25,30 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="App">
-      <OfflineIndicator />
-      {!showIntro && <ThemePicker />}
-      {!showIntro && <InstallPrompt />}
-      {showIntro && (
-        <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
-      )}
-      {!showIntro && (
-        <>
-          <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
-          <button
-            className="progress-toggle-btn"
-            onClick={() => setShowProgress(true)}
-            aria-label="View progress"
-            title="View your progress"
-          >
-            <span className="progress-btn-icon">📊</span>
-          </button>
-          <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
-        </>
-      )}
-      </div>
+      <SubscriptionProvider>
+        <div className="App">
+        <OfflineIndicator />
+        {!showIntro && <ThemePicker />}
+        {!showIntro && <InstallPrompt />}
+        {showIntro && (
+          <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
+        )}
+        {!showIntro && (
+          <>
+            <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
+            <button
+              className="progress-toggle-btn"
+              onClick={() => setShowProgress(true)}
+              aria-label="View progress"
+              title="View your progress"
+            >
+              <span className="progress-btn-icon">📊</span>
+            </button>
+            <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
+          </>
+        )}
+        </div>
+      </SubscriptionProvider>
     </ErrorBoundary>
   );
 }

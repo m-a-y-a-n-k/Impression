@@ -1,10 +1,11 @@
 {
   "name": "impression",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Make your impression better",
   "keywords": [
     "semantic analysis",
-    "nlp",
+    "natural language processing",
+    "gesture recognition",
     "speech recognition",
     "productivity",
     "career",

@@ -57,14 +57,14 @@
 .text-input-title {
   font-size: 2rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-on-primary);
   margin: 0 0 0.75rem 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .text-input-subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-on-primary-secondary);
   margin: 0;
   line-height: 1.5;
   max-width: 600px;
@@ -135,7 +135,7 @@
 }
 
 .tips-title {
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -151,7 +151,7 @@
 }
 
 .tips-list li {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-on-primary-secondary);
   font-size: 0.9rem;
   padding-left: 1.5rem;
   position: relative;
@@ -167,7 +167,7 @@
 
 .text-submit-btn {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   border: none;
   border-radius: 16px;
   padding: 1rem 2.5rem;
@@ -217,7 +217,7 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  color: white;
+  color: var(--text-on-primary);
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -240,7 +240,7 @@
 
 .home-button:hover {
   background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--card-border);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 

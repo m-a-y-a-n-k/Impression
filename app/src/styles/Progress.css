@@ -30,8 +30,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--card-border);
+  background: var(--overlay);
 }
 
 .progress-title {
@@ -40,7 +40,7 @@
   gap: 0.75rem;
   margin: 0;
   font-size: 1.75rem;
-  color: white;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -51,7 +51,7 @@
 .progress-close-btn {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--text-primary);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -65,7 +65,7 @@
 }
 
 .progress-close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--overlay);
   transform: rotate(90deg);
 }
 
@@ -73,14 +73,14 @@
   display: flex;
   gap: 0.5rem;
   padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--card-border);
+  background: var(--overlay);
 }
 
 .tab-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -90,12 +90,12 @@
 }
 
 .tab-btn:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  background: var(--overlay);
 }
 
 .tab-btn.active {
-  color: white;
+  color: var(--text-on-primary);
   background: var(--bg-secondary);
   box-shadow: 0 4px 12px var(--shadow);
 }
@@ -115,18 +115,18 @@
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s ease;
+  border: 1px solid var(--card-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px var(--shadow);
 }
 
 .stat-icon {
@@ -137,13 +137,13 @@
 .stat-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin: 0.5rem 0;
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -155,7 +155,7 @@
 
 .section-title {
   font-size: 1.25rem;
-  color: white;
+  color: var(--text-primary);
   margin: 0 0 1.5rem 0;
   font-weight: 600;
 }
@@ -167,10 +167,10 @@
 }
 
 .sentiment-bar-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
 }
 
 .sentiment-bar-header {
@@ -187,14 +187,14 @@
 }
 
 .sentiment-count {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   font-size: 0.9rem;
 }
 
 .sentiment-bar-container {
   width: 100%;
   height: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--overlay);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -217,9 +217,9 @@
   height: 200px;
   gap: 4px;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
 }
 
 .chart-bar-container {
@@ -251,7 +251,7 @@
 .empty-history {
   text-align: center;
   padding: 4rem 2rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .empty-icon {
@@ -262,7 +262,7 @@
 .empty-hint {
   font-size: 0.9rem;
   margin-top: 0.5rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--card-text-secondary);
 }
 
 .history-list {
@@ -272,16 +272,17 @@
 }
 
 .history-item {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
   transition: all 0.2s ease;
 }
 
 .history-item:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--card-bg);
+  border-color: var(--theme-primary);
   transform: translateX(4px);
 }
 
@@ -293,7 +294,7 @@
 }
 
 .history-date {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   font-size: 0.85rem;
 }
 
@@ -307,7 +308,7 @@
 }
 
 .history-transcript {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--card-text);
   font-style: italic;
   margin-bottom: 0.75rem;
   line-height: 1.5;
@@ -328,7 +329,7 @@
 }
 
 .history-feedback {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   font-size: 0.9rem;
 }
 
@@ -351,7 +352,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .export-btn {
@@ -383,13 +384,13 @@
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--card-border);
 }
 
 .confirm-text {
-  color: white;
+  color: var(--card-text);
   margin: 0;
   font-weight: 500;
 }
@@ -411,7 +412,7 @@
 
 .confirm-yes {
   background: #e53e3e;
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .confirm-yes:hover {
@@ -419,12 +420,114 @@
 }
 
 .confirm-no {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: var(--overlay);
+  color: var(--card-text);
 }
 
 .confirm-no:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--card-border);
+}
+
+/* Subscription Status Card */
+.subscription-status-card {
+  margin: 0 2rem 1.5rem 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.subscription-status-card.free-tier {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.subscription-status-card.premium-tier {
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(56, 161, 105, 0.1) 100%);
+  border: 2px solid rgba(72, 187, 120, 0.4);
+}
+
+.subscription-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.subscription-plan-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.plan-name {
+  font-size: 1rem;
+}
+
+.subscription-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sessions-remaining {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sessions-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.sessions-progress-bar {
+  height: 6px;
+  background: var(--overlay);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.sessions-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #48bb78 0%, #f093fb 50%, #fa709a 100%);
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.subscription-details.premium {
+  display: flex;
+  align-items: center;
+}
+
+.unlimited-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #48bb78;
+}
+
+.upgrade-btn-small {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--text-on-primary);
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.upgrade-btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 /* Responsive Design */
@@ -452,6 +555,17 @@
 
   .score-chart {
     height: 150px;
+  }
+
+  .subscription-status-card {
+    margin: 0 1.5rem 1.25rem 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .upgrade-btn-small {
+    width: 100%;
   }
 }
 
@@ -533,7 +647,7 @@
 .time-period-selector {
   display: flex;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--overlay);
   padding: 0.25rem;
   border-radius: 8px;
 }
@@ -542,7 +656,7 @@
   padding: 0.5rem 1rem;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -551,34 +665,34 @@
 }
 
 .period-btn:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  background: var(--overlay);
 }
 
 .period-btn.active {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   box-shadow: 0 2px 8px var(--shadow);
 }
 
 .chart-container {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
 }
 
 .chart-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: white;
+  color: var(--card-text);
   margin: 0 0 1rem 0;
 }
 
 .chart-subtitle {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
   margin: 0 0 1rem 0;
 }
 
@@ -612,7 +726,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--overlay);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   min-width: 80px;
@@ -620,20 +734,20 @@
 
 .stat-badge-label {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
   margin-bottom: 0.25rem;
 }
 
 .stat-badge-value {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: var(--text-primary);
 }
 
 .empty-analytics {
   text-align: center;
   padding: 4rem 2rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .empty-analytics .empty-icon {
@@ -647,7 +761,7 @@
 
 .empty-analytics .empty-hint {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--card-text-secondary);
 }
 
 /* === INSIGHTS TAB STYLES === */
@@ -663,7 +777,7 @@
 .insights-subtitle {
   font-size: 1.1rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-primary);
   margin: 0 0 1.5rem 0;
 }
 
@@ -676,8 +790,8 @@
 }
 
 .streak-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
@@ -687,7 +801,7 @@
 .streak-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px var(--shadow);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--theme-primary);
 }
 
 .streak-icon {
@@ -699,20 +813,20 @@
 .streak-value {
   font-size: 2.5rem;
   font-weight: bold;
-  color: white;
+  color: var(--text-primary);
   margin: 0.5rem 0 0.25rem;
 }
 
 .streak-label {
   font-size: 1rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
 .streak-sublabel {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .streak-encouragement {
@@ -725,16 +839,16 @@
 
 .streak-encouragement p {
   margin: 0;
-  color: white;
+  color: var(--card-text);
   font-size: 0.95rem;
 }
 
 /* Calendar Heatmap */
 .calendar-heatmap {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
 }
 
 .calendar-days-labels {
@@ -746,7 +860,7 @@
 
 .day-label {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
   text-align: center;
   padding: 0.25rem;
 }
@@ -782,7 +896,7 @@
 
 .calendar-day-number {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-on-primary-secondary);
   font-weight: 500;
 }
 
@@ -796,7 +910,7 @@
 
 .legend-label {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .legend-boxes {
@@ -819,8 +933,8 @@
 }
 
 .improvement-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
@@ -830,7 +944,7 @@
 .improvement-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px var(--shadow);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--theme-primary);
 }
 
 .improvement-icon {
@@ -847,21 +961,21 @@
 .improvement-label {
   font-size: 0.95rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-on-primary-secondary);
   margin-bottom: 0.25rem;
 }
 
 .improvement-hint {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .improvement-message {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-border);
 }
 
 .improvement-message p {
@@ -883,7 +997,7 @@
 }
 
 .message-neutral {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-on-primary-secondary);
 }
 
 /* Best Performances */
@@ -896,16 +1010,16 @@
 .performance-card {
   display: flex;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 1rem;
   transition: all 0.3s ease;
 }
 
 .performance-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--card-bg);
+  border-color: var(--theme-primary);
   transform: translateX(4px);
 }
 
@@ -938,7 +1052,7 @@
 
 .performance-date {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .performance-sentiment {
@@ -956,7 +1070,7 @@
 
 .performance-transcript {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   font-style: italic;
   line-height: 1.5;
 }
@@ -964,7 +1078,7 @@
 .empty-insights {
   text-align: center;
   padding: 4rem 2rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .empty-insights .empty-icon {
@@ -978,7 +1092,7 @@
 
 .empty-insights .empty-hint {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--card-text-secondary);
 }
 
 /* PDF Export Button */

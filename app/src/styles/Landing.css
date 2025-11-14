@@ -207,7 +207,7 @@
 
 .retry-button {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   border: none;
   border-radius: 12px;
   padding: 0.875rem 2rem;
@@ -288,22 +288,21 @@
 .mode-selector-title {
   font-size: 2rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-primary);
   margin: 0 0 2rem 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .mode-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2rem;
 }
 
 .mode-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--card-border);
   border-radius: 20px;
   padding: 2.5rem 2rem;
   cursor: pointer;
@@ -312,20 +311,21 @@
   align-items: center;
   gap: 1rem;
   transition: all 0.3s ease;
-  color: white;
+  color: var(--card-text);
   text-align: center;
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .mode-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--card-bg);
+  border-color: var(--theme-primary);
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 32px var(--shadow);
 }
 
 .mode-btn.active {
-  background: var(--overlay);
-  border-color: var(--card-border);
+  background: var(--card-bg);
+  border-color: var(--theme-primary);
   box-shadow: 0 8px 24px var(--shadow);
 }
 
@@ -399,5 +399,160 @@
 
   .mode-description {
     font-size: 0.9rem;
+  }
+}
+
+/* Session Tracking & Premium Features */
+
+/* Session Info Bar */
+.session-info-bar {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  max-width: 600px;
+  width: calc(100% - 40px);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid var(--card-border);
+}
+
+.session-info-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+}
+
+.session-info-text {
+  color: var(--card-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.session-info-upgrade-btn {
+  background: var(--bg-secondary);
+  color: var(--text-on-primary);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.session-info-upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.session-info-progress {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.session-info-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #48bb78 0%, #f093fb 50%, #fa709a 100%);
+  transition: width 0.3s ease;
+}
+
+/* Premium Feature Badges */
+.mode-btn.premium-feature {
+  position: relative;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.mode-btn.premium-feature:hover {
+  border-color: rgba(255, 215, 0, 0.6);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.premium-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #1a1a2e;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}
+
+.lock-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .session-info-bar {
+    top: 70px;
+    width: calc(100% - 24px);
+  }
+
+  .session-info-content {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .session-info-text {
+    font-size: 0.85rem;
+  }
+
+  .session-info-upgrade-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .session-info-bar {
+    top: 60px;
+  }
+
+  .session-info-content {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .session-info-text {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  .session-info-upgrade-btn {
+    width: 100%;
+  }
+
+  .premium-badge {
+    top: 8px;
+    right: 8px;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+  }
+
+  .lock-icon {
+    bottom: 8px;
+    right: 8px;
+    font-size: 1rem;
   }
 }

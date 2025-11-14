@@ -24,7 +24,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   padding: 0.75rem 1.25rem;
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .header-section h1 {
-  color: white;
+  color: var(--text-on-primary);
   font-size: 2rem;
   font-weight: 600;
   margin: 0;
@@ -98,7 +98,7 @@
 
 .retry-btn {
   background: var(--bg-secondary);
-  color: white;
+  color: var(--text-on-primary);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
@@ -157,7 +157,7 @@
 
 .mic-icon {
   font-size: 1.5rem;
-  color: white;
+  color: var(--text-on-primary);
   z-index: 2;
 }
 
@@ -232,7 +232,7 @@
 }
 
 .status-text {
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1.25rem;
   font-weight: 500;
   margin: 0;
@@ -269,7 +269,7 @@
 }
 
 .use-text-intead {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-on-primary-secondary);
   cursor: pointer;
   padding: 1rem 2rem;
   background: rgba(255, 255, 255, 0.1);
@@ -281,7 +281,7 @@
 }
 
 .use-text-intead:hover {
-  color: white;
+  color: var(--text-on-primary);
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);

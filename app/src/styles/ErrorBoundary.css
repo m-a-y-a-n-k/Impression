@@ -98,7 +98,7 @@
 
 .error-boundary-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: var(--text-on-primary);
   border: none;
   padding: 1rem 2.5rem;
   border-radius: 12px;

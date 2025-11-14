@@ -34,7 +34,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   padding: 0.75rem 1.25rem;
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -62,7 +62,7 @@
   gap: 0.75rem;
   margin: 0;
   font-size: 1.75rem;
-  color: white;
+  color: var(--text-on-primary);
   font-weight: 600;
 }
 
@@ -73,7 +73,7 @@
 .cancel-recording-btn {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  color: var(--text-on-primary);
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
   font-size: 1rem;
@@ -149,7 +149,7 @@
 .countdown-number {
   font-size: 8rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-on-primary);
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   animation: pulse 1s ease-in-out infinite;
 }
@@ -170,7 +170,7 @@
   top: 1.5rem;
   left: 1.5rem;
   background: rgba(229, 62, 62, 0.9);
-  color: white;
+  color: var(--text-on-primary);
   padding: 0.75rem 1.25rem;
   border-radius: 12px;
   display: flex;
@@ -205,7 +205,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(229, 62, 62, 0.95);
-  color: white;
+  color: var(--text-on-primary);
   padding: 1.5rem 2rem;
   border-radius: 12px;
   text-align: center;
@@ -251,28 +251,28 @@
 .current-time {
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .separator {
   font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--card-text-secondary);
 }
 
 .max-time {
   font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
 }
 
 .remaining-time {
   text-align: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-on-primary-secondary);
   font-size: 1rem;
   font-weight: 500;
 }
 
 .scenario-tips {
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .scenario-tips h3 {
@@ -296,7 +296,7 @@
   content: "•";
   position: absolute;
   left: 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-on-primary-secondary);
   font-size: 1.5rem;
   line-height: 1;
 }
@@ -323,7 +323,7 @@
 
 .start-recording-btn {
   background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .start-recording-btn:hover {
@@ -333,7 +333,7 @@
 
 .stop-recording-btn {
   background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
-  color: white;
+  color: var(--text-on-primary);
 }
 
 .stop-recording-btn:hover {
@@ -355,7 +355,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: white;
+  color: var(--text-on-primary);
   font-size: 1.125rem;
   font-weight: 500;
 }
@@ -364,7 +364,7 @@
   width: 24px;
   height: 24px;
   border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border-top-color: var(--text-on-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
