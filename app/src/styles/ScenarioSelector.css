@@ -14,14 +14,14 @@
 }
 
 .scenario-selector-container {
-  background: var(--bg-primary);
+  background: var(--card-bg);
   border-radius: 24px;
   max-width: 900px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px var(--shadow);
+  border: 1px solid var(--card-border);
 }
 
 .scenario-selector-header {
@@ -29,7 +29,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--card-border);
 }
 
 .header-left {
@@ -41,7 +41,7 @@
 .scenario-selector-header h2 {
   margin: 0;
   font-size: 1.75rem;
-  color: white;
+  color: var(--card-text);
   font-weight: 600;
 }
 
@@ -49,23 +49,23 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--overlay);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 0.75rem 1.25rem;
-  color: white;
+  color: var(--card-text);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .home-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--card-border);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 16px var(--shadow);
 }
 
 .home-icon {
@@ -79,7 +79,7 @@
 .close-btn {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--card-text);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -93,7 +93,7 @@
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--overlay);
   transform: rotate(90deg);
 }
 
@@ -105,8 +105,8 @@
 }
 
 .scenario-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: var(--overlay);
+  border: 2px solid var(--card-border);
   border-radius: 16px;
   padding: 1.5rem;
   cursor: pointer;
@@ -116,8 +116,8 @@
 }
 
 .scenario-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--card-border);
+  border-color: var(--card-border);
   transform: translateY(-4px);
 }
 
@@ -137,19 +137,19 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: white;
+  color: var(--card-text);
 }
 
 .scenario-description {
   margin: 0 0 1rem 0;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--card-text-secondary);
   line-height: 1.5;
 }
 
 .scenario-duration {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -175,7 +175,7 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--card-border);
 }
 
 .cancel-btn,
@@ -190,12 +190,12 @@
 }
 
 .cancel-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--overlay);
+  color: var(--card-text);
 }
 
 .cancel-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--card-border);
 }
 
 .confirm-btn {
