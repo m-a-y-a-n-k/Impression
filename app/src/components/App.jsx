@@ -6,6 +6,7 @@ import Progress from "./Progress";
 import ThemePicker from "./ThemePicker";
 import InstallPrompt from "./InstallPrompt";
 import OfflineIndicator from "./OfflineIndicator";
+import ErrorBoundary from "./ErrorBoundary";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 
 export default function App() {
@@ -22,7 +23,8 @@ export default function App() {
   const { handlePlayAudio, handleStopAudio } = useSiteAudio();
 
   return (
-    <div className="App">
+    <ErrorBoundary>
+      <div className="App">
       <OfflineIndicator />
       {!showIntro && <ThemePicker />}
       {!showIntro && <InstallPrompt />}
@@ -43,6 +45,7 @@ export default function App() {
           <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
         </>
       )}
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }

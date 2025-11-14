@@ -7,14 +7,19 @@ import FeedBack from "./Feedback";
 import VideoRecorder from "./VideoRecorder";
 import ScenarioSelector from "./ScenarioSelector";
 import VideoFeedback from "./VideoFeedback";
+import QuestionDisplay from "./QuestionDisplay";
+import QnAFeedback from "./QnAFeedback";
+import DifficultySelector from "./DifficultySelector";
 import { analyzeText } from "../utils/nlpAnalysis";
 import { analyzeVideo, calculateVideoScore, generateVideoSuggestions } from "../utils/videoAnalysis";
 import { saveProgressEntry } from "../utils/progressStorage";
 import { feebackTextConfig } from "../config/feedbackText";
 import { getScenarioFeedback, getScenario } from "../config/practiceScenarios";
+import { getRandomQuestion } from "../config/qnaQuestions";
+import { evaluateAnswer } from "../utils/qnaEvaluation";
 
 const Landing = ({ playAudio, stopAudio }) => {
-  // Mode selection: 'text', 'audio', or 'video'
+  // Mode selection: 'text', 'audio', 'video', or 'qna'
   const [mode, setMode] = useState(null);
   const [hasSelectedMode, setHasSelectedMode] = useState(false);
   
@@ -37,6 +42,14 @@ const Landing = ({ playAudio, stopAudio }) => {
   const [videoOverallScore, setVideoOverallScore] = useState(null);
   const [videoEntryId, setVideoEntryId] = useState(null);
   const [analysisProgress, setAnalysisProgress] = useState(0);
+
+  // Q&A mode states
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [showQuestionDisplay, setShowQuestionDisplay] = useState(false);
+  const [showDifficultySelector, setShowDifficultySelector] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const [qnaEvaluation, setQnaEvaluation] = useState(null);
+  const [qnaEntryId, setQnaEntryId] = useState(null);
 
   const updateUserFeedback = async (transcript) => {
     // Prevent duplicate processing of the same transcript
@@ -157,8 +170,16 @@ const Landing = ({ playAudio, stopAudio }) => {
     setVideoEntryId(null);
     setShowVideoRecorder(false);
     setSelectedScenarioId(null);
-    setShowScenarioSelector(true); // Show scenario selector for "Practice Again"
+    setShowScenarioSelector(mode === 'video'); // Show scenario selector only for video mode
     setAnalysisProgress(0);
+
+    // Reset Q&A mode states
+    if (mode === 'qna') {
+      setQnaEvaluation(null);
+      setQnaEntryId(null);
+      setShowQuestionDisplay(false);
+      setShowDifficultySelector(true); // Show difficulty selector instead
+    }
   };
 
   // Reset to landing screen (mode selector)
@@ -167,6 +188,12 @@ const Landing = ({ playAudio, stopAudio }) => {
     setMode(null);
     setHasSelectedMode(false);
     setShowScenarioSelector(false);
+    setShowQuestionDisplay(false);
+    setShowDifficultySelector(false);
+    setCurrentQuestion(null);
+    setSelectedDifficulty(null);
+    setQnaEvaluation(null);
+    setQnaEntryId(null);
   };
 
   // Handle scenario selection
@@ -298,6 +325,101 @@ const Landing = ({ playAudio, stopAudio }) => {
     resetFeedback();
   };
 
+  // Handle Q&A mode initialization - show difficulty selector
+  const handleQnAStart = () => {
+    setShowDifficultySelector(true);
+  };
+
+  // Handle difficulty selection
+  const handleDifficultySelect = (difficulty) => {
+    setSelectedDifficulty(difficulty);
+    const question = getRandomQuestion(null, difficulty);
+    setCurrentQuestion(question);
+    setShowDifficultySelector(false);
+    setShowQuestionDisplay(true);
+  };
+
+  // Handle Q&A answer submission
+  const handleAnswerSubmit = async (answer, timeElapsed) => {
+    if (!currentQuestion) {
+      console.error("No current question available");
+      setError("No question available. Please try again.");
+      return;
+    }
+
+    if (!answer || answer.trim().length === 0) {
+      setError("Please provide an answer before submitting.");
+      return;
+    }
+
+    setIsProcessing(true);
+    setError(null);
+    try {
+      // Add a small delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Evaluate the answer with safety checks
+      const evaluation = evaluateAnswer(answer, currentQuestion, timeElapsed);
+      
+      if (!evaluation) {
+        throw new Error("Evaluation failed to produce results");
+      }
+
+      setQnaEvaluation(evaluation);
+
+      // Save to progress history with safety checks
+      const savedEntry = saveProgressEntry({
+        type: 'qna',
+        questionId: currentQuestion.id || 'unknown',
+        category: currentQuestion.category || 'unknown',
+        difficulty: currentQuestion.difficulty || 'unknown',
+        question: currentQuestion.question || '',
+        answer: answer,
+        sentiment: 'positive', // Q&A doesn't use sentiment
+        transcript: answer,
+        score: evaluation.overallScore || 0,
+        feedback: evaluation.grade?.message || 'Evaluation complete',
+        analysis: {
+          accuracy: evaluation.scores?.accuracy || 0,
+          clarity: evaluation.scores?.clarity || 0,
+          completeness: evaluation.scores?.completeness || 0,
+          vocabulary: evaluation.scores?.vocabulary || 0,
+          keywordsCovered: evaluation.keywordAnalysis?.matchedKeywords?.length || 0,
+          totalKeywords: evaluation.keywordAnalysis?.totalKeywords || 0,
+          suggestions: evaluation.suggestions?.length || 0
+        }
+      });
+
+      if (savedEntry && savedEntry.id) {
+        setQnaEntryId(savedEntry.id);
+      }
+
+      setShowQuestionDisplay(false);
+    } catch (err) {
+      console.error("Q&A evaluation error:", err);
+      setError(`Failed to evaluate your answer: ${err.message || 'Unknown error'}. Please try again.`);
+      setShowQuestionDisplay(false);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // Handle try same question again
+  const handleTryAgain = () => {
+    setQnaEvaluation(null);
+    setQnaEntryId(null);
+    setShowQuestionDisplay(true);
+  };
+
+  // Handle get new question (keep same difficulty)
+  const handleNewQuestion = () => {
+    const newQuestion = getRandomQuestion(null, selectedDifficulty);
+    setCurrentQuestion(newQuestion);
+    setQnaEvaluation(null);
+    setQnaEntryId(null);
+    setShowQuestionDisplay(true);
+  };
+
   const getBackgroundGradient = (feedback) => {
     const gradients = {
       positive: "linear-gradient(135deg, #38a169 0%, #2f855a 100%)",
@@ -311,7 +433,7 @@ const Landing = ({ playAudio, stopAudio }) => {
 
   // Determine if we should show mode selector
   // Show mode selector only initially when nothing has happened yet
-  const showModeSelector = !userFeedback && !videoAnalysis && !isProcessing && !error && !showVideoRecorder && !showScenarioSelector && !hasSelectedMode;
+  const showModeSelector = !userFeedback && !videoAnalysis && !qnaEvaluation && !isProcessing && !error && !showVideoRecorder && !showScenarioSelector && !showQuestionDisplay && !showDifficultySelector && !hasSelectedMode;
 
   return (
     <div 
@@ -373,6 +495,20 @@ const Landing = ({ playAudio, stopAudio }) => {
                 <span className="mode-label">Video Mode</span>
                 <span className="mode-description">Record with video analysis</span>
               </motion.button>
+              <motion.button
+                className={`mode-btn ${mode === 'qna' ? 'active' : ''}`}
+                onClick={() => {
+                  setMode('qna');
+                  setHasSelectedMode(true);
+                  handleQnAStart();
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="mode-icon">🎯</span>
+                <span className="mode-label">Q&A Mode</span>
+                <span className="mode-description">Answer STEM questions and get scored</span>
+              </motion.button>
             </div>
           </motion.div>
         )}
@@ -382,6 +518,14 @@ const Landing = ({ playAudio, stopAudio }) => {
           <ScenarioSelector
             onSelectScenario={handleScenarioSelect}
             onClose={resetToLanding}
+          />
+        )}
+
+        {/* Difficulty Selector for Q&A */}
+        {showDifficultySelector && (
+          <DifficultySelector
+            onSelectDifficulty={handleDifficultySelect}
+            onBack={resetToLanding}
           />
         )}
 
@@ -413,11 +557,15 @@ const Landing = ({ playAudio, stopAudio }) => {
                     ? 'Analyzing your video...' 
                     : mode === 'text'
                     ? 'Analyzing your text...'
+                    : mode === 'qna'
+                    ? 'Evaluating your answer...'
                     : 'Analyzing your message...'}
                 </h2>
                 <p className="processing-subtitle">
                   {mode === 'video' 
                     ? 'Analyzing facial expressions, body language, and speech'
+                    : mode === 'qna'
+                    ? 'Checking accuracy, clarity, completeness, and vocabulary'
                     : 'Analyzing sentiment, clarity, and delivery'}
                 </p>
                 {mode === 'video' && isProcessing && (
@@ -530,6 +678,43 @@ const Landing = ({ playAudio, stopAudio }) => {
                 entryId={videoEntryId}
                 resetFeedback={resetFeedback}
                 onBack={resetToLanding}
+              />
+            </motion.div>
+          )}
+
+          {/* Q&A Question Display */}
+          {showQuestionDisplay && currentQuestion && !isProcessing && (
+            <motion.div
+              key="question-display"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <QuestionDisplay
+                question={currentQuestion}
+                onSubmit={handleAnswerSubmit}
+                onBack={resetToLanding}
+              />
+            </motion.div>
+          )}
+
+          {/* Q&A Feedback */}
+          {qnaEvaluation && !isProcessing && (
+            <motion.div
+              key="qna-feedback"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <QnAFeedback
+                evaluation={qnaEvaluation}
+                question={currentQuestion}
+                onTryAgain={handleTryAgain}
+                onNewQuestion={handleNewQuestion}
+                onBack={resetToLanding}
+                entryId={qnaEntryId}
               />
             </motion.div>
           )}
