@@ -263,6 +263,7 @@ const Landing = ({ playAudio, stopAudio }) => {
     setSelectedDifficulty(null);
     setQnaEvaluation(null);
     setQnaEntryId(null);
+    playAudio(); // Restart audio when returning to mode selection
   };
 
   // Handle scenario selection
@@ -619,6 +620,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                   if (!handleSessionStart()) return;
                   setMode("text");
                   setHasSelectedMode(true);
+                  stopAudio(); // Stop audio after mode selection
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -635,6 +637,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                   if (!handleSessionStart()) return;
                   setMode("audio");
                   setHasSelectedMode(true);
+                  stopAudio(); // Stop audio after mode selection
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -656,6 +659,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                   setMode("video");
                   setHasSelectedMode(true);
                   setShowScenarioSelector(true);
+                  stopAudio(); // Stop audio after mode selection
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -679,6 +683,7 @@ const Landing = ({ playAudio, stopAudio }) => {
                   setMode("qna");
                   setHasSelectedMode(true);
                   handleQnAStart();
+                  stopAudio(); // Stop audio after mode selection
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
