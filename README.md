@@ -90,7 +90,22 @@
 3. **Configure Firebase** (Required for authentication)
    - Follow the detailed setup guide in [FIREBASE_SETUP.md](./FIREBASE_SETUP.md)
    - Create a Firebase project and enable Google Authentication
-   - Copy `.env.example` to `.env` and add your Firebase credentials
+   - Create a `.env` file in the `app/` directory with the following variables:
+   
+   ```bash
+   # Firebase Configuration
+   REACT_APP_FIREBASE_API_KEY=your_api_key_here
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain_here
+   REACT_APP_FIREBASE_PROJECT_ID=your_project_id_here
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket_here
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id_here
+   REACT_APP_FIREBASE_APP_ID=your_app_id_here
+   
+   # Beta Testing Configuration (Optional)
+   # Set to 'true' to enable beta testing tools in Profile for Premium Access testing
+   # This allows testing Premium/Pro features without payment (stored locally)
+   REACT_APP_ENABLE_BETA_TESTING=false
+   ```
 
 4. **Start the development server**
    ```bash
@@ -206,6 +221,24 @@ app/
 ├── package.json
 └── README.md
 ```
+
+## 🧪 Beta Testing & Development
+
+### Premium Access Testing
+
+For development and testing purposes, you can enable beta testing tools in the user profile to test Premium and Pro features without payment:
+
+1. **Enable Beta Testing**:
+   - Set `REACT_APP_ENABLE_BETA_TESTING=true` in your `.env` file
+   - Restart the development server
+
+2. **Access Beta Tools**:
+   - Sign in to your account
+   - Open your Profile (click on your avatar)
+   - Expand the "🧪 Beta Testing" section
+   - Toggle between Free, Premium, and Pro plans
+
+3. **Note**: Beta testing changes are stored locally in browser storage and won't affect actual subscription status.
 
 ## 🎯 Key Features Explained
 

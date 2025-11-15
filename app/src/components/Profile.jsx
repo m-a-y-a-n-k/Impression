@@ -312,7 +312,8 @@ export default function Profile({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* Beta Testing Tools */}
+              {/* Beta Testing Tools - Controlled by Environment Variable */}
+              {process.env.REACT_APP_ENABLE_BETA_TESTING === 'true' && (
               <div className="profile-section beta-section">
                 <div className="beta-header">
                   <h4 className="profile-section-title">
@@ -404,6 +405,7 @@ export default function Profile({ isOpen, onClose }) {
                   </motion.div>
                 )}
               </div>
+              )}
 
               {/* Logout Button */}
               <div className="profile-section">
