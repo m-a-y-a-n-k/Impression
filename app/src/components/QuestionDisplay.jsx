@@ -78,6 +78,18 @@ const QuestionDisplay = ({ question, onSubmit, onBack }) => {
 
   return (
     <div className="question-display-container">
+      {/* Home Button */}
+      <button
+        className="qna-home-button"
+        onClick={onBack}
+        disabled={isSubmitting}
+        aria-label="Go to home"
+        title="Go to home"
+      >
+        <span className="home-icon">🏠</span>
+        <span className="home-text">Home</span>
+      </button>
+
       <motion.div
         className="question-display-card"
         initial={{ opacity: 0, y: 20 }}
@@ -86,9 +98,6 @@ const QuestionDisplay = ({ question, onSubmit, onBack }) => {
       >
         {/* Header */}
         <div className="question-header">
-          <button className="back-btn" onClick={onBack} disabled={isSubmitting}>
-            ← Back
-          </button>
           <div className={`timer ${timeRemaining <= 30 ? 'timer-warning' : ''}`}>
             <span className="timer-icon">{timeRemaining <= 30 ? '⚠️' : '⏱️'}</span>
             <span 

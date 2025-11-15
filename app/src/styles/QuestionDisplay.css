@@ -5,6 +5,64 @@
   align-items: flex-start;
   justify-content: center;
   overflow-y: auto;
+  position: relative;
+}
+
+/* QnA Home Button */
+.qna-home-button {
+  position: fixed;
+  top: 22.5vh;
+  left: 1vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  backdrop-filter: blur(10px);
+  border: 3px solid #ffffff;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+  z-index: 9999;
+  animation: slideInLeft 0.4s ease-out;
+  will-change: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.qna-home-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  border-color: #ffffff;
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.8);
+  transform: scale(1.08);
+}
+
+.qna-home-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qna-home-button .home-icon {
+  font-size: 1.25rem;
+}
+
+.qna-home-button .home-text {
+  font-size: 1rem;
 }
 
 .question-display-card {
@@ -21,7 +79,7 @@
 /* Header */
 .question-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 2rem;
 }
@@ -323,6 +381,17 @@
   .question-display-container {
     padding: 0.5rem;
     align-items: flex-start;
+  }
+
+  .qna-home-button {
+    top: 10vh;
+    left: auto;
+    right: 2vw;
+    padding: 0.6rem 1rem;
+  }
+
+  .qna-home-button .home-text {
+    display: none;
   }
 
   .question-display-card {

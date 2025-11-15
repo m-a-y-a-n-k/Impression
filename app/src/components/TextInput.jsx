@@ -28,17 +28,15 @@ const TextInput = ({ updateUserFeedback, onBack }) => {
 
   return (
     <div className="text-input-container">
-      {onBack && (
-        <button
-          className="home-button"
-          onClick={handleHome}
-          aria-label="Go to home"
-          title="Go to home"
-        >
-          <span className="home-icon">🏠</span>
-          <span className="home-text">Home</span>
-        </button>
-      )}
+      <button
+        className="home-button"
+        onClick={handleHome}
+        aria-label="Go to home"
+        title="Go to home"
+      >
+        <span className="home-icon">🏠</span>
+        <span className="home-text">Home</span>
+      </button>
 
       <div className="text-input-content">
         <div className="text-input-header">

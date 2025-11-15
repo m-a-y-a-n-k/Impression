@@ -203,28 +203,30 @@
   font-size: 1rem;
 }
 
-/* Home Button */
-.home-button {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  background: rgba(255, 255, 255, 0.15);
+/* Home Button - Very visible for debugging */
+.text-input-container .home-button {
+  position: fixed;
+  top: 22.5vh;
+  left: 1vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 3px solid #ffffff;
   border-radius: 50px;
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  color: var(--text-on-primary);
-  font-weight: 600;
-  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+  z-index: 9999;
   animation: slideInLeft 0.4s ease-out;
   will-change: auto;
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes slideInLeft {
@@ -238,18 +240,19 @@
   }
 }
 
-.home-button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: var(--card-border);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+.text-input-container .home-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.8) !important;
+  transform: scale(1.08) !important;
 }
 
-.home-icon {
-  font-size: 1.25rem;
+.text-input-container .home-icon {
+  font-size: 1.25rem !important;
 }
 
-.home-text {
-  font-size: 1rem;
+.text-input-container .home-text {
+  font-size: 1rem !important;
 }
 
 /* Desktop specific adjustments */
@@ -299,14 +302,15 @@
     max-width: 100%;
   }
 
-  .home-button {
-    top: 1rem;
-    left: 1rem;
-    padding: 0.6rem 1rem;
+  .text-input-container .home-button {
+    top: 10vh;
+    left: auto;
+    right: 2vw;
+    padding: 0.6rem 1rem !important;
   }
 
-  .home-text {
-    display: none;
+  .text-input-container .home-text {
+    display: none !important;
   }
 }
 

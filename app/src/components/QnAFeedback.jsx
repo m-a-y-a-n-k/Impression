@@ -60,6 +60,17 @@ const QnAFeedback = ({ evaluation, question, onTryAgain, onNewQuestion, onBack, 
 
   return (
     <div className="qna-feedback-container">
+      {/* Home Button */}
+      <button
+        className="qna-home-button"
+        onClick={onBack}
+        aria-label="Go to home"
+        title="Go to home"
+      >
+        <span className="home-icon">🏠</span>
+        <span className="home-text">Home</span>
+      </button>
+
       <motion.div
         className="qna-feedback-card"
         initial={{ opacity: 0, scale: 0.95 }}
@@ -68,9 +79,6 @@ const QnAFeedback = ({ evaluation, question, onTryAgain, onNewQuestion, onBack, 
       >
         {/* Header */}
         <div className="feedback-header">
-          <button className="back-btn-feedback" onClick={onBack}>
-            🏠 Home
-          </button>
           {entryId && (
             <button 
               className={`favorite-btn ${isFavorited ? 'favorited' : ''}`}

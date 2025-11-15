@@ -4,7 +4,7 @@
  */
 
 const SESSION_STORAGE_KEY = 'impression-sessions';
-const FREE_SESSION_LIMIT = 10;
+const FREE_SESSION_LIMIT = 15;
 
 /**
  * Get current session count
@@ -105,7 +105,7 @@ export const resetSessionCount = () => {
  */
 export const shouldShowUpgradePrompt = () => {
   const count = getSessionCount();
-  return count >= 7 && count < FREE_SESSION_LIMIT;
+  return count >= 8 && count < FREE_SESSION_LIMIT;
 };
 
 /**
