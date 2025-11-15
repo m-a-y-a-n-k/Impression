@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import Profile from './Profile';
+import Avatar from './Avatar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import '../styles/UserMenu.css';
@@ -68,11 +69,7 @@ export default function UserMenu() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="User menu"
         >
-          <img
-            src={currentUser.photoURL || 'https://via.placeholder.com/40'}
-            alt={currentUser.displayName || 'User'}
-            className="user-avatar"
-          />
+          <Avatar user={currentUser} size="medium" />
         </button>
 
         <AnimatePresence>
@@ -90,11 +87,7 @@ export default function UserMenu() {
                 exit="exit"
               >
                 <div className="user-menu-header">
-                  <img
-                    src={currentUser.photoURL || 'https://via.placeholder.com/48'}
-                    alt={currentUser.displayName || 'User'}
-                    className="user-menu-avatar"
-                  />
+                  <Avatar user={currentUser} size="medium" className="user-menu-avatar" />
                   <div className="user-menu-info">
                     <div className="user-menu-name">
                       {currentUser.displayName || 'Anonymous User'}

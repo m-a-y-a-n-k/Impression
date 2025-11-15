@@ -135,6 +135,41 @@ export const SubscriptionProvider = ({ children }) => {
     return freeFeatures.includes(feature);
   };
 
+  // Beta Testing Functions - For development/testing only
+  const enableBetaTesting = (planId = 'premium') => {
+    setSubscriptionStatus({
+      plan: planId,
+      active: true,
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
+      customerId: 'beta-tester',
+      isBetaTesting: true,
+      activatedAt: new Date().toISOString()
+    });
+  };
+
+  const disableBetaTesting = () => {
+    setSubscriptionStatus({
+      plan: 'free',
+      active: false,
+      expiresAt: null,
+      customerId: null,
+      isBetaTesting: false,
+      cancelledAt: new Date().toISOString()
+    });
+  };
+
+  const toggleBetaPlan = (planId) => {
+    if (subscriptionStatus.isBetaTesting && subscriptionStatus.plan === planId) {
+      disableBetaTesting();
+    } else {
+      enableBetaTesting(planId);
+    }
+  };
+
+  const isBetaTesting = () => {
+    return subscriptionStatus.isBetaTesting === true;
+  };
+
   const value = {
     subscriptionStatus,
     isPremium,
@@ -144,7 +179,12 @@ export const SubscriptionProvider = ({ children }) => {
     cancelSubscription,
     getCurrentPlan,
     hasFeatureAccess,
-    plans: SUBSCRIPTION_PLANS
+    plans: SUBSCRIPTION_PLANS,
+    // Beta testing functions
+    enableBetaTesting,
+    disableBetaTesting,
+    toggleBetaPlan,
+    isBetaTesting
   };
 
   return (

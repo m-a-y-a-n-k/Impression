@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
+import Avatar from './Avatar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import '../styles/Profile.css';
@@ -12,7 +13,7 @@ import '../styles/Profile.css';
 
 export default function Profile({ isOpen, onClose }) {
   const { currentUser, userProfile, logout, updateUserProfile, updatePreferences } = useAuth();
-  const { subscriptionStatus, getCurrentPlan, isPremium, isPro } = useSubscription();
+  const { subscriptionStatus, getCurrentPlan, isPremium, isPro, toggleBetaPlan, isBetaTesting } = useSubscription();
   const { t, i18n } = useTranslation();
   
   const [isEditing, setIsEditing] = useState(false);
@@ -20,6 +21,7 @@ export default function Profile({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showBetaTools, setShowBetaTools] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -142,11 +144,7 @@ export default function Profile({ isOpen, onClose }) {
               {/* User Info Section */}
               <div className="profile-section">
                 <div className="profile-avatar-container">
-                  <img
-                    src={currentUser.photoURL || 'https://via.placeholder.com/100'}
-                    alt={currentUser.displayName || 'User'}
-                    className="profile-avatar"
-                  />
+                  <Avatar user={currentUser} size="xxlarge" className="profile-avatar" />
                   <span className={`plan-badge ${getPlanBadgeClass()}`}>
                     {getCurrentPlan().name}
                   </span>
@@ -312,6 +310,99 @@ export default function Profile({ isOpen, onClose }) {
                     <option value="ru">Русский</option>
                   </select>
                 </div>
+              </div>
+
+              {/* Beta Testing Tools */}
+              <div className="profile-section beta-section">
+                <div className="beta-header">
+                  <h4 className="profile-section-title">
+                    🧪 Beta Testing
+                  </h4>
+                  <button
+                    className="beta-toggle-btn"
+                    onClick={() => setShowBetaTools(!showBetaTools)}
+                    aria-label="Toggle beta tools"
+                  >
+                    {showBetaTools ? '▼' : '▶'}
+                  </button>
+                </div>
+                
+                {showBetaTools && (
+                  <motion.div
+                    className="beta-tools"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                  >
+                    <p className="beta-description">
+                      Test premium features without payment. Changes are temporary and stored locally.
+                    </p>
+                    
+                    {isBetaTesting() && (
+                      <div className="beta-badge-active">
+                        ✓ Beta Testing Active
+                      </div>
+                    )}
+
+                    <div className="beta-plan-buttons">
+                      <button
+                        className={`beta-plan-btn ${
+                          subscriptionStatus.plan === 'free' && !isBetaTesting() 
+                            ? 'beta-plan-btn-active' 
+                            : ''
+                        }`}
+                        onClick={() => toggleBetaPlan('free')}
+                      >
+                        <span className="beta-plan-name">Free</span>
+                        <span className="beta-plan-price">$0</span>
+                      </button>
+
+                      <button
+                        className={`beta-plan-btn beta-plan-btn-premium ${
+                          subscriptionStatus.plan === 'premium' && isBetaTesting() 
+                            ? 'beta-plan-btn-active' 
+                            : ''
+                        }`}
+                        onClick={() => toggleBetaPlan('premium')}
+                      >
+                        <span className="beta-plan-name">Premium</span>
+                        <span className="beta-plan-price">$12.99</span>
+                        {subscriptionStatus.plan === 'premium' && isBetaTesting() && (
+                          <span className="beta-checkmark">✓</span>
+                        )}
+                      </button>
+
+                      <button
+                        className={`beta-plan-btn beta-plan-btn-pro ${
+                          subscriptionStatus.plan === 'pro' && isBetaTesting() 
+                            ? 'beta-plan-btn-active' 
+                            : ''
+                        }`}
+                        onClick={() => toggleBetaPlan('pro')}
+                      >
+                        <span className="beta-plan-name">Pro</span>
+                        <span className="beta-plan-price">$24.99</span>
+                        {subscriptionStatus.plan === 'pro' && isBetaTesting() && (
+                          <span className="beta-checkmark">✓</span>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="beta-info">
+                      <strong>Current Status:</strong> {getCurrentPlan().name}
+                      {isBetaTesting() && <span className="beta-testing-label"> (Testing)</span>}
+                    </div>
+
+                    <div className="beta-features">
+                      <strong>Active Features:</strong>
+                      <ul className="beta-features-list">
+                        {getCurrentPlan().features.slice(0, 4).map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
               </div>
 
               {/* Logout Button */}

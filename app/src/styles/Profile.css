@@ -73,16 +73,12 @@
 
 .profile-avatar-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   margin: 0 auto 1.5rem;
 }
 
 .profile-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
   border: 4px solid white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -440,6 +436,225 @@
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
+  }
+}
+
+/* Beta Testing Section */
+.beta-section {
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.beta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.beta-header .profile-section-title {
+  margin: 0;
+}
+
+.beta-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #4a5568;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.beta-toggle-btn:hover {
+  color: #667eea;
+  transform: scale(1.1);
+}
+
+.beta-tools {
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.beta-description {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin: 0 0 1rem 0;
+  padding: 0.75rem;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.beta-badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.beta-plan-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.beta-plan-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.beta-plan-btn:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.beta-plan-btn-active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+}
+
+.beta-plan-btn-premium.beta-plan-btn-active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+}
+
+.beta-plan-btn-pro.beta-plan-btn-active {
+  border-color: #f5576c;
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.15), rgba(245, 87, 108, 0.15));
+}
+
+.beta-plan-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.beta-plan-price {
+  font-size: 0.875rem;
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.beta-checkmark {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
+  color: #38a169;
+}
+
+.beta-info {
+  font-size: 0.875rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.beta-testing-label {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.beta-features {
+  font-size: 0.875rem;
+  color: #2d3748;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.beta-features strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #1a202c;
+}
+
+.beta-features-list {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.beta-features-list li {
+  margin-bottom: 0.25rem;
+  color: #4a5568;
+}
+
+/* Dark theme for beta section */
+[data-theme="dark"] .beta-section {
+  background: linear-gradient(135deg, #2d3748, #1a202c);
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .beta-toggle-btn {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .beta-toggle-btn:hover {
+  color: #667eea;
+}
+
+[data-theme="dark"] .beta-description {
+  color: #a0aec0;
+  background: rgba(102, 126, 234, 0.15);
+}
+
+[data-theme="dark"] .beta-plan-btn {
+  background: #2d3748;
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .beta-plan-btn:hover {
+  border-color: #667eea;
+}
+
+[data-theme="dark"] .beta-plan-name {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .beta-plan-price {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .beta-info,
+[data-theme="dark"] .beta-features {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .beta-features-list li {
+  color: #a0aec0;
+}
+
+/* Responsive for beta section */
+@media (max-width: 640px) {
+  .beta-plan-buttons {
+    grid-template-columns: 1fr;
   }
 }
 
