@@ -7,6 +7,8 @@
 ## ✨ Features
 
 ### 🎯 Core Capabilities
+- **🔐 User Authentication** - Secure login with Google SSO
+- **👤 Profile Management** - Personalized user profiles with preferences
 - **Real-time Speech Recognition** - Speak naturally and get instant feedback
 - **Text Input Alternative** - Can't use your microphone? Type your text instead
 - **Advanced NLP Analysis** - Comprehensive sentiment and linguistic analysis
@@ -27,8 +29,10 @@
 
 ### 🎨 User Experience
 - **Modern, Intuitive UI** - Beautiful interface with rich colors and smooth animations
+- **User Profiles** - Personalized experience with secure authentication
 - **Dark Mode Support** - Comfortable viewing in any lighting condition
-- **Progress Tracking** - Monitor your improvement over time
+- **Progress Tracking** - Monitor your improvement over time (synced across devices)
+- **Multilingual Support** - Available in 10+ languages
 - **Offline Support** - Service worker for offline functionality
 - **PWA Ready** - Install as a Progressive Web App
 - **Responsive Design** - Works seamlessly on desktop and mobile browsers
@@ -40,6 +44,12 @@
 - **React 18.2.0** - Modern UI library
 - **Framer Motion 8.2.4** - Smooth animations and transitions
 - **React Speech Recognition 3.9.1** - Browser-based speech recognition
+- **React Router DOM 6.20.1** - Client-side routing
+
+### Backend & Authentication
+- **Firebase 10.7.1** - Backend-as-a-Service
+- **Firebase Authentication** - Secure user authentication with Google SSO
+- **Cloud Firestore** - Real-time NoSQL database for user data
 
 ### NLP & Analysis
 - **Compromise 14.7.1** - Natural language processing
@@ -77,13 +87,19 @@
    npm install
    ```
 
-3. **Start the development server**
+3. **Configure Firebase** (Required for authentication)
+   - Follow the detailed setup guide in [FIREBASE_SETUP.md](./FIREBASE_SETUP.md)
+   - Create a Firebase project and enable Google Authentication
+   - Copy `.env.example` to `.env` and add your Firebase credentials
+
+4. **Start the development server**
    ```bash
    npm start
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    - The app will automatically open at `http://localhost:3000`
+   - Sign in with your Google account
    - Allow microphone permissions when prompted
 
 ### Building for Production
@@ -104,20 +120,24 @@ npm run deploy
 
 ## 📖 Usage
 
-1. **Start a Session**
+1. **Sign In**
+   - Sign in with your Google account
+   - Your profile and progress will be automatically created
+
+2. **Start a Session**
    - Click the microphone button to start recording
    - Or click "Can't use Mic? Go with Text instead" for text input
 
-2. **Choose a Scenario** (optional)
+3. **Choose a Scenario** (optional)
    - Select from Job Interview, Elevator Pitch, Presentation, or Networking
    - Each scenario has tailored feedback criteria
 
-3. **Speak or Type**
+4. **Speak or Type**
    - Speak naturally into your microphone
    - Or type your text in the text input mode
    - Watch real-time transcript as you speak
 
-4. **Review Feedback**
+5. **Review Feedback**
    - Get comprehensive analysis including:
      - Sentiment score
      - Filler word count
@@ -126,9 +146,14 @@ npm run deploy
      - Overall impression score
    - Receive actionable improvement suggestions
 
-5. **Track Progress**
+6. **Track Progress**
    - Click the progress button (📊) to view your improvement over time
-   - Review your historical performance
+   - Review your historical performance (synced across devices)
+
+7. **Manage Profile**
+   - Click your avatar in the top-right corner
+   - Update your profile, preferences, and view account details
+   - Change language and other settings
 
 ## 🌐 Browser Support
 
@@ -149,22 +174,35 @@ app/
 │   ├── components/        # React components
 │   │   ├── AnimatedMic.jsx      # Main speech input component
 │   │   ├── App.jsx              # Root component
+│   │   ├── Login.jsx            # Login with Google SSO
+│   │   ├── Profile.jsx          # User profile management
+│   │   ├── UserMenu.jsx         # User menu dropdown
+│   │   ├── ProtectedRoute.jsx   # Authentication wrapper
 │   │   ├── Feedback.jsx         # Feedback display
 │   │   ├── VideoRecorder.jsx    # Video recording functionality
 │   │   └── ...
 │   ├── config/           # Configuration files
+│   │   ├── firebase.js          # Firebase configuration
 │   │   ├── practiceScenarios.js # Scenario definitions
 │   │   └── ...
 │   ├── contexts/         # React contexts
-│   │   └── DarkModeContext.jsx
+│   │   ├── AuthContext.jsx      # Authentication state
+│   │   ├── SubscriptionContext.jsx # Subscription management
+│   │   ├── ThemeContext.jsx     # Theme management
+│   │   └── ...
 │   ├── hooks/            # Custom React hooks
 │   │   └── useSiteAudio.js
+│   ├── i18n/             # Internationalization
+│   │   ├── index.js
+│   │   └── locales/             # Translation files
 │   ├── styles/           # CSS files
 │   ├── utils/            # Utility functions
 │   │   ├── nlpAnalysis.js       # NLP analysis logic
 │   │   ├── videoAnalysis.js     # Video analysis
 │   │   └── ...
 │   └── index.js          # Entry point
+├── .env.example          # Environment variables template
+├── FIREBASE_SETUP.md     # Firebase setup guide
 ├── package.json
 └── README.md
 ```
@@ -191,12 +229,15 @@ app/
 - Actionable improvement tips
 - Overall impression score calculation
 
-## 🔒 Privacy
+## 🔒 Privacy & Security
 
-- All processing happens **locally in your browser**
-- No data is sent to external servers
-- Speech recognition uses browser's built-in API
-- Your transcripts and analysis remain private
+- **Authentication**: Secure Google Sign-In via Firebase Authentication
+- **Data Storage**: User profiles and progress stored in Firebase Firestore
+- **Access Control**: Firestore security rules ensure users can only access their own data
+- **Local Processing**: Speech and NLP analysis happen **locally in your browser**
+- **Speech Recognition**: Uses browser's built-in API (no data sent to external servers)
+- **Privacy First**: Your transcripts and analysis are processed locally
+- **Secure by Default**: All Firebase communication is encrypted over HTTPS
 
 ## 🤝 Contributing
 

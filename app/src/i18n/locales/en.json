@@ -180,6 +180,43 @@
     "description": "Install Impression as a PWA for better experience",
     "install": "Install",
     "dismiss": "Maybe Later"
+  },
+  "login": {
+    "welcome": "Welcome to Impression",
+    "subtitle": "Sign in to access your practice sessions and track your progress",
+    "google": "Continue with Google",
+    "signing_in": "Signing in...",
+    "error": "Failed to sign in. Please try again.",
+    "terms_prefix": "By signing in, you agree to our",
+    "terms": "Terms of Service",
+    "terms_and": "and",
+    "privacy": "Privacy Policy"
+  },
+  "profile": {
+    "title": "Profile",
+    "display_name": "Display Name",
+    "email": "Email",
+    "edit": "Edit Profile",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "logout": "Log Out",
+    "logout_error": "Failed to log out",
+    "update_success": "Profile updated successfully",
+    "update_error": "Failed to update profile",
+    "account_details": "Account Details",
+    "member_since": "Member Since",
+    "last_login": "Last Login",
+    "total_sessions": "Total Sessions",
+    "subscription": "Subscription",
+    "active": "Active",
+    "preferences": "Preferences",
+    "language": "Language"
+  },
+  "user_menu": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log Out"
   }
 }
 

@@ -1,0 +1,475 @@
+.profile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.profile-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+.profile-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+.profile-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #718096;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.profile-close-btn:hover {
+  background: #f7fafc;
+  color: #1a202c;
+}
+
+.profile-content {
+  padding: 2rem;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section:last-child {
+  margin-bottom: 0;
+}
+
+.profile-avatar-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.5rem;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plan-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plan-badge-free {
+  background: linear-gradient(135deg, #a0aec0, #718096);
+  color: white;
+}
+
+.plan-badge-premium {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.plan-badge-pro {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  color: white;
+}
+
+.profile-info {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 0.5rem 0;
+}
+
+.profile-email {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0;
+}
+
+.profile-edit-group {
+  margin-bottom: 1rem;
+}
+
+.profile-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1a202c;
+  transition: all 0.2s ease;
+}
+
+.profile-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profile-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 120px;
+}
+
+.profile-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.profile-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.profile-btn-secondary {
+  background: #f7fafc;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+}
+
+.profile-btn-secondary:hover:not(:disabled) {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+.profile-btn-logout {
+  width: 100%;
+  background: #fff5f5;
+  color: #c53030;
+  border: 2px solid #feb2b2;
+}
+
+.profile-btn-logout:hover {
+  background: #fed7d7;
+  border-color: #fc8181;
+}
+
+.profile-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.profile-message-success {
+  background: #c6f6d5;
+  color: #22543d;
+  border: 1px solid #9ae6b4;
+}
+
+.profile-message-error {
+  background: #fed7d7;
+  color: #742a2a;
+  border: 1px solid #fc8181;
+}
+
+.profile-section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 1rem 0;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profile-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.profile-detail-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.profile-detail-value {
+  font-size: 0.875rem;
+  color: #1a202c;
+  font-weight: 500;
+}
+
+.profile-subscription {
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+}
+
+.subscription-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.subscription-plan {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.subscription-status {
+  font-size: 0.875rem;
+  color: #38a169;
+  font-weight: 600;
+}
+
+.subscription-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature-item {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.profile-preference-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1a202c;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] .profile-modal {
+  background: #1a202c;
+}
+
+[data-theme="dark"] .profile-header {
+  background: #1a202c;
+  border-bottom-color: #2d3748;
+}
+
+[data-theme="dark"] .profile-title {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-close-btn:hover {
+  background: #2d3748;
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-name {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-email {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .profile-input {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-btn-secondary {
+  background: #2d3748;
+  color: #a0aec0;
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .profile-btn-secondary:hover:not(:disabled) {
+  background: #4a5568;
+  border-color: #718096;
+}
+
+[data-theme="dark"] .profile-section-title {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-detail-item {
+  background: #2d3748;
+}
+
+[data-theme="dark"] .profile-detail-label {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .profile-detail-value {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .profile-subscription {
+  background: linear-gradient(135deg, #2d3748, #1a202c);
+  border-color: #4a5568;
+}
+
+[data-theme="dark"] .subscription-plan {
+  color: #f7fafc;
+}
+
+[data-theme="dark"] .feature-item {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .profile-select {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #f7fafc;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .profile-header {
+    padding: 1.5rem;
+  }
+
+  .profile-title {
+    font-size: 1.5rem;
+  }
+
+  .profile-content {
+    padding: 1.5rem;
+  }
+
+  .profile-name {
+    font-size: 1.25rem;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .profile-btn {
+    width: 100%;
+  }
+
+  .profile-detail-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+/* Scrollbar styling */
+.profile-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-modal::-webkit-scrollbar-track {
+  background: #f7fafc;
+}
+
+.profile-modal::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+.profile-modal::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+[data-theme="dark"] .profile-modal::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+[data-theme="dark"] .profile-modal::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+[data-theme="dark"] .profile-modal::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+

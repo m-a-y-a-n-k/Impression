@@ -21,7 +21,7 @@ const TextInput = ({ updateUserFeedback, onBack }) => {
 
   const handleKeyPress = (e) => {
     // Submit on Ctrl/Cmd + Enter
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
       handleSubmit();
     }
   };
@@ -39,13 +39,14 @@ const TextInput = ({ updateUserFeedback, onBack }) => {
           <span className="home-text">Home</span>
         </button>
       )}
-      
+
       <div className="text-input-content">
         <div className="text-input-header">
           <span className="text-input-icon">✍️</span>
           <h2 className="text-input-title">Type Your Speech</h2>
           <p className="text-input-subtitle">
-            Practice your presentation by typing it out. Get instant feedback on sentiment, clarity, and structure.
+            Practice your presentation by typing it out. Get instant feedback on
+            sentiment, clarity, and structure.
           </p>
         </div>
 
@@ -64,7 +65,7 @@ Press Ctrl+Enter (⌘+Enter on Mac) to submit."
             size="large"
             resize="vertical"
             className="custom-text-textarea"
-            rows={12}
+            rows={20}
           />
           <div className="textarea-footer">
             <span className="char-count">{text.length} characters</span>
@@ -100,4 +101,3 @@ Press Ctrl+Enter (⌘+Enter on Mac) to submit."
 };
 
 export default TextInput;
-

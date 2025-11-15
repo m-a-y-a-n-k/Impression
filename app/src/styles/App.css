@@ -88,6 +88,40 @@ h1 , h2 , h3 , h4, h5, h6 , p {
   }
 }
 
+/* Loading State */
+.app-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  gap: 1.5rem;
+  background: var(--bg-primary);
+}
+
+.app-loading .spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(102, 126, 234, 0.2);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.app-loading p {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 768px) {
   .progress-toggle-btn {
     bottom: 1.5rem;
@@ -98,5 +132,15 @@ h1 , h2 , h3 , h4, h5, h6 , p {
   
   .progress-btn-icon {
     font-size: 1.5rem;
+  }
+
+  .app-loading .spinner {
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+  }
+
+  .app-loading p {
+    font-size: 1rem;
   }
 }

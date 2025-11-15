@@ -8,10 +8,14 @@ import LanguageSelector from "./LanguageSelector";
 import InstallPrompt from "./InstallPrompt";
 import OfflineIndicator from "./OfflineIndicator";
 import ErrorBoundary from "./ErrorBoundary";
+import UserMenu from "./UserMenu";
+import Login from "./Login";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 import { SubscriptionProvider } from "../contexts/SubscriptionContext";
+import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
-export default function App() {
+function AppContent() {
+  const { currentUser, loading } = useAuth();
   const fetchIntroStatus = () =>
     sessionStorage.getItem("intro-done") ? false : true;
 
@@ -24,33 +28,58 @@ export default function App() {
 
   const { handlePlayAudio, handleStopAudio } = useSiteAudio();
 
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <div className="app-loading">
+        <div className="spinner"></div>
+        <p>Loading Impression...</p>
+      </div>
+    );
+  }
+
+  // Show login if not authenticated
+  if (!currentUser) {
+    return <Login />;
+  }
+
+  // Show main app when authenticated
+  return (
+    <div className="App">
+      <OfflineIndicator />
+      <UserMenu />
+      {!showIntro && <ThemePicker />}
+      {!showIntro && <LanguageSelector />}
+      {!showIntro && <InstallPrompt />}
+      {showIntro && (
+        <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
+      )}
+      {!showIntro && (
+        <>
+          <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
+          <button
+            className="progress-toggle-btn"
+            onClick={() => setShowProgress(true)}
+            aria-label="View progress"
+            title="View your progress"
+          >
+            <span className="progress-btn-icon">📊</span>
+          </button>
+          <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
   return (
     <ErrorBoundary>
-      <SubscriptionProvider>
-        <div className="App">
-        <OfflineIndicator />
-        {!showIntro && <ThemePicker />}
-        {!showIntro && <LanguageSelector />}
-        {!showIntro && <InstallPrompt />}
-        {showIntro && (
-          <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
-        )}
-        {!showIntro && (
-          <>
-            <Landing playAudio={handlePlayAudio} stopAudio={handleStopAudio} />
-            <button
-              className="progress-toggle-btn"
-              onClick={() => setShowProgress(true)}
-              aria-label="View progress"
-              title="View your progress"
-            >
-              <span className="progress-btn-icon">📊</span>
-            </button>
-            <Progress isOpen={showProgress} onClose={() => setShowProgress(false)} />
-          </>
-        )}
-        </div>
-      </SubscriptionProvider>
+      <AuthProvider>
+        <SubscriptionProvider>
+          <AppContent />
+        </SubscriptionProvider>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }
