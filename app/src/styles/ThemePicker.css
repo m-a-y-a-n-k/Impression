@@ -1,7 +1,7 @@
 .theme-picker-container {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 88px;
+  left: 20px;
   z-index: 1000;
 }
 
@@ -45,8 +45,8 @@
 
 .theme-picker-panel {
   position: fixed;
-  top: 6rem;
-  right: 2rem;
+  top: 156px;
+  left: 20px;
   background: var(--card-bg);
   border: 2px solid var(--card-border);
   border-radius: 20px;
@@ -147,8 +147,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .theme-picker-container {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 76px;
+    left: 16px;
   }
 
   .theme-toggle-btn {
@@ -161,9 +161,9 @@
   }
 
   .theme-picker-panel {
-    top: 5rem;
-    right: 1.5rem;
-    left: 1.5rem;
+    top: 136px;
+    right: 16px;
+    left: 16px;
     min-width: auto;
   }
 
@@ -182,14 +182,6 @@
 
   .theme-option-name {
     font-size: 0.75rem;
-  }
-}
-
-/* Adjust position when other buttons are visible */
-@media (min-width: 769px) {
-  .theme-picker-container {
-    top: 2rem;
-    right: calc(2rem + 80px); /* Make room for progress button */
   }
 }
 

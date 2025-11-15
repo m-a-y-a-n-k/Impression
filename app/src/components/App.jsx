@@ -48,8 +48,8 @@ function AppContent() {
     <div className="App">
       <OfflineIndicator />
       <UserMenu />
-      {!showIntro && <ThemePicker />}
       {!showIntro && <LanguageSelector />}
+      {!showIntro && <ThemePicker />}
       {!showIntro && <InstallPrompt />}
       {showIntro && (
         <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />
