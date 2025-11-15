@@ -36,16 +36,24 @@ export const PAYMENT_CONFIG = {
   // Environment mode
   isBetaTesting: isBetaTestingEnabled(),
   
-  // Stripe Configuration
+  // Razorpay Configuration (Primary payment gateway for Indian market)
+  razorpay: {
+    keyId: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_HERE',
+    enabled: !isBetaTestingEnabled(),
+    currency: 'INR',
+    supportedMethods: ['card', 'upi', 'netbanking', 'wallet']
+  },
+  
+  // Stripe Configuration (Alternative for international payments)
   stripe: {
     publishableKey: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE',
-    enabled: !isBetaTestingEnabled()
+    enabled: false // Can be enabled for international payments
   },
   
   // PayPal Configuration
   paypal: {
     clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID || 'YOUR_PAYPAL_CLIENT_ID',
-    enabled: !isBetaTestingEnabled()
+    enabled: false // Can be enabled if needed
   },
   
   // UPI Configuration

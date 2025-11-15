@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSubscription } from '../contexts/SubscriptionContext';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   PAYMENT_CONFIG, 
   PAYMENT_METHODS, 
@@ -10,12 +11,14 @@ import {
   SUPPORTED_BANKS 
 } from '../config/paymentConfig';
 import mockPaymentService from '../utils/mockPaymentService';
+import razorpayService from '../utils/razorpayIntegration';
 import '../styles/Checkout.css';
 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { upgradeToPremium, plans } = useSubscription();
+  const { currentUser } = useAuth();
   
   // Get plan from navigation state
   const selectedPlanId = location.state?.planId || 'premium';
@@ -166,9 +169,101 @@ const Checkout = () => {
             throw new Error('Invalid payment method');
         }
       } else {
-        // Real payment processing
-        // TODO: Implement actual payment gateway integrations
-        throw new Error('Production payment processing not yet implemented. Please enable beta testing mode.');
+        // Production payment processing with Razorpay
+        console.log('Production mode: Using Razorpay payment gateway');
+        
+        const userEmail = currentUser?.email || '';
+        const userName = currentUser?.displayName || 'User';
+        
+        // Handle payment success
+        const handlePaymentSuccess = (paymentData) => {
+          paymentResult = paymentData;
+          
+          // Update subscription
+          const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+          upgradeToPremium(planId, paymentData.transactionId, expiresAt);
+          
+          setSuccess(true);
+          setIsProcessing(false);
+          
+          // Redirect to success page after a delay
+          setTimeout(() => {
+            navigate('/', { 
+              state: { 
+                paymentSuccess: true, 
+                transactionId: paymentData.transactionId 
+              } 
+            });
+          }, 3000);
+        };
+        
+        // Handle payment failure
+        const handlePaymentFailure = (error) => {
+          console.error('Payment failed:', error);
+          setError(error.message || 'Payment failed. Please try again.');
+          setIsProcessing(false);
+        };
+        
+        // Process payment based on payment method
+        switch (paymentMethod) {
+          case PAYMENT_METHODS.CARD:
+            // Razorpay handles card validation in their checkout UI
+            paymentResult = await razorpayService.processCardPayment({
+              amount,
+              planId,
+              userEmail,
+              userName,
+              onSuccess: handlePaymentSuccess,
+              onFailure: handlePaymentFailure
+            });
+            break;
+
+          case PAYMENT_METHODS.UPI:
+            // Razorpay handles UPI in their checkout UI
+            paymentResult = await razorpayService.processUPIPayment({
+              amount,
+              planId,
+              upiId,
+              userEmail,
+              userName,
+              onSuccess: handlePaymentSuccess,
+              onFailure: handlePaymentFailure
+            });
+            break;
+
+          case PAYMENT_METHODS.NETBANKING:
+            // Razorpay handles net banking in their checkout UI
+            paymentResult = await razorpayService.processNetBankingPayment({
+              amount,
+              planId,
+              bankId: selectedBank,
+              userEmail,
+              userName,
+              onSuccess: handlePaymentSuccess,
+              onFailure: handlePaymentFailure
+            });
+            break;
+
+          case PAYMENT_METHODS.STRIPE:
+          case PAYMENT_METHODS.PAYPAL:
+            // For international payments, fall back to Razorpay
+            // You can enable Stripe/PayPal separately if needed
+            paymentResult = await razorpayService.processRazorpayPayment({
+              amount,
+              planId,
+              userEmail,
+              userName,
+              onSuccess: handlePaymentSuccess,
+              onFailure: handlePaymentFailure
+            });
+            break;
+
+          default:
+            throw new Error('Invalid payment method');
+        }
+        
+        // Return early since handlers will manage the flow
+        return;
       }
 
       // Payment successful

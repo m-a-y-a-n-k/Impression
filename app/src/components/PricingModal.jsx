@@ -3,23 +3,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSubscription } from "../contexts/SubscriptionContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import sessionTrackingService from "../utils/sessionTracking";
 
 const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
   const { plans, getCurrentPlan } = useSubscription();
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState('premium');
+  const [selectedPlan, setSelectedPlan] = useState("premium");
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubscribe = (planId) => {
     setIsProcessing(true);
     setSelectedPlan(planId);
-    
+
     // Navigate to checkout page with selected plan
-    navigate('/checkout', { state: { planId } });
-    
+    navigate("/checkout", { state: { planId } });
+
     // Close the pricing modal
     onClose();
-    
+
     setIsProcessing(false);
   };
 
@@ -52,7 +53,8 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
             <h2 className="pricing-title">Upgrade to Premium</h2>
             {currentSessionCount !== undefined && (
               <p className="pricing-subtitle">
-                You've used {currentSessionCount} of 10 free sessions. 
+                You've used {currentSessionCount} of{" "}
+                {sessionTrackingService.FREE_SESSION_LIMIT} free sessions.
                 Unlock unlimited practice now! 🚀
               </p>
             )}
@@ -60,12 +62,14 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
 
           <div className="pricing-plans">
             {/* Free Plan (Current) */}
-            <motion.div 
-              className={`pricing-card ${currentPlan.id === 'free' ? 'current-plan' : ''}`}
+            <motion.div
+              className={`pricing-card ${
+                currentPlan.id === "free" ? "current-plan" : ""
+              }`}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
-              {currentPlan.id === 'free' && (
+              {currentPlan.id === "free" && (
                 <div className="current-plan-badge">Current Plan</div>
               )}
               <div className="plan-header">
@@ -89,13 +93,15 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
             </motion.div>
 
             {/* Premium Plan */}
-            <motion.div 
-              className={`pricing-card recommended ${currentPlan.id === 'premium' ? 'current-plan' : ''}`}
+            <motion.div
+              className={`pricing-card recommended ${
+                currentPlan.id === "premium" ? "current-plan" : ""
+              }`}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
               <div className="recommended-badge">Most Popular 🔥</div>
-              {currentPlan.id === 'premium' && (
+              {currentPlan.id === "premium" && (
                 <div className="current-plan-badge">Current Plan</div>
               )}
               <div className="plan-header">
@@ -113,31 +119,33 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
                   </li>
                 ))}
               </ul>
-              <button 
+              <button
                 className="plan-button premium"
-                onClick={() => handleSubscribe('premium')}
-                disabled={isProcessing || currentPlan.id === 'premium'}
+                onClick={() => handleSubscribe("premium")}
+                disabled={isProcessing || currentPlan.id === "premium"}
               >
-                {isProcessing && selectedPlan === 'premium' ? (
+                {isProcessing && selectedPlan === "premium" ? (
                   <>
                     <span className="button-spinner"></span>
                     Processing...
                   </>
-                ) : currentPlan.id === 'premium' ? (
-                  'Current Plan'
+                ) : currentPlan.id === "premium" ? (
+                  "Current Plan"
                 ) : (
-                  'Upgrade to Premium'
+                  "Upgrade to Premium"
                 )}
               </button>
             </motion.div>
 
             {/* Pro Plan */}
-            <motion.div 
-              className={`pricing-card ${currentPlan.id === 'pro' ? 'current-plan' : ''}`}
+            <motion.div
+              className={`pricing-card ${
+                currentPlan.id === "pro" ? "current-plan" : ""
+              }`}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
-              {currentPlan.id === 'pro' && (
+              {currentPlan.id === "pro" && (
                 <div className="current-plan-badge">Current Plan</div>
               )}
               <div className="plan-header">
@@ -155,20 +163,20 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
                   </li>
                 ))}
               </ul>
-              <button 
+              <button
                 className="plan-button pro"
-                onClick={() => handleSubscribe('pro')}
-                disabled={isProcessing || currentPlan.id === 'pro'}
+                onClick={() => handleSubscribe("pro")}
+                disabled={isProcessing || currentPlan.id === "pro"}
               >
-                {isProcessing && selectedPlan === 'pro' ? (
+                {isProcessing && selectedPlan === "pro" ? (
                   <>
                     <span className="button-spinner"></span>
                     Processing...
                   </>
-                ) : currentPlan.id === 'pro' ? (
-                  'Current Plan'
+                ) : currentPlan.id === "pro" ? (
+                  "Current Plan"
                 ) : (
-                  'Upgrade to Pro'
+                  "Upgrade to Pro"
                 )}
               </button>
             </motion.div>
@@ -176,7 +184,8 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
 
           <div className="pricing-footer">
             <p className="pricing-note">
-              💳 Secure payment powered by Stripe • Cancel anytime • 30-day money-back guarantee
+              💳 Secure payment powered by multiple payment gateways • Cancel
+              anytime • 30-day money-back guarantee
             </p>
           </div>
         </motion.div>
@@ -186,4 +195,3 @@ const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
 };
 
 export default PricingModal;
-
