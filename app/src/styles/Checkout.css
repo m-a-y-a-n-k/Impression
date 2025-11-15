@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .checkout-wrapper {
@@ -13,7 +15,8 @@
   background: rgba(255, 255, 255, 0.98);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  overflow: visible;
+  margin-bottom: 2rem;
 }
 
 /* Header */
@@ -71,8 +74,6 @@
   padding: 1.5rem;
   border-radius: 15px;
   height: fit-content;
-  position: sticky;
-  top: 2rem;
 }
 
 .order-summary h2 {
@@ -515,12 +516,18 @@
 
 /* Responsive Design */
 @media (max-width: 968px) {
+  .checkout-container {
+    padding: 1rem;
+  }
+
   .checkout-content {
     grid-template-columns: 1fr;
+    padding: 1rem;
   }
 
   .order-summary {
     position: static;
+    margin-bottom: 1.5rem;
   }
 
   .payment-methods {
@@ -529,8 +536,20 @@
 }
 
 @media (max-width: 640px) {
+  .checkout-container {
+    padding: 0.5rem;
+  }
+
+  .checkout-header {
+    padding: 1.5rem 1rem;
+  }
+
   .checkout-header h1 {
     font-size: 1.5rem;
+  }
+
+  .checkout-content {
+    padding: 1rem;
   }
 
   .form-row {

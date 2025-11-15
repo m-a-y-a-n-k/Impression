@@ -11,6 +11,7 @@ import VideoFeedback from "./VideoFeedback";
 import QuestionDisplay from "./QuestionDisplay";
 import QnAFeedback from "./QnAFeedback";
 import DifficultySelector from "./DifficultySelector";
+import TopicSelector from "./TopicSelector";
 import PricingModal from "./PricingModal";
 import UpgradePrompt from "./UpgradePrompt";
 import { analyzeText } from "../utils/nlpAnalysis";
@@ -68,7 +69,9 @@ const Landing = ({ playAudio, stopAudio }) => {
   // Q&A mode states
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [showQuestionDisplay, setShowQuestionDisplay] = useState(false);
+  const [showTopicSelector, setShowTopicSelector] = useState(false);
   const [showDifficultySelector, setShowDifficultySelector] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [qnaEvaluation, setQnaEvaluation] = useState(null);
   const [qnaEntryId, setQnaEntryId] = useState(null);
@@ -257,9 +260,11 @@ const Landing = ({ playAudio, stopAudio }) => {
     setMode(null);
     setHasSelectedMode(false);
     setShowScenarioSelector(false);
+    setShowTopicSelector(false);
     setShowQuestionDisplay(false);
     setShowDifficultySelector(false);
     setCurrentQuestion(null);
+    setSelectedTopic(null);
     setSelectedDifficulty(null);
     setQnaEvaluation(null);
     setQnaEntryId(null);
@@ -413,13 +418,21 @@ const Landing = ({ playAudio, stopAudio }) => {
 
   // Handle Q&A mode initialization - show difficulty selector
   const handleQnAStart = () => {
+    setShowTopicSelector(true);
+  };
+
+  // Handle topic selection
+  const handleTopicSelect = (topic) => {
+    setSelectedTopic(topic);
+    setShowTopicSelector(false);
     setShowDifficultySelector(true);
   };
 
   // Handle difficulty selection
   const handleDifficultySelect = (difficulty) => {
     setSelectedDifficulty(difficulty);
-    const question = getRandomQuestion(null, difficulty);
+    // Get question from selected topic and difficulty
+    const question = getRandomQuestion(selectedTopic, difficulty);
     setCurrentQuestion(question);
     setShowDifficultySelector(false);
     setShowQuestionDisplay(true);
@@ -502,9 +515,9 @@ const Landing = ({ playAudio, stopAudio }) => {
     setShowQuestionDisplay(true);
   };
 
-  // Handle get new question (keep same difficulty)
+  // Handle get new question (keep same topic and difficulty)
   const handleNewQuestion = () => {
-    const newQuestion = getRandomQuestion(null, selectedDifficulty);
+    const newQuestion = getRandomQuestion(selectedTopic, selectedDifficulty);
     setCurrentQuestion(newQuestion);
     setQnaEvaluation(null);
     setQnaEntryId(null);
@@ -705,6 +718,14 @@ const Landing = ({ playAudio, stopAudio }) => {
           <ScenarioSelector
             onSelectScenario={handleScenarioSelect}
             onClose={resetToLanding}
+          />
+        )}
+
+        {/* Topic Selector for Q&A */}
+        {showTopicSelector && (
+          <TopicSelector
+            onSelectTopic={handleTopicSelect}
+            onBack={resetToLanding}
           />
         )}
 

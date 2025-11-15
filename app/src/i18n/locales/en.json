@@ -28,7 +28,7 @@
     "qna": {
       "label": "Q&A Mode",
       "icon": "🎯",
-      "description": "Answer STEM questions and get scored"
+      "description": "Answer questions from different categories and get scored"
     }
   },
   "scenarios": {
