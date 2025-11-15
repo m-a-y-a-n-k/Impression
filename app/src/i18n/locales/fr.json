@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "Impression",
+    "tagline": "Améliorez votre impression"
+  },
+  "intro": {
+    "welcome": "Bienvenue à Impression",
+    "description": "Pratiquez et améliorez vos compétences en communication avec des commentaires en temps réel",
+    "getStarted": "Commencer"
+  },
+  "modes": {
+    "title": "Choisissez Votre Mode de Pratique",
+    "text": {
+      "label": "Mode Texte",
+      "icon": "✍️",
+      "description": "Tapez et analysez votre discours"
+    },
+    "audio": {
+      "label": "Mode Audio",
+      "icon": "🎤",
+      "description": "Parlez et obtenez des commentaires instantanés"
+    },
+    "video": {
+      "label": "Mode Vidéo",
+      "icon": "📹",
+      "description": "Enregistrez avec analyse vidéo"
+    },
+    "qna": {
+      "label": "Mode Questions",
+      "icon": "🎯",
+      "description": "Répondez aux questions STEM et obtenez une note"
+    }
+  },
+  "scenarios": {
+    "title": "Sélectionnez Votre Scénario",
+    "jobInterview": {
+      "name": "Entretien d'Embauche",
+      "icon": "💼",
+      "description": "Pratiquez pour votre prochain entretien d'embauche",
+      "tips": {
+        "eyeContact": "Maintenez le contact visuel avec la caméra",
+        "speak": "Parlez clairement et avec confiance",
+        "bodyLanguage": "Utilisez un langage corporel positif",
+        "fillers": "Évitez les mots de remplissage",
+        "enthusiasm": "Montrez de l'enthousiasme et de l'intérêt"
+      }
+    },
+    "elevatorPitch": {
+      "name": "Pitch Éclair",
+      "icon": "🚀",
+      "description": "Perfectionnez votre pitch de 30-60 secondes",
+      "tips": {
+        "concise": "Soyez concis et engageant",
+        "hook": "Commencez avec un accroche",
+        "passion": "Montrez passion et énergie",
+        "posture": "Maintenez une posture confiante",
+        "cta": "Terminez par un appel à l'action clair"
+      }
+    },
+    "presentation": {
+      "name": "Présentation",
+      "icon": "📊",
+      "description": "Pratiquez vos compétences en présentation",
+      "tips": {
+        "gestures": "Utilisez des gestes pour souligner les points",
+        "pace": "Variez votre rythme de parole",
+        "engagement": "Maintenez l'engagement du public",
+        "pauses": "Utilisez les pauses efficacement",
+        "confidence": "Montrez confiance et autorité"
+      }
+    },
+    "networking": {
+      "name": "Réseautage",
+      "icon": "🤝",
+      "description": "Pratiquez votre conversation de réseautage",
+      "tips": {
+        "warm": "Soyez chaleureux et accessible",
+        "interest": "Montrez un intérêt sincère",
+        "listen": "Écoutez activement",
+        "bodyLanguage": "Maintenez un langage corporel positif",
+        "authentic": "Soyez authentique et mémorable"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "Analyse de votre message...",
+    "analyzingVideo": "Analyse de votre vidéo...",
+    "analyzingText": "Analyse de votre texte...",
+    "analyzingAnswer": "Évaluation de votre réponse...",
+    "processingVideo": "Analyse des expressions faciales, du langage corporel et de la parole",
+    "processingQnA": "Vérification de la précision, de la clarté, de l'exhaustivité et du vocabulaire",
+    "processingSpeech": "Analyse du sentiment, de la clarté et de la présentation",
+    "overallScore": "Performance Globale",
+    "excellent": "Excellent",
+    "good": "Bon",
+    "fair": "Passable",
+    "needsWork": "À Améliorer",
+    "videoAnalysis": "Analyse Vidéo",
+    "speechAnalysis": "Analyse de la Parole",
+    "eyeContact": "Contact Visuel",
+    "confidence": "Confiance",
+    "posture": "Posture",
+    "gestures": "Gestes",
+    "fillerWords": "Mots de Remplissage",
+    "speakingPace": "Rythme de Parole",
+    "vocabulary": "Vocabulaire",
+    "showTips": "Afficher les Conseils d'Amélioration",
+    "hideTips": "Masquer les Conseils d'Amélioration",
+    "practiceAgain": "Pratiquer à Nouveau",
+    "home": "Accueil"
+  },
+  "difficulty": {
+    "title": "Sélectionner le Niveau de Difficulté",
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile",
+    "expert": "Expert"
+  },
+  "session": {
+    "remaining": "{{remaining}} sur {{total}} sessions gratuites restantes",
+    "used": "Vous avez utilisé toutes les {{total}} sessions gratuites",
+    "upgrade": "⚡ Mettre à Niveau pour Illimité"
+  },
+  "premium": {
+    "badge": "PREMIUM",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "Démarrer",
+    "stop": "Arrêter",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "back": "Retour",
+    "next": "Suivant",
+    "tryAgain": "Réessayer",
+    "newQuestion": "Nouvelle Question",
+    "close": "Fermer"
+  },
+  "micInput": {
+    "clickToStart": "Cliquez pour commencer à parler",
+    "listening": "Écoute...",
+    "stop": "Arrêter",
+    "cantUseMic": "Impossible d'utiliser le micro? Utilisez le texte à la place"
+  },
+  "textInput": {
+    "placeholder": "Tapez votre message ici...",
+    "analyze": "Analyser",
+    "minLength": "Veuillez taper au moins 10 caractères"
+  },
+  "progress": {
+    "title": "Votre Progrès",
+    "empty": "Aucune session de pratique pour le moment. Commencez à pratiquer pour voir votre progrès!",
+    "sessions": "Sessions",
+    "avgScore": "Score Moyen",
+    "totalTime": "Temps Total",
+    "improvements": "Améliorations"
+  },
+  "theme": {
+    "light": "Mode Clair",
+    "dark": "Mode Sombre",
+    "toggle": "Changer de Thème"
+  },
+  "language": {
+    "select": "Sélectionner la Langue",
+    "current": "Langue Actuelle"
+  },
+  "errors": {
+    "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "noMicrophone": "Microphone non disponible. Veuillez vérifier vos autorisations.",
+    "analysisFailure": "Échec de l'analyse de votre message. Veuillez réessayer.",
+    "videoFailure": "Échec de l'analyse de votre vidéo. Veuillez réessayer.",
+    "answerRequired": "Veuillez fournir une réponse avant de soumettre."
+  },
+  "offline": {
+    "message": "Vous êtes hors ligne",
+    "description": "Certaines fonctionnalités peuvent ne pas être disponibles"
+  },
+  "install": {
+    "title": "Installer Impression",
+    "description": "Installez Impression en tant que PWA pour une meilleure expérience",
+    "install": "Installer",
+    "dismiss": "Peut-être Plus Tard"
+  }
+}
+

@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "Eindruck",
+    "tagline": "Verbessern Sie Ihren Eindruck"
+  },
+  "intro": {
+    "welcome": "Willkommen bei Eindruck",
+    "description": "Üben und verbessern Sie Ihre Kommunikationsfähigkeiten mit Echtzeit-Feedback",
+    "getStarted": "Loslegen"
+  },
+  "modes": {
+    "title": "Wählen Sie Ihren Übungsmodus",
+    "text": {
+      "label": "Text-Modus",
+      "icon": "✍️",
+      "description": "Tippen und analysieren Sie Ihre Rede"
+    },
+    "audio": {
+      "label": "Audio-Modus",
+      "icon": "🎤",
+      "description": "Sprechen und sofortiges Feedback erhalten"
+    },
+    "video": {
+      "label": "Video-Modus",
+      "icon": "📹",
+      "description": "Aufnehmen mit Videoanalyse"
+    },
+    "qna": {
+      "label": "Fragen-Modus",
+      "icon": "🎯",
+      "description": "STEM-Fragen beantworten und bewerten"
+    }
+  },
+  "scenarios": {
+    "title": "Wählen Sie Ihr Szenario",
+    "jobInterview": {
+      "name": "Vorstellungsgespräch",
+      "icon": "💼",
+      "description": "Üben Sie für Ihr nächstes Vorstellungsgespräch",
+      "tips": {
+        "eyeContact": "Halten Sie Augenkontakt mit der Kamera",
+        "speak": "Sprechen Sie klar und selbstbewusst",
+        "bodyLanguage": "Verwenden Sie positive Körpersprache",
+        "fillers": "Vermeiden Sie Füllwörter",
+        "enthusiasm": "Zeigen Sie Enthusiasmus und Interesse"
+      }
+    },
+    "elevatorPitch": {
+      "name": "Elevator Pitch",
+      "icon": "🚀",
+      "description": "Perfektionieren Sie Ihren 30-60 Sekunden Pitch",
+      "tips": {
+        "concise": "Halten Sie es prägnant und ansprechend",
+        "hook": "Beginnen Sie mit einem Aufhänger",
+        "passion": "Zeigen Sie Leidenschaft und Energie",
+        "posture": "Behalten Sie eine selbstbewusste Haltung",
+        "cta": "Enden Sie mit einem klaren Call-to-Action"
+      }
+    },
+    "presentation": {
+      "name": "Präsentation",
+      "icon": "📊",
+      "description": "Üben Sie Ihre Präsentationsfähigkeiten",
+      "tips": {
+        "gestures": "Verwenden Sie Gesten, um Punkte zu betonen",
+        "pace": "Variieren Sie Ihr Sprechtempo",
+        "engagement": "Halten Sie das Publikum engagiert",
+        "pauses": "Verwenden Sie Pausen effektiv",
+        "confidence": "Zeigen Sie Selbstvertrauen und Autorität"
+      }
+    },
+    "networking": {
+      "name": "Networking",
+      "icon": "🤝",
+      "description": "Üben Sie Ihr Networking-Gespräch",
+      "tips": {
+        "warm": "Seien Sie herzlich und zugänglich",
+        "interest": "Zeigen Sie echtes Interesse",
+        "listen": "Hören Sie aktiv zu",
+        "bodyLanguage": "Behalten Sie positive Körpersprache",
+        "authentic": "Seien Sie authentisch und einprägsam"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "Analysiere Ihre Nachricht...",
+    "analyzingVideo": "Analysiere Ihr Video...",
+    "analyzingText": "Analysiere Ihren Text...",
+    "analyzingAnswer": "Bewerte Ihre Antwort...",
+    "processingVideo": "Analyse von Gesichtsausdrücken, Körpersprache und Sprache",
+    "processingQnA": "Prüfung von Genauigkeit, Klarheit, Vollständigkeit und Wortschatz",
+    "processingSpeech": "Analyse von Sentiment, Klarheit und Vortrag",
+    "overallScore": "Gesamtleistung",
+    "excellent": "Ausgezeichnet",
+    "good": "Gut",
+    "fair": "Befriedigend",
+    "needsWork": "Verbesserungswürdig",
+    "videoAnalysis": "Videoanalyse",
+    "speechAnalysis": "Sprachanalyse",
+    "eyeContact": "Augenkontakt",
+    "confidence": "Selbstvertrauen",
+    "posture": "Haltung",
+    "gestures": "Gesten",
+    "fillerWords": "Füllwörter",
+    "speakingPace": "Sprechtempo",
+    "vocabulary": "Wortschatz",
+    "showTips": "Verbesserungstipps anzeigen",
+    "hideTips": "Verbesserungstipps ausblenden",
+    "practiceAgain": "Erneut üben",
+    "home": "Startseite"
+  },
+  "difficulty": {
+    "title": "Schwierigkeitsgrad auswählen",
+    "easy": "Einfach",
+    "medium": "Mittel",
+    "hard": "Schwer",
+    "expert": "Experte"
+  },
+  "session": {
+    "remaining": "{{remaining}} von {{total}} kostenlosen Sitzungen verbleibend",
+    "used": "Sie haben alle {{total}} kostenlosen Sitzungen verwendet",
+    "upgrade": "⚡ Upgrade für Unbegrenzt"
+  },
+  "premium": {
+    "badge": "PREMIUM",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "Starten",
+    "stop": "Stoppen",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "tryAgain": "Erneut versuchen",
+    "newQuestion": "Neue Frage",
+    "close": "Schließen"
+  },
+  "micInput": {
+    "clickToStart": "Klicken Sie, um zu sprechen",
+    "listening": "Höre zu...",
+    "stop": "Stoppen",
+    "cantUseMic": "Mikrofon nicht verfügbar? Verwenden Sie stattdessen Text"
+  },
+  "textInput": {
+    "placeholder": "Geben Sie Ihre Nachricht hier ein...",
+    "analyze": "Analysieren",
+    "minLength": "Bitte geben Sie mindestens 10 Zeichen ein"
+  },
+  "progress": {
+    "title": "Ihr Fortschritt",
+    "empty": "Noch keine Übungssitzungen. Beginnen Sie mit dem Üben, um Ihren Fortschritt zu sehen!",
+    "sessions": "Sitzungen",
+    "avgScore": "Durchschnittswert",
+    "totalTime": "Gesamtzeit",
+    "improvements": "Verbesserungen"
+  },
+  "theme": {
+    "light": "Heller Modus",
+    "dark": "Dunkler Modus",
+    "toggle": "Thema wechseln"
+  },
+  "language": {
+    "select": "Sprache auswählen",
+    "current": "Aktuelle Sprache"
+  },
+  "errors": {
+    "general": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
+    "noMicrophone": "Mikrofon nicht verfügbar. Bitte überprüfen Sie Ihre Berechtigungen.",
+    "analysisFailure": "Analyse Ihrer Nachricht fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "videoFailure": "Analyse Ihres Videos fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "answerRequired": "Bitte geben Sie eine Antwort ein, bevor Sie absenden."
+  },
+  "offline": {
+    "message": "Sie sind offline",
+    "description": "Einige Funktionen sind möglicherweise nicht verfügbar"
+  },
+  "install": {
+    "title": "Eindruck installieren",
+    "description": "Installieren Sie Eindruck als PWA für eine bessere Erfahrung",
+    "install": "Installieren",
+    "dismiss": "Vielleicht später"
+  }
+}
+

@@ -4,6 +4,7 @@ import Intro from "./Intro";
 import Landing from "./Landing";
 import Progress from "./Progress";
 import ThemePicker from "./ThemePicker";
+import LanguageSelector from "./LanguageSelector";
 import InstallPrompt from "./InstallPrompt";
 import OfflineIndicator from "./OfflineIndicator";
 import ErrorBoundary from "./ErrorBoundary";
@@ -29,6 +30,7 @@ export default function App() {
         <div className="App">
         <OfflineIndicator />
         {!showIntro && <ThemePicker />}
+        {!showIntro && <LanguageSelector />}
         {!showIntro && <InstallPrompt />}
         {showIntro && (
           <Intro closeIntro={handleCloseIntro} playAudio={handlePlayAudio} />

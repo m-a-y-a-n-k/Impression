@@ -1,5 +1,6 @@
 import "../styles/Landing.css";
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedMic from "./AnimatedMic";
 import TextInput from "./TextInput";
@@ -31,6 +32,8 @@ import {
 } from "../utils/sessionTracking";
 
 const Landing = ({ playAudio, stopAudio }) => {
+  const { i18n, t } = useTranslation();
+  
   // Subscription and session tracking
   const { isPremium, isFree } = useSubscription();
   const [sessionInfo, setSessionInfo] = useState(getSessionLimitInfo());
@@ -131,8 +134,8 @@ const Landing = ({ playAudio, stopAudio }) => {
       // Add a small delay to show processing state
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      // Enhanced NLP analysis using compromise
-      const enhancedAnalysis = analyzeText(transcript);
+      // Enhanced NLP analysis using compromise with language support
+      const enhancedAnalysis = analyzeText(transcript, null, i18n.language);
       setAnalysisData(enhancedAnalysis);
 
       const sentiment = enhancedAnalysis.sentiment.label;
@@ -173,7 +176,7 @@ const Landing = ({ playAudio, stopAudio }) => {
 
       // Fallback: try basic analysis
       try {
-        const fallbackAnalysis = analyzeText(transcript);
+        const fallbackAnalysis = analyzeText(transcript, null, i18n.language);
         setAnalysisData(fallbackAnalysis);
         const sentiment = fallbackAnalysis.sentiment.label;
         setUserFeedback(sentiment);
@@ -608,7 +611,7 @@ const Landing = ({ playAudio, stopAudio }) => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="mode-selector-title">Choose Your Practice Mode</h2>
+            <h2 className="mode-selector-title">{t('modes.title')}</h2>
             <div className="mode-buttons">
               <motion.button
                 className={`mode-btn ${mode === "text" ? "active" : ""}`}
@@ -620,10 +623,10 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="mode-icon">✍️</span>
-                <span className="mode-label">Text Mode</span>
+                <span className="mode-icon">{t('modes.text.icon')}</span>
+                <span className="mode-label">{t('modes.text.label')}</span>
                 <span className="mode-description">
-                  Type and analyze your speech
+                  {t('modes.text.description')}
                 </span>
               </motion.button>
               <motion.button
@@ -636,10 +639,10 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="mode-icon">🎤</span>
-                <span className="mode-label">Audio Mode</span>
+                <span className="mode-icon">{t('modes.audio.icon')}</span>
+                <span className="mode-label">{t('modes.audio.label')}</span>
                 <span className="mode-description">
-                  Speak and get instant feedback
+                  {t('modes.audio.description')}
                 </span>
               </motion.button>
               <motion.button
@@ -657,13 +660,13 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isFree() && <span className="premium-badge">PREMIUM</span>}
-                <span className="mode-icon">📹</span>
-                <span className="mode-label">Video Mode</span>
+                {isFree() && <span className="premium-badge">{t('premium.badge')}</span>}
+                <span className="mode-icon">{t('modes.video.icon')}</span>
+                <span className="mode-label">{t('modes.video.label')}</span>
                 <span className="mode-description">
-                  Record with video analysis
+                  {t('modes.video.description')}
                 </span>
-                {isFree() && <span className="lock-icon">🔒</span>}
+                {isFree() && <span className="lock-icon">{t('premium.locked')}</span>}
               </motion.button>
               <motion.button
                 className={`mode-btn ${mode === "qna" ? "active" : ""} ${isFree() ? 'premium-feature' : ''}`}
@@ -680,13 +683,13 @@ const Landing = ({ playAudio, stopAudio }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isFree() && <span className="premium-badge">PREMIUM</span>}
-                <span className="mode-icon">🎯</span>
-                <span className="mode-label">Q&A Mode</span>
+                {isFree() && <span className="premium-badge">{t('premium.badge')}</span>}
+                <span className="mode-icon">{t('modes.qna.icon')}</span>
+                <span className="mode-label">{t('modes.qna.label')}</span>
                 <span className="mode-description">
-                  Answer STEM questions and get scored
+                  {t('modes.qna.description')}
                 </span>
-                {isFree() && <span className="lock-icon">🔒</span>}
+                {isFree() && <span className="lock-icon">{t('premium.locked')}</span>}
               </motion.button>
             </div>
           </motion.div>

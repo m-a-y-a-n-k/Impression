@@ -1,15 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import "../styles/AnimatedMic.css";
 import SpeechRecognition, {
   useSpeechRecognition
 } from "react-speech-recognition";
 import _debounce from "lodash/debounce";
 import { micMotionConfig } from "../config/micMotion";
+import { getSpeechRecognitionLang } from "../config/languageConfig";
 import MicNotSupport from "./MicNotSupport";
 import impressionLogo from "../assets/impression.webp";
 
 const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
+  const { i18n, t } = useTranslation();
   const [listen, setListen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
@@ -32,17 +35,19 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
       if (on) {
         stopAudio();
         setShowTranscript(true);
+        // Get the speech recognition language code based on current i18n language
+        const speechLang = getSpeechRecognitionLang(i18n.language);
         await SpeechRecognition.startListening({
           continuous: true,
           interimResults: true,
-          language: 'en-US'
+          language: speechLang
         });
       } else {
         SpeechRecognition.stopListening();
         setShowTranscript(false);
       }
     } catch (err) {
-      setError('Failed to start speech recognition. Please try again.');
+      setError(t('errors.noMicrophone'));
       console.error('Speech recognition error:', err);
     }
   };
@@ -128,10 +133,10 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
   }
 
   const getStatusText = () => {
-    if (error) return "Error occurred";
-    if (isProcessing) return "Processing...";
-    if (listen) return "Listening...";
-    return "Tap the Mic";
+    if (error) return t('errors.general');
+    if (isProcessing) return t('feedback.analyzing');
+    if (listen) return t('micInput.listening');
+    return t('micInput.clickToStart');
   };
 
   const getStatusIcon = () => {
@@ -165,11 +170,11 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
           transition={{ duration: 0.3 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          aria-label="Go to home"
-          title="Go to home"
+          aria-label={t('feedback.home')}
+          title={t('feedback.home')}
         >
           <span className="home-icon">🏠</span>
-          <span className="home-text">Home</span>
+          <span className="home-text">{t('feedback.home')}</span>
         </motion.button>
       )}
       <motion.div 
@@ -179,8 +184,8 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
         transition={{ duration: 0.6 }}
       >
         <h1>
-          <img src={impressionLogo} alt="impression logo" width={36} height={36} /> 
-          Welcome, Let's make you sound <em><strong>Impressive</strong></em>.
+          <img src={impressionLogo} alt={t('app.title')} width={36} height={36} /> 
+          {t('intro.welcome')}
         </h1>
       </motion.div>
 
@@ -197,7 +202,7 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
             className="retry-btn"
             onClick={() => setError(null)}
           >
-            Try Again
+            {t('actions.tryAgain')}
           </button>
         </motion.div>
       )}
@@ -219,7 +224,7 @@ const AnimatedMic = ({ updateUserFeedback, playAudio, stopAudio, onBack }) => {
           whileTap={{ scale: 0.95 }}
           role="button"
           tabIndex={0}
-          aria-label={listen ? "Stop listening" : "Start listening"}
+          aria-label={listen ? t('micInput.stop') : t('micInput.clickToStart')}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();

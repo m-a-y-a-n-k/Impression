@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "Impressão",
+    "tagline": "Melhore sua impressão"
+  },
+  "intro": {
+    "welcome": "Bem-vindo ao Impressão",
+    "description": "Pratique e melhore suas habilidades de comunicação com feedback em tempo real",
+    "getStarted": "Começar"
+  },
+  "modes": {
+    "title": "Escolha Seu Modo de Prática",
+    "text": {
+      "label": "Modo Texto",
+      "icon": "✍️",
+      "description": "Digite e analise seu discurso"
+    },
+    "audio": {
+      "label": "Modo Áudio",
+      "icon": "🎤",
+      "description": "Fale e receba feedback instantâneo"
+    },
+    "video": {
+      "label": "Modo Vídeo",
+      "icon": "📹",
+      "description": "Grave com análise de vídeo"
+    },
+    "qna": {
+      "label": "Modo Perguntas",
+      "icon": "🎯",
+      "description": "Responda perguntas STEM e obtenha pontuação"
+    }
+  },
+  "scenarios": {
+    "title": "Selecione Seu Cenário",
+    "jobInterview": {
+      "name": "Entrevista de Emprego",
+      "icon": "💼",
+      "description": "Pratique para sua próxima entrevista de emprego",
+      "tips": {
+        "eyeContact": "Mantenha contato visual com a câmera",
+        "speak": "Fale claramente e com confiança",
+        "bodyLanguage": "Use linguagem corporal positiva",
+        "fillers": "Evite palavras de preenchimento",
+        "enthusiasm": "Mostre entusiasmo e interesse"
+      }
+    },
+    "elevatorPitch": {
+      "name": "Elevator Pitch",
+      "icon": "🚀",
+      "description": "Aperfeiçoe seu pitch de 30-60 segundos",
+      "tips": {
+        "concise": "Mantenha conciso e envolvente",
+        "hook": "Comece com um gancho",
+        "passion": "Mostre paixão e energia",
+        "posture": "Mantenha uma postura confiante",
+        "cta": "Termine com uma chamada clara para ação"
+      }
+    },
+    "presentation": {
+      "name": "Apresentação",
+      "icon": "📊",
+      "description": "Pratique suas habilidades de apresentação",
+      "tips": {
+        "gestures": "Use gestos para enfatizar pontos",
+        "pace": "Varie seu ritmo de fala",
+        "engagement": "Mantenha o engajamento do público",
+        "pauses": "Use pausas efetivamente",
+        "confidence": "Mostre confiança e autoridade"
+      }
+    },
+    "networking": {
+      "name": "Networking",
+      "icon": "🤝",
+      "description": "Pratique sua conversa de networking",
+      "tips": {
+        "warm": "Seja caloroso e acessível",
+        "interest": "Mostre interesse genuíno",
+        "listen": "Ouça ativamente",
+        "bodyLanguage": "Mantenha linguagem corporal positiva",
+        "authentic": "Seja autêntico e memorável"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "Analisando sua mensagem...",
+    "analyzingVideo": "Analisando seu vídeo...",
+    "analyzingText": "Analisando seu texto...",
+    "analyzingAnswer": "Avaliando sua resposta...",
+    "processingVideo": "Analisando expressões faciais, linguagem corporal e fala",
+    "processingQnA": "Verificando precisão, clareza, completude e vocabulário",
+    "processingSpeech": "Analisando sentimento, clareza e entrega",
+    "overallScore": "Desempenho Geral",
+    "excellent": "Excelente",
+    "good": "Bom",
+    "fair": "Regular",
+    "needsWork": "Precisa Melhorar",
+    "videoAnalysis": "Análise de Vídeo",
+    "speechAnalysis": "Análise de Fala",
+    "eyeContact": "Contato Visual",
+    "confidence": "Confiança",
+    "posture": "Postura",
+    "gestures": "Gestos",
+    "fillerWords": "Palavras de Preenchimento",
+    "speakingPace": "Ritmo de Fala",
+    "vocabulary": "Vocabulário",
+    "showTips": "Mostrar Dicas de Melhoria",
+    "hideTips": "Ocultar Dicas de Melhoria",
+    "practiceAgain": "Praticar Novamente",
+    "home": "Início"
+  },
+  "difficulty": {
+    "title": "Selecionar Nível de Dificuldade",
+    "easy": "Fácil",
+    "medium": "Médio",
+    "hard": "Difícil",
+    "expert": "Especialista"
+  },
+  "session": {
+    "remaining": "{{remaining}} de {{total}} sessões gratuitas restantes",
+    "used": "Você usou todas as {{total}} sessões gratuitas",
+    "upgrade": "⚡ Atualizar para Ilimitado"
+  },
+  "premium": {
+    "badge": "PREMIUM",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "Iniciar",
+    "stop": "Parar",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "tryAgain": "Tentar Novamente",
+    "newQuestion": "Nova Pergunta",
+    "close": "Fechar"
+  },
+  "micInput": {
+    "clickToStart": "Clique para começar a falar",
+    "listening": "Ouvindo...",
+    "stop": "Parar",
+    "cantUseMic": "Não pode usar o microfone? Use texto em vez disso"
+  },
+  "textInput": {
+    "placeholder": "Digite sua mensagem aqui...",
+    "analyze": "Analisar",
+    "minLength": "Por favor, digite pelo menos 10 caracteres"
+  },
+  "progress": {
+    "title": "Seu Progresso",
+    "empty": "Ainda não há sessões de prática. Comece a praticar para ver seu progresso!",
+    "sessions": "Sessões",
+    "avgScore": "Pontuação Média",
+    "totalTime": "Tempo Total",
+    "improvements": "Melhorias"
+  },
+  "theme": {
+    "light": "Modo Claro",
+    "dark": "Modo Escuro",
+    "toggle": "Alternar Tema"
+  },
+  "language": {
+    "select": "Selecionar Idioma",
+    "current": "Idioma Atual"
+  },
+  "errors": {
+    "general": "Algo deu errado. Por favor, tente novamente.",
+    "noMicrophone": "Microfone não disponível. Por favor, verifique suas permissões.",
+    "analysisFailure": "Falha ao analisar sua mensagem. Por favor, tente novamente.",
+    "videoFailure": "Falha ao analisar seu vídeo. Por favor, tente novamente.",
+    "answerRequired": "Por favor, forneça uma resposta antes de enviar."
+  },
+  "offline": {
+    "message": "Você está offline",
+    "description": "Alguns recursos podem não estar disponíveis"
+  },
+  "install": {
+    "title": "Instalar Impressão",
+    "description": "Instale Impressão como PWA para uma melhor experiência",
+    "install": "Instalar",
+    "dismiss": "Talvez Depois"
+  }
+}
+

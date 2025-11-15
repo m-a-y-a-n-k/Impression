@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "Impression",
+    "tagline": "Make your impression better"
+  },
+  "intro": {
+    "welcome": "Welcome to Impression",
+    "description": "Practice and improve your communication skills with real-time feedback",
+    "getStarted": "Get Started"
+  },
+  "modes": {
+    "title": "Choose Your Practice Mode",
+    "text": {
+      "label": "Text Mode",
+      "icon": "✍️",
+      "description": "Type and analyze your speech"
+    },
+    "audio": {
+      "label": "Audio Mode",
+      "icon": "🎤",
+      "description": "Speak and get instant feedback"
+    },
+    "video": {
+      "label": "Video Mode",
+      "icon": "📹",
+      "description": "Record with video analysis"
+    },
+    "qna": {
+      "label": "Q&A Mode",
+      "icon": "🎯",
+      "description": "Answer STEM questions and get scored"
+    }
+  },
+  "scenarios": {
+    "title": "Select Your Scenario",
+    "jobInterview": {
+      "name": "Job Interview",
+      "icon": "💼",
+      "description": "Practice for your next job interview",
+      "tips": {
+        "eyeContact": "Maintain eye contact with the camera",
+        "speak": "Speak clearly and confidently",
+        "bodyLanguage": "Use positive body language",
+        "fillers": "Avoid filler words",
+        "enthusiasm": "Show enthusiasm and interest"
+      }
+    },
+    "elevatorPitch": {
+      "name": "Elevator Pitch",
+      "icon": "🚀",
+      "description": "Perfect your 30-60 second pitch",
+      "tips": {
+        "concise": "Keep it concise and engaging",
+        "hook": "Start with a hook",
+        "passion": "Show passion and energy",
+        "posture": "Maintain confident posture",
+        "cta": "End with a clear call to action"
+      }
+    },
+    "presentation": {
+      "name": "Presentation",
+      "icon": "📊",
+      "description": "Practice your presentation skills",
+      "tips": {
+        "gestures": "Use gestures to emphasize points",
+        "pace": "Vary your speaking pace",
+        "engagement": "Maintain audience engagement",
+        "pauses": "Use pauses effectively",
+        "confidence": "Show confidence and authority"
+      }
+    },
+    "networking": {
+      "name": "Networking",
+      "icon": "🤝",
+      "description": "Practice your networking conversation",
+      "tips": {
+        "warm": "Be warm and approachable",
+        "interest": "Show genuine interest",
+        "listen": "Listen actively",
+        "bodyLanguage": "Maintain positive body language",
+        "authentic": "Be authentic and memorable"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "Analyzing your message...",
+    "analyzingVideo": "Analyzing your video...",
+    "analyzingText": "Analyzing your text...",
+    "analyzingAnswer": "Evaluating your answer...",
+    "processingVideo": "Analyzing facial expressions, body language, and speech",
+    "processingQnA": "Checking accuracy, clarity, completeness, and vocabulary",
+    "processingSpeech": "Analyzing sentiment, clarity, and delivery",
+    "overallScore": "Overall Performance",
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+    "needsWork": "Needs Work",
+    "videoAnalysis": "Video Analysis",
+    "speechAnalysis": "Speech Analysis",
+    "eyeContact": "Eye Contact",
+    "confidence": "Confidence",
+    "posture": "Posture",
+    "gestures": "Gestures",
+    "fillerWords": "Filler Words",
+    "speakingPace": "Speaking Pace",
+    "vocabulary": "Vocabulary",
+    "showTips": "Show Improvement Tips",
+    "hideTips": "Hide Improvement Tips",
+    "practiceAgain": "Practice Again",
+    "home": "Home"
+  },
+  "difficulty": {
+    "title": "Select Difficulty Level",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "expert": "Expert"
+  },
+  "session": {
+    "remaining": "{{remaining}} of {{total}} free sessions remaining",
+    "used": "You've used all {{total}} free sessions",
+    "upgrade": "⚡ Upgrade for Unlimited"
+  },
+  "premium": {
+    "badge": "PREMIUM",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "Start",
+    "stop": "Stop",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "tryAgain": "Try Again",
+    "newQuestion": "New Question",
+    "close": "Close"
+  },
+  "micInput": {
+    "clickToStart": "Click to start speaking",
+    "listening": "Listening...",
+    "stop": "Stop",
+    "cantUseMic": "Can't use Mic? Go with Text instead"
+  },
+  "textInput": {
+    "placeholder": "Type your message here...",
+    "analyze": "Analyze",
+    "minLength": "Please type at least 10 characters"
+  },
+  "progress": {
+    "title": "Your Progress",
+    "empty": "No practice sessions yet. Start practicing to see your progress!",
+    "sessions": "Sessions",
+    "avgScore": "Average Score",
+    "totalTime": "Total Time",
+    "improvements": "Improvements"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "toggle": "Toggle Theme"
+  },
+  "language": {
+    "select": "Select Language",
+    "current": "Current Language"
+  },
+  "errors": {
+    "general": "Something went wrong. Please try again.",
+    "noMicrophone": "Microphone not available. Please check your permissions.",
+    "analysisFailure": "Failed to analyze your message. Please try again.",
+    "videoFailure": "Failed to analyze your video. Please try again.",
+    "answerRequired": "Please provide an answer before submitting."
+  },
+  "offline": {
+    "message": "You are offline",
+    "description": "Some features may not be available"
+  },
+  "install": {
+    "title": "Install Impression",
+    "description": "Install Impression as a PWA for better experience",
+    "install": "Install",
+    "dismiss": "Maybe Later"
+  }
+}
+

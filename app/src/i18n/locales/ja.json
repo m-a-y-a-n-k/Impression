@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "インプレッション",
+    "tagline": "あなたの印象をより良くする"
+  },
+  "intro": {
+    "welcome": "インプレッションへようこそ",
+    "description": "リアルタイムフィードバックでコミュニケーションスキルを練習し、向上させましょう",
+    "getStarted": "始める"
+  },
+  "modes": {
+    "title": "練習モードを選択",
+    "text": {
+      "label": "テキストモード",
+      "icon": "✍️",
+      "description": "入力してスピーチを分析"
+    },
+    "audio": {
+      "label": "オーディオモード",
+      "icon": "🎤",
+      "description": "話して即座にフィードバックを得る"
+    },
+    "video": {
+      "label": "ビデオモード",
+      "icon": "📹",
+      "description": "ビデオ分析で録画"
+    },
+    "qna": {
+      "label": "Q&Aモード",
+      "icon": "🎯",
+      "description": "STEM問題に答えてスコアを獲得"
+    }
+  },
+  "scenarios": {
+    "title": "シナリオを選択",
+    "jobInterview": {
+      "name": "就職面接",
+      "icon": "💼",
+      "description": "次の就職面接のための練習",
+      "tips": {
+        "eyeContact": "カメラとアイコンタクトを保つ",
+        "speak": "明確で自信を持って話す",
+        "bodyLanguage": "ポジティブなボディランゲージを使用",
+        "fillers": "フィラーワードを避ける",
+        "enthusiasm": "熱意と興味を示す"
+      }
+    },
+    "elevatorPitch": {
+      "name": "エレベーターピッチ",
+      "icon": "🚀",
+      "description": "30〜60秒のピッチを完璧に",
+      "tips": {
+        "concise": "簡潔で魅力的に保つ",
+        "hook": "フックから始める",
+        "passion": "情熱とエネルギーを示す",
+        "posture": "自信のある姿勢を保つ",
+        "cta": "明確な行動喚起で終わる"
+      }
+    },
+    "presentation": {
+      "name": "プレゼンテーション",
+      "icon": "📊",
+      "description": "プレゼンテーションスキルを練習",
+      "tips": {
+        "gestures": "ポイントを強調するためにジェスチャーを使用",
+        "pace": "話すペースを変える",
+        "engagement": "聴衆のエンゲージメントを維持",
+        "pauses": "効果的にポーズを使用",
+        "confidence": "自信と権威を示す"
+      }
+    },
+    "networking": {
+      "name": "ネットワーキング",
+      "icon": "🤝",
+      "description": "ネットワーキング会話を練習",
+      "tips": {
+        "warm": "温かく親しみやすく",
+        "interest": "genuine interest を示す",
+        "listen": "積極的に聞く",
+        "bodyLanguage": "ポジティブなボディランゲージを保つ",
+        "authentic": "本物で印象的に"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "メッセージを分析中...",
+    "analyzingVideo": "ビデオを分析中...",
+    "analyzingText": "テキストを分析中...",
+    "analyzingAnswer": "回答を評価中...",
+    "processingVideo": "表情、ボディランゲージ、スピーチを分析",
+    "processingQnA": "正確さ、明瞭さ、完全性、語彙をチェック",
+    "processingSpeech": "感情、明瞭さ、配信を分析",
+    "overallScore": "総合パフォーマンス",
+    "excellent": "優秀",
+    "good": "良好",
+    "fair": "普通",
+    "needsWork": "改善が必要",
+    "videoAnalysis": "ビデオ分析",
+    "speechAnalysis": "スピーチ分析",
+    "eyeContact": "アイコンタクト",
+    "confidence": "自信",
+    "posture": "姿勢",
+    "gestures": "ジェスチャー",
+    "fillerWords": "フィラーワード",
+    "speakingPace": "話すペース",
+    "vocabulary": "語彙",
+    "showTips": "改善のヒントを表示",
+    "hideTips": "改善のヒントを非表示",
+    "practiceAgain": "もう一度練習",
+    "home": "ホーム"
+  },
+  "difficulty": {
+    "title": "難易度レベルを選択",
+    "easy": "簡単",
+    "medium": "中級",
+    "hard": "難しい",
+    "expert": "エキスパート"
+  },
+  "session": {
+    "remaining": "無料セッション{{total}}回中{{remaining}}回残り",
+    "used": "すべての{{total}}回の無料セッションを使用しました",
+    "upgrade": "⚡ 無制限にアップグレード"
+  },
+  "premium": {
+    "badge": "プレミアム",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "開始",
+    "stop": "停止",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "back": "戻る",
+    "next": "次",
+    "tryAgain": "もう一度試す",
+    "newQuestion": "新しい質問",
+    "close": "閉じる"
+  },
+  "micInput": {
+    "clickToStart": "クリックして話し始める",
+    "listening": "聞いています...",
+    "stop": "停止",
+    "cantUseMic": "マイクが使えない？代わりにテキストを使用"
+  },
+  "textInput": {
+    "placeholder": "ここにメッセージを入力してください...",
+    "analyze": "分析",
+    "minLength": "少なくとも10文字を入力してください"
+  },
+  "progress": {
+    "title": "あなたの進捗",
+    "empty": "まだ練習セッションがありません。練習を始めて進捗を確認しましょう！",
+    "sessions": "セッション",
+    "avgScore": "平均スコア",
+    "totalTime": "合計時間",
+    "improvements": "改善"
+  },
+  "theme": {
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "toggle": "テーマを切り替え"
+  },
+  "language": {
+    "select": "言語を選択",
+    "current": "現在の言語"
+  },
+  "errors": {
+    "general": "問題が発生しました。もう一度お試しください。",
+    "noMicrophone": "マイクが利用できません。権限を確認してください。",
+    "analysisFailure": "メッセージの分析に失敗しました。もう一度お試しください。",
+    "videoFailure": "ビデオの分析に失敗しました。もう一度お試しください。",
+    "answerRequired": "送信する前に回答を提供してください。"
+  },
+  "offline": {
+    "message": "オフラインです",
+    "description": "一部の機能が利用できない可能性があります"
+  },
+  "install": {
+    "title": "インプレッションをインストール",
+    "description": "より良い体験のためにインプレッションをPWAとしてインストール",
+    "install": "インストール",
+    "dismiss": "後で"
+  }
+}
+

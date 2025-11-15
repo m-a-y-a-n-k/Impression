@@ -1,23 +1,24 @@
 import nlp from 'compromise';
 import compendium from 'compendium-js';
+import { getFillerWords } from '../config/languageConfig';
 
 /**
  * Enhanced NLP analysis using compromise and compendium
+ * Now supports multiple languages
  */
 
-// Common filler words to detect
-const FILLER_WORDS = [
-  'um', 'uh', 'er', 'ah', 'like', 'you know', 'so', 'well', 
-  'actually', 'basically', 'literally', 'right', 'okay', 'ok',
-  'i mean', 'sort of', 'kind of', 'you see', 'i guess'
-];
+// Get filler words dynamically based on language
+const getFillerWordsForLanguage = (languageCode = 'en') => {
+  return getFillerWords(languageCode);
+};
 
 /**
  * Detect filler words in text
  * @param {string} text - Input text
+ * @param {string} languageCode - Language code (e.g., 'en', 'es', 'fr')
  * @returns {Object} Filler word analysis
  */
-export const detectFillerWords = (text) => {
+export const detectFillerWords = (text, languageCode = 'en') => {
   if (!text || text.trim() === '') {
     return { count: 0, words: [], percentage: 0 };
   }
@@ -25,6 +26,7 @@ export const detectFillerWords = (text) => {
   const words = text.split(/\s+/);
   const foundFillers = [];
   const fillerCounts = {};
+  const FILLER_WORDS = getFillerWordsForLanguage(languageCode);
 
   FILLER_WORDS.forEach(filler => {
     // Handle multi-word fillers
@@ -329,9 +331,10 @@ export const generateSuggestions = (analysis) => {
  * Comprehensive NLP analysis
  * @param {string} text - Input text
  * @param {number} durationSeconds - Optional duration in seconds
+ * @param {string} languageCode - Language code for analysis (default: 'en')
  * @returns {Object} Complete analysis object
  */
-export const analyzeText = (text, durationSeconds = null) => {
+export const analyzeText = (text, durationSeconds = null, languageCode = 'en') => {
   if (!text || text.trim() === '') {
     return {
       sentiment: { label: 'neutral', score: 0 },
@@ -340,12 +343,13 @@ export const analyzeText = (text, durationSeconds = null) => {
       repetition: { repeatedWords: [], count: 0 },
       vocabulary: { uniqueWords: 0, totalWords: 0, diversity: 0 },
       pace: { wordsPerMinute: 0, pace: 'normal', wordCount: 0 },
-      suggestions: []
+      suggestions: [],
+      language: languageCode
     };
   }
 
   const sentiment = analyzeSentiment(text);
-  const fillerWords = detectFillerWords(text);
+  const fillerWords = detectFillerWords(text, languageCode);
   const sentenceStructure = analyzeSentenceStructure(text);
   const repetition = detectRepetition(text);
   const vocabulary = analyzeVocabulary(text);
@@ -357,7 +361,8 @@ export const analyzeText = (text, durationSeconds = null) => {
     sentenceStructure,
     repetition,
     vocabulary,
-    pace
+    pace,
+    language: languageCode
   };
 
   const suggestions = generateSuggestions(analysis);

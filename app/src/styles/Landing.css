@@ -407,12 +407,11 @@
 /* Session Info Bar */
 .session-info-bar {
   position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 8px;
+  left: 20px;
   z-index: 100;
   max-width: 600px;
-  width: calc(100% - 40px);
+  width: 66%;
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -502,10 +501,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .session-info-bar {
-    top: 70px;
-    width: calc(100% - 24px);
-  }
 
   .session-info-content {
     padding: 10px 16px;
@@ -523,9 +518,6 @@
 }
 
 @media (max-width: 480px) {
-  .session-info-bar {
-    top: 60px;
-  }
 
   .session-info-content {
     flex-direction: column;

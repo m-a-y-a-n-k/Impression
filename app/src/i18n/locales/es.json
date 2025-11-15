@@ -1,0 +1,185 @@
+{
+  "app": {
+    "title": "Impresión",
+    "tagline": "Mejora tu impresión"
+  },
+  "intro": {
+    "welcome": "Bienvenido a Impresión",
+    "description": "Practica y mejora tus habilidades de comunicación con retroalimentación en tiempo real",
+    "getStarted": "Comenzar"
+  },
+  "modes": {
+    "title": "Elige tu Modo de Práctica",
+    "text": {
+      "label": "Modo Texto",
+      "icon": "✍️",
+      "description": "Escribe y analiza tu discurso"
+    },
+    "audio": {
+      "label": "Modo Audio",
+      "icon": "🎤",
+      "description": "Habla y obtén retroalimentación instantánea"
+    },
+    "video": {
+      "label": "Modo Video",
+      "icon": "📹",
+      "description": "Graba con análisis de video"
+    },
+    "qna": {
+      "label": "Modo Preguntas",
+      "icon": "🎯",
+      "description": "Responde preguntas STEM y obtén puntuación"
+    }
+  },
+  "scenarios": {
+    "title": "Selecciona tu Escenario",
+    "jobInterview": {
+      "name": "Entrevista de Trabajo",
+      "icon": "💼",
+      "description": "Practica para tu próxima entrevista de trabajo",
+      "tips": {
+        "eyeContact": "Mantén contacto visual con la cámara",
+        "speak": "Habla con claridad y confianza",
+        "bodyLanguage": "Usa lenguaje corporal positivo",
+        "fillers": "Evita palabras de relleno",
+        "enthusiasm": "Muestra entusiasmo e interés"
+      }
+    },
+    "elevatorPitch": {
+      "name": "Discurso de Ascensor",
+      "icon": "🚀",
+      "description": "Perfecciona tu presentación de 30-60 segundos",
+      "tips": {
+        "concise": "Mantén conciso y atractivo",
+        "hook": "Comienza con un gancho",
+        "passion": "Muestra pasión y energía",
+        "posture": "Mantén una postura confiada",
+        "cta": "Termina con una llamada a la acción clara"
+      }
+    },
+    "presentation": {
+      "name": "Presentación",
+      "icon": "📊",
+      "description": "Practica tus habilidades de presentación",
+      "tips": {
+        "gestures": "Usa gestos para enfatizar puntos",
+        "pace": "Varía tu ritmo de habla",
+        "engagement": "Mantén el compromiso de la audiencia",
+        "pauses": "Usa pausas efectivamente",
+        "confidence": "Muestra confianza y autoridad"
+      }
+    },
+    "networking": {
+      "name": "Networking",
+      "icon": "🤝",
+      "description": "Practica tu conversación de networking",
+      "tips": {
+        "warm": "Sé cálido y accesible",
+        "interest": "Muestra interés genuino",
+        "listen": "Escucha activamente",
+        "bodyLanguage": "Mantén lenguaje corporal positivo",
+        "authentic": "Sé auténtico y memorable"
+      }
+    }
+  },
+  "feedback": {
+    "analyzing": "Analizando tu mensaje...",
+    "analyzingVideo": "Analizando tu video...",
+    "analyzingText": "Analizando tu texto...",
+    "analyzingAnswer": "Evaluando tu respuesta...",
+    "processingVideo": "Analizando expresiones faciales, lenguaje corporal y habla",
+    "processingQnA": "Verificando precisión, claridad, completitud y vocabulario",
+    "processingSpeech": "Analizando sentimiento, claridad y entrega",
+    "overallScore": "Rendimiento General",
+    "excellent": "Excelente",
+    "good": "Bueno",
+    "fair": "Regular",
+    "needsWork": "Necesita Mejorar",
+    "videoAnalysis": "Análisis de Video",
+    "speechAnalysis": "Análisis del Habla",
+    "eyeContact": "Contacto Visual",
+    "confidence": "Confianza",
+    "posture": "Postura",
+    "gestures": "Gestos",
+    "fillerWords": "Palabras de Relleno",
+    "speakingPace": "Ritmo de Habla",
+    "vocabulary": "Vocabulario",
+    "showTips": "Mostrar Consejos de Mejora",
+    "hideTips": "Ocultar Consejos de Mejora",
+    "practiceAgain": "Practicar de Nuevo",
+    "home": "Inicio"
+  },
+  "difficulty": {
+    "title": "Seleccionar Nivel de Dificultad",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "expert": "Experto"
+  },
+  "session": {
+    "remaining": "{{remaining}} de {{total}} sesiones gratuitas restantes",
+    "used": "Has usado todas las {{total}} sesiones gratuitas",
+    "upgrade": "⚡ Actualizar para Ilimitado"
+  },
+  "premium": {
+    "badge": "PREMIUM",
+    "locked": "🔒"
+  },
+  "actions": {
+    "start": "Iniciar",
+    "stop": "Detener",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "tryAgain": "Intentar de Nuevo",
+    "newQuestion": "Nueva Pregunta",
+    "close": "Cerrar"
+  },
+  "micInput": {
+    "clickToStart": "Haz clic para comenzar a hablar",
+    "listening": "Escuchando...",
+    "stop": "Detener",
+    "cantUseMic": "¿No puedes usar el micrófono? Usa texto en su lugar"
+  },
+  "textInput": {
+    "placeholder": "Escribe tu mensaje aquí...",
+    "analyze": "Analizar",
+    "minLength": "Por favor escribe al menos 10 caracteres"
+  },
+  "progress": {
+    "title": "Tu Progreso",
+    "empty": "Aún no hay sesiones de práctica. ¡Comienza a practicar para ver tu progreso!",
+    "sessions": "Sesiones",
+    "avgScore": "Puntuación Promedio",
+    "totalTime": "Tiempo Total",
+    "improvements": "Mejoras"
+  },
+  "theme": {
+    "light": "Modo Claro",
+    "dark": "Modo Oscuro",
+    "toggle": "Cambiar Tema"
+  },
+  "language": {
+    "select": "Seleccionar Idioma",
+    "current": "Idioma Actual"
+  },
+  "errors": {
+    "general": "Algo salió mal. Por favor, inténtalo de nuevo.",
+    "noMicrophone": "Micrófono no disponible. Por favor verifica tus permisos.",
+    "analysisFailure": "No se pudo analizar tu mensaje. Por favor, inténtalo de nuevo.",
+    "videoFailure": "No se pudo analizar tu video. Por favor, inténtalo de nuevo.",
+    "answerRequired": "Por favor proporciona una respuesta antes de enviar."
+  },
+  "offline": {
+    "message": "Estás desconectado",
+    "description": "Algunas funciones pueden no estar disponibles"
+  },
+  "install": {
+    "title": "Instalar Impresión",
+    "description": "Instala Impresión como PWA para una mejor experiencia",
+    "install": "Instalar",
+    "dismiss": "Tal Vez Después"
+  }
+}
+

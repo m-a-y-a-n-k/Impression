@@ -27,13 +27,17 @@
     "detectrtc": "1.4.1",
     "framer-motion": "8.2.4",
     "html2canvas": "^1.4.1",
+    "i18next": "^25.6.2",
+    "i18next-browser-languagedetector": "^8.2.0",
     "jspdf": "^3.0.3",
     "lodash": "4.17.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "^16.3.3",
     "react-scripts": "5.0.1",
     "react-speech-recognition": "3.9.1",
     "recharts": "^3.4.1",
+    "scheduler": "^0.27.0",
     "typewriter-effect": "2.19.0"
   },
   "scripts": {
