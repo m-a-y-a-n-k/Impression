@@ -9,11 +9,15 @@
  * 5. Set up a backend webhook endpoint to handle subscription events
  */
 
+import { PAYMENT_CONFIG } from '../config/paymentConfig';
+import mockPaymentService from './mockPaymentService';
+
 // In production, these should be environment variables
 // Create a .env file with:
 // REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_live_...
 // REACT_APP_STRIPE_PREMIUM_PRICE_ID=price_...
 // REACT_APP_STRIPE_PRO_PRICE_ID=price_...
+// REACT_APP_ENABLE_BETA_TESTING=false
 
 const STRIPE_CONFIG = {
   // Use test key for development
@@ -27,14 +31,25 @@ const STRIPE_CONFIG = {
   
   // Your backend API endpoint for creating checkout sessions
   apiEndpoint: process.env.REACT_APP_API_ENDPOINT || 'https://your-backend.com/api',
+  
+  // Check if beta testing is enabled
+  isBetaTesting: PAYMENT_CONFIG.isBetaTesting
 };
 
 /**
  * Initialize Stripe checkout
  * This would typically redirect to Stripe Checkout
+ * Uses mock payment service in beta testing mode
  */
-export const initiateCheckout = async (planId, userEmail = null) => {
+export const initiateCheckout = async (planId, userEmail = null, amount = 0) => {
   try {
+    // Check if beta testing is enabled
+    if (STRIPE_CONFIG.isBetaTesting) {
+      // Use mock payment service
+      console.log('Beta testing mode: Using mock Stripe payment');
+      return await mockPaymentService.processMockStripePayment(amount, planId);
+    }
+
     // In production, this would call your backend API
     // Your backend creates a Stripe Checkout Session and returns the URL
     
@@ -98,9 +113,15 @@ export const loadStripe = () => {
 /**
  * Verify subscription status
  * Call your backend to verify the subscription
+ * Uses mock verification in beta testing mode
  */
 export const verifySubscription = async (customerId) => {
   try {
+    // Check if beta testing is enabled
+    if (STRIPE_CONFIG.isBetaTesting) {
+      return await mockPaymentService.verifyMockPayment(customerId);
+    }
+
     const response = await fetch(`${STRIPE_CONFIG.apiEndpoint}/verify-subscription`, {
       method: 'POST',
       headers: {

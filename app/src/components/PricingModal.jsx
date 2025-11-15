@@ -1,38 +1,26 @@
 import "../styles/PricingModal.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSubscription } from "../contexts/SubscriptionContext";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const PricingModal = ({ isOpen, onClose, currentSessionCount }) => {
   const { plans, getCurrentPlan } = useSubscription();
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState('premium');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubscribe = async (planId) => {
+  const handleSubscribe = (planId) => {
     setIsProcessing(true);
     setSelectedPlan(planId);
     
-    // In production, this would call your Stripe/payment API
-    // For now, we'll simulate the payment flow
-    try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // TODO: Replace with actual Stripe Checkout
-      console.log('Starting payment for plan:', planId);
-      
-      // For demo purposes, you can uncomment this to test premium features:
-      // const { upgradeToPremium } = useSubscription();
-      // upgradeToPremium(planId, 'demo_customer_id', new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString());
-      
-      alert('🚀 Payment integration coming soon! This will redirect to Stripe Checkout.');
-      
-    } catch (err) {
-      console.error('Payment error:', err);
-      alert('Payment failed. Please try again.');
-    } finally {
-      setIsProcessing(false);
-    }
+    // Navigate to checkout page with selected plan
+    navigate('/checkout', { state: { planId } });
+    
+    // Close the pricing modal
+    onClose();
+    
+    setIsProcessing(false);
   };
 
   if (!isOpen) return null;

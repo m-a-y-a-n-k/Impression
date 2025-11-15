@@ -222,6 +222,69 @@ app/
 └── README.md
 ```
 
+## 💳 Payment Integration
+
+Impression includes a comprehensive payment system with support for multiple payment methods and environment-based configuration.
+
+### Supported Payment Methods
+
+- **💳 Card Payments** - Debit and Credit cards
+- **📱 UPI Payments** - Google Pay, PhonePe, Paytm
+- **🏦 Net Banking** - 12+ major Indian banks
+- **💰 Digital Wallets** - PayPal, Stripe (Production only)
+
+### Environment-Based Payments
+
+The payment system automatically switches between mock and real payments based on configuration:
+
+**Beta Testing Mode** (Development)
+- Mock payments for testing
+- No real transactions
+- Perfect for development
+- Enable with: `REACT_APP_ENABLE_BETA_TESTING=true`
+
+**Production Mode** (Live)
+- Real payment gateway integration
+- Actual transactions
+- Requires backend API
+- Enable with: `REACT_APP_ENABLE_BETA_TESTING=false`
+
+### Quick Start
+
+1. **For Development/Testing** (Mock Payments):
+   ```bash
+   # Add to your .env file
+   REACT_APP_ENABLE_BETA_TESTING=true
+   ```
+   That's it! You can now test the complete checkout flow without any payment setup.
+
+2. **For Production** (Real Payments):
+   ```bash
+   # Add to your .env file
+   REACT_APP_ENABLE_BETA_TESTING=false
+   REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_live_YOUR_KEY
+   REACT_APP_STRIPE_PREMIUM_PRICE_ID=price_premium_id
+   REACT_APP_STRIPE_PRO_PRICE_ID=price_pro_id
+   REACT_APP_API_ENDPOINT=https://your-backend.com/api
+   ```
+
+### Documentation
+
+For complete payment integration setup and usage:
+- 📘 **[Payment Integration Guide](./PAYMENT_INTEGRATION.md)** - Complete documentation
+- 🚀 **[Quick Start Guide](./app/PAYMENT_QUICKSTART.md)** - 5-minute setup
+- ⚙️ **[Environment Configuration](./app/ENV_CONFIGURATION.md)** - Environment variables
+- 📋 **[Implementation Summary](./PAYMENT_INTEGRATION_SUMMARY.md)** - What's included
+
+### Payment Flow
+
+```
+User selects plan → Checkout page → Select payment method → 
+Enter details → Process payment → Subscription activated
+```
+
+In beta testing mode, all payments are simulated instantly without real transactions.
+
 ## 🧪 Beta Testing & Development
 
 ### Premium Access Testing

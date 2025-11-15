@@ -1,5 +1,6 @@
 import "../styles/App.css";
 import { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Intro from "./Intro";
 import Landing from "./Landing";
 import Progress from "./Progress";
@@ -10,12 +11,12 @@ import OfflineIndicator from "./OfflineIndicator";
 import ErrorBoundary from "./ErrorBoundary";
 import UserMenu from "./UserMenu";
 import Login from "./Login";
+import Checkout from "./Checkout";
 import { useSiteAudio } from "../hooks/useSiteAudio";
 import { SubscriptionProvider } from "../contexts/SubscriptionContext";
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
-function AppContent() {
-  const { currentUser, loading } = useAuth();
+function MainApp() {
   const fetchIntroStatus = () =>
     sessionStorage.getItem("intro-done") ? false : true;
 
@@ -28,22 +29,6 @@ function AppContent() {
 
   const { handlePlayAudio, handleStopAudio } = useSiteAudio();
 
-  // Show loading state while checking authentication
-  if (loading) {
-    return (
-      <div className="app-loading">
-        <div className="spinner"></div>
-        <p>Loading Impression...</p>
-      </div>
-    );
-  }
-
-  // Show login if not authenticated
-  if (!currentUser) {
-    return <Login />;
-  }
-
-  // Show main app when authenticated
   return (
     <div className="App">
       <OfflineIndicator />
@@ -69,6 +54,34 @@ function AppContent() {
         </>
       )}
     </div>
+  );
+}
+
+function AppContent() {
+  const { currentUser, loading } = useAuth();
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <div className="app-loading">
+        <div className="spinner"></div>
+        <p>Loading Impression...</p>
+      </div>
+    );
+  }
+
+  // Show login if not authenticated
+  if (!currentUser) {
+    return <Login />;
+  }
+
+  // Show main app when authenticated with routing
+  return (
+    <Routes>
+      <Route path="/" element={<MainApp />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
