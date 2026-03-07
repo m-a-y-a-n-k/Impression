@@ -483,7 +483,27 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 
 ## 🆕 Recent Updates
 
-### Version 5.2.0 (Latest)
+### Version 5.3.0 (Latest)
+
+**☁️ Cloud Intelligence & Sync**
+- **Real-time Firestore Sync**: Your practice history is now securely backed up to the cloud and synced across all your devices.
+- **Unified Progress History**: Seamlessly merge local and cloud history for a complete view of your communication journey.
+
+**📊 Live Analysis Metrics**
+- **Real-time Filler Word Detection**: See your filler word count update LIVE as you speak in Audio Mode.
+- **Improved Scoring Algorithm**: Enhanced NLP weights for more accurate and actionable feedback.
+- **Robust Keyword Matching**: Smarter evaluation in Q&A mode with word-boundary awareness.
+
+**🏗️ Architecture Improvements**
+- **Modular Component Structure**: Refactored core components for better performance and maintainability.
+- **Progress Context**: Single source of truth for all performance data.
+
+**🐛 Bug Fixes & Refinements**
+- Fixed score clamping issues to ensure accurate 0-100 range.
+- Improved build stability and component encapsulation.
+- Better state management for multi-mode practice sessions.
+
+### Version 5.2.0
 
 **✨ Enhanced Q&A Mode**
 - Added topic-based question selection with 10 diverse categories
