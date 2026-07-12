@@ -1,4 +1,5 @@
 import nlp from 'compromise';
+// @ts-ignore
 import compendium from 'compendium-js';
 import { getFillerWords } from '../config/languageConfig';
 
@@ -8,7 +9,7 @@ import { getFillerWords } from '../config/languageConfig';
  */
 
 // Get filler words dynamically based on language
-const getFillerWordsForLanguage = (languageCode = 'en') => {
+const getFillerWordsForLanguage = (languageCode: string = 'en') => {
   return getFillerWords(languageCode);
 };
 
@@ -18,14 +19,14 @@ const getFillerWordsForLanguage = (languageCode = 'en') => {
  * @param {string} languageCode - Language code (e.g., 'en', 'es', 'fr')
  * @returns {Object} Filler word analysis
  */
-export const detectFillerWords = (text, languageCode = 'en') => {
+export const detectFillerWords = (text: string, languageCode: string = 'en') => {
   if (!text || text.trim() === '') {
     return { count: 0, words: [], percentage: 0 };
   }
 
   const words = text.split(/\s+/);
-  const foundFillers = [];
-  const fillerCounts = {};
+  const foundFillers: string[] = [];
+  const fillerCounts: Record<string, number> = {};
   const FILLER_WORDS = getFillerWordsForLanguage(languageCode);
 
   FILLER_WORDS.forEach(filler => {
@@ -65,13 +66,13 @@ export const detectFillerWords = (text, languageCode = 'en') => {
  * @param {string} text - Input text
  * @returns {Object} Sentence structure analysis
  */
-export const analyzeSentenceStructure = (text) => {
+export const analyzeSentenceStructure = (text: string) => {
   if (!text || text.trim() === '') {
     return { sentenceCount: 0, avgLength: 0, variety: 'low' };
   }
 
   const doc = nlp(text);
-  const sentences = doc.sentences().out('array');
+  const sentences: string[] = doc.sentences().out('array');
   const sentenceCount = sentences.length;
   
   const sentenceLengths = sentences.map(s => {
@@ -108,7 +109,7 @@ export const analyzeSentenceStructure = (text) => {
  * @param {string} text - Input text
  * @returns {Object} Repetition analysis
  */
-export const detectRepetition = (text) => {
+export const detectRepetition = (text: string) => {
   if (!text || text.trim() === '') {
     return { repeatedWords: [], count: 0 };
   }
@@ -118,7 +119,7 @@ export const detectRepetition = (text) => {
     .split(/\s+/)
     .filter(w => w.length > 3); // Only check words longer than 3 characters
 
-  const wordCounts = {};
+  const wordCounts: Record<string, number> = {};
   words.forEach(word => {
     wordCounts[word] = (wordCounts[word] || 0) + 1;
   });
@@ -140,13 +141,13 @@ export const detectRepetition = (text) => {
  * @param {string} text - Input text
  * @returns {Object} Vocabulary analysis
  */
-export const analyzeVocabulary = (text) => {
+export const analyzeVocabulary = (text: string) => {
   if (!text || text.trim() === '') {
     return { uniqueWords: 0, totalWords: 0, diversity: 0, complexity: 'low' };
   }
 
   const doc = nlp(text);
-  const words = doc.terms().out('array');
+  const words: string[] = doc.terms().out('array');
   const totalWords = words.length;
   const uniqueWords = new Set(words.map(w => w.toLowerCase())).size;
   const diversity = totalWords > 0 ? Math.round((uniqueWords / totalWords) * 100) : 0;
@@ -175,7 +176,7 @@ export const analyzeVocabulary = (text) => {
  * @param {number} durationSeconds - Duration in seconds (optional)
  * @returns {Object} Pace analysis
  */
-export const analyzePace = (text, durationSeconds = null) => {
+export const analyzePace = (text: string, durationSeconds: number | null = null) => {
   if (!text || text.trim() === '') {
     return { wordsPerMinute: 0, pace: 'normal', wordCount: 0 };
   }
@@ -214,7 +215,7 @@ export const analyzePace = (text, durationSeconds = null) => {
  * @param {string} text - Input text
  * @returns {Object} Sentiment analysis
  */
-export const analyzeSentiment = (text) => {
+export const analyzeSentiment = (text: string) => {
   try {
     const analysis = compendium.analyse(text, null, [
       "entities",
@@ -246,8 +247,8 @@ export const analyzeSentiment = (text) => {
  * @param {Object} analysis - Complete analysis object
  * @returns {Array} Array of improvement suggestions
  */
-export const generateSuggestions = (analysis) => {
-  const suggestions = [];
+export const generateSuggestions = (analysis: Record<string, any>): Record<string, any>[] => {
+  const suggestions: Record<string, any>[] = [];
 
   // Filler word suggestions
   if (analysis.fillerWords.count > 0) {
@@ -274,7 +275,7 @@ export const generateSuggestions = (analysis) => {
       type: 'repetition',
       priority: 'medium',
       message: `You repeated some words multiple times. Try using synonyms for variety.`,
-      tip: `Repeated words: ${analysis.repetition.repeatedWords.slice(0, 3).map(r => r.word).join(', ')}`
+      tip: `Repeated words: ${analysis.repetition.repeatedWords.slice(0, 3).map((r: Record<string, any>) => r.word).join(', ')}`
     });
   }
 
@@ -334,7 +335,7 @@ export const generateSuggestions = (analysis) => {
  * @param {string} languageCode - Language code for analysis (default: 'en')
  * @returns {Object} Complete analysis object
  */
-export const analyzeText = (text, durationSeconds = null, languageCode = 'en') => {
+export const analyzeText = (text: string, durationSeconds: number | null = null, languageCode: string = 'en') => {
   if (!text || text.trim() === '') {
     return {
       sentiment: { label: 'neutral', score: 0 },
@@ -379,11 +380,11 @@ export const analyzeText = (text, durationSeconds = null, languageCode = 'en') =
  * @param {Object} analysis - Analysis object
  * @returns {number} Overall score (0-100)
  */
-const calculateOverallScore = (analysis) => {
+const calculateOverallScore = (analysis: Record<string, any>) => {
   let score = 50; // Base score
 
   // Sentiment impact (0-25 points)
-  const sentimentScores = {
+  const sentimentScores: Record<string, number> = {
     positive: 25,
     mixed: 15,
     neutral: 10,

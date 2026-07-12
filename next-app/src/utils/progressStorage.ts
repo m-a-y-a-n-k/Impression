@@ -9,7 +9,7 @@ const FAVORITES_KEY = 'impression_favorites';
  * Get all progress entries from localStorage
  * @returns {Array} Array of progress entries
  */
-export const getProgressHistory = () => {
+export const getProgressHistory = (): Record<string, any>[] => {
   try {
     const history = localStorage.getItem(STORAGE_KEY);
     return history ? JSON.parse(history) : [];
@@ -27,7 +27,7 @@ export const getProgressHistory = () => {
  * @param {number} entry.score - Score value
  * @param {string} entry.feedback - Feedback message
  */
-export const saveProgressEntry = (entry) => {
+export const saveProgressEntry = (entry: any) => {
   try {
     const history = getProgressHistory();
     const now = Date.now();
@@ -155,7 +155,7 @@ export const getProgressStats = () => {
 
     // Calculate average scores per date
     Object.keys(entriesByDate).forEach(date => {
-      const scores = entriesByDate[date].scores;
+      const scores: any[] = entriesByDate[date].scores;
       entriesByDate[date].avgScore = scores.length > 0
         ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
         : 0;
@@ -216,7 +216,7 @@ export const getRecentEntries = (days = 7) => {
  * @param {string} value - Value to escape
  * @returns {string} Escaped value
  */
-const escapeCSVField = (value) => {
+const escapeCSVField = (value: any) => {
   if (value === null || value === undefined) return '';
   
   const stringValue = String(value);
@@ -337,7 +337,7 @@ export const getFavorites = () => {
  * @param {string} entryId - Entry ID to check
  * @returns {boolean} True if entry is favorited
  */
-export const isFavorite = (entryId) => {
+export const isFavorite = (entryId: string) => {
   try {
     const favorites = getFavorites();
     return favorites.includes(entryId);
@@ -352,7 +352,7 @@ export const isFavorite = (entryId) => {
  * @param {string} entryId - Entry ID to toggle
  * @returns {boolean} New favorite status (true if now favorited, false if unfavorited)
  */
-export const toggleFavorite = (entryId) => {
+export const toggleFavorite = (entryId: string) => {
   try {
     const favorites = getFavorites();
     const index = favorites.indexOf(entryId);

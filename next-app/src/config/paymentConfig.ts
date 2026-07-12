@@ -29,7 +29,7 @@ export const CARD_TYPES = {
 
 // Check if we're in beta testing mode
 export const isBetaTestingEnabled = () => {
-  return process.env.REACT_APP_ENABLE_BETA_TESTING === 'true';
+  return process.env.NEXT_PUBLIC_ENABLE_BETA_TESTING === 'true';
 };
 
 export const PAYMENT_CONFIG = {
@@ -38,7 +38,7 @@ export const PAYMENT_CONFIG = {
   
   // Razorpay Configuration (Primary payment gateway for Indian market)
   razorpay: {
-    keyId: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_HERE',
+    keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_HERE',
     enabled: !isBetaTestingEnabled(),
     currency: 'INR',
     supportedMethods: ['card', 'upi', 'netbanking', 'wallet']
@@ -46,25 +46,25 @@ export const PAYMENT_CONFIG = {
   
   // Stripe Configuration (Alternative for international payments)
   stripe: {
-    publishableKey: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE',
+    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE',
     enabled: false // Can be enabled for international payments
   },
   
   // PayPal Configuration
   paypal: {
-    clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID || 'YOUR_PAYPAL_CLIENT_ID',
+    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'YOUR_PAYPAL_CLIENT_ID',
     enabled: false // Can be enabled if needed
   },
   
   // UPI Configuration
   upi: {
-    merchantVPA: process.env.REACT_APP_UPI_MERCHANT_VPA || 'merchant@upi',
-    merchantName: process.env.REACT_APP_UPI_MERCHANT_NAME || 'Impression',
+    merchantVPA: process.env.NEXT_PUBLIC_UPI_MERCHANT_VPA || 'merchant@upi',
+    merchantName: process.env.NEXT_PUBLIC_UPI_MERCHANT_NAME || 'Impression',
     enabled: true // Available in both modes
   },
   
   // API Endpoint
-  apiEndpoint: process.env.REACT_APP_API_ENDPOINT || 'https://your-backend.com/api',
+  apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT || 'https://your-backend.com/api',
   
   // Mock Payment Settings (for beta testing)
   mock: {

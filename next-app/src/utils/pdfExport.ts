@@ -222,8 +222,8 @@ export const exportProgressToPDF = async () => {
 /**
  * Get RGB color for sentiment
  */
-const getSentimentColor = (sentiment) => {
-  const colors = {
+const getSentimentColor = (sentiment: string) => {
+  const colors: Record<string, Record<string, number>> = {
     positive: { r: 56, g: 161, b: 105 },
     negative: { r: 229, g: 62, b: 62 },
     neutral: { r: 113, g: 128, b: 150 },

@@ -9,7 +9,7 @@ import { PAYMENT_CONFIG } from '../config/paymentConfig';
 /**
  * Simulate payment processing delay
  */
-const simulateDelay = (ms) => {
+const simulateDelay = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
@@ -25,7 +25,7 @@ const generateTransactionId = () => {
 /**
  * Mock Card Payment
  */
-export const processMockCardPayment = async (cardDetails, amount, planId) => {
+export const processMockCardPayment = async (cardDetails: Record<string, any>, amount: number, planId: string): Promise<Record<string, any>> => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -56,9 +56,9 @@ export const processMockCardPayment = async (cardDetails, amount, planId) => {
   return {
     success: true,
     transactionId: generateTransactionId(),
-    amount: amount,
+    amount,
     currency: 'USD',
-    planId: planId,
+    planId,
     paymentMethod: `${cardType}_card`,
     timestamp: new Date().toISOString(),
     status: 'completed',
@@ -70,7 +70,7 @@ export const processMockCardPayment = async (cardDetails, amount, planId) => {
 /**
  * Mock UPI Payment
  */
-export const processMockUPIPayment = async (upiDetails, amount, planId) => {
+export const processMockUPIPayment = async (upiDetails: Record<string, string>, amount: number, planId: string) => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -95,11 +95,11 @@ export const processMockUPIPayment = async (upiDetails, amount, planId) => {
   return {
     success: true,
     transactionId: generateTransactionId(),
-    amount: amount,
+    amount,
     currency: 'USD',
-    planId: planId,
+    planId,
     paymentMethod: 'upi',
-    upiApp: upiApp,
+    upiApp,
     timestamp: new Date().toISOString(),
     status: 'completed',
     message: 'Payment successful via UPI (Mock Mode)',
@@ -110,7 +110,7 @@ export const processMockUPIPayment = async (upiDetails, amount, planId) => {
 /**
  * Mock Net Banking Payment
  */
-export const processMockNetBankingPayment = async (bankingDetails, amount, planId) => {
+export const processMockNetBankingPayment = async (bankingDetails: Record<string, string>, amount: number, planId: string) => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -129,9 +129,9 @@ export const processMockNetBankingPayment = async (bankingDetails, amount, planI
   return {
     success: true,
     transactionId: generateTransactionId(),
-    amount: amount,
+    amount,
     currency: 'USD',
-    planId: planId,
+    planId,
     paymentMethod: 'netbanking',
     bank: bankId,
     timestamp: new Date().toISOString(),
@@ -144,7 +144,7 @@ export const processMockNetBankingPayment = async (bankingDetails, amount, planI
 /**
  * Mock PayPal Payment
  */
-export const processMockPayPalPayment = async (amount, planId) => {
+export const processMockPayPalPayment = async (amount: number, planId: string) => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -157,9 +157,9 @@ export const processMockPayPalPayment = async (amount, planId) => {
   return {
     success: true,
     transactionId: generateTransactionId(),
-    amount: amount,
+    amount,
     currency: 'USD',
-    planId: planId,
+    planId,
     paymentMethod: 'paypal',
     timestamp: new Date().toISOString(),
     status: 'completed',
@@ -171,7 +171,7 @@ export const processMockPayPalPayment = async (amount, planId) => {
 /**
  * Mock Stripe Payment
  */
-export const processMockStripePayment = async (amount, planId) => {
+export const processMockStripePayment = async (amount: number, planId: string) => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -184,9 +184,9 @@ export const processMockStripePayment = async (amount, planId) => {
   return {
     success: true,
     transactionId: generateTransactionId(),
-    amount: amount,
+    amount,
     currency: 'USD',
-    planId: planId,
+    planId,
     paymentMethod: 'stripe',
     timestamp: new Date().toISOString(),
     status: 'completed',
@@ -198,7 +198,7 @@ export const processMockStripePayment = async (amount, planId) => {
 /**
  * Verify mock payment status
  */
-export const verifyMockPayment = async (transactionId) => {
+export const verifyMockPayment = async (transactionId: string) => {
   if (!PAYMENT_CONFIG.mock.enabled) {
     throw new Error('Mock payments are not enabled');
   }
@@ -206,7 +206,7 @@ export const verifyMockPayment = async (transactionId) => {
   await simulateDelay(500);
 
   return {
-    transactionId: transactionId,
+    transactionId,
     status: 'completed',
     verified: true,
     timestamp: new Date().toISOString(),

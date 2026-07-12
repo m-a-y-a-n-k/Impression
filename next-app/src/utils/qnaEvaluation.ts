@@ -11,16 +11,27 @@ import { analyzeText } from './nlpAnalysis';
  * @param {Array} keywords - Expected keywords
  * @returns {Object} Keyword analysis
  */
-export const evaluateKeywords = (answer, keywords) => {
+export interface KeywordAnalysis {
+  score: number;
+  matchedKeywords: string[];
+  missingKeywords: string[];
+  percentage: number;
+  totalKeywords?: number;
+}
+
+export const evaluateKeywords = (
+  answer: string,
+  keywords: string[]
+): KeywordAnalysis => {
   if (!answer || !keywords || keywords.length === 0) {
     return { score: 0, matchedKeywords: [], missingKeywords: keywords, percentage: 0 };
   }
 
   const answerLower = answer.toLowerCase();
-  const matchedKeywords = [];
-  const missingKeywords = [];
+  const matchedKeywords: string[] = [];
+  const missingKeywords: string[] = [];
 
-  keywords.forEach(keyword => {
+  keywords.forEach((keyword: string) => {
     const keywordLower = keyword.toLowerCase();
     
     // Use regex with word boundaries to ensure we match whole words/phrases
@@ -52,12 +63,23 @@ export const evaluateKeywords = (answer, keywords) => {
  * @param {number} expectedLength - Expected word count
  * @returns {Object} Completeness analysis
  */
-export const evaluateCompleteness = (answer, expectedLength) => {
+export interface CompletenessAnalysis {
+  score: number;
+  wordCount: number;
+  expectedLength?: number;
+  percentage?: number;
+  status: string;
+}
+
+export const evaluateCompleteness = (
+  answer: string,
+  expectedLength: number
+): CompletenessAnalysis => {
   if (!answer) {
     return { score: 0, wordCount: 0, percentage: 0, status: 'too-short' };
   }
 
-  const words = answer.trim().split(/\s+/).filter(w => w.length > 0);
+  const words = answer.trim().split(/\s+/).filter((w: string) => w.length > 0);
   const wordCount = words.length;
   
   // Allow 20% variance from expected length
@@ -93,7 +115,7 @@ export const evaluateCompleteness = (answer, expectedLength) => {
  * @param {Object} nlpAnalysis - NLP analysis result
  * @returns {Object} Clarity analysis
  */
-export const evaluateClarity = (nlpAnalysis) => {
+export const evaluateClarity = (nlpAnalysis: any): any => {
   if (!nlpAnalysis) {
     return { score: 0, issues: ['Analysis unavailable'] };
   }
@@ -149,7 +171,7 @@ export const evaluateClarity = (nlpAnalysis) => {
  * @param {Object} nlpAnalysis - NLP analysis result
  * @returns {Object} Vocabulary analysis
  */
-export const evaluateVocabulary = (nlpAnalysis) => {
+export const evaluateVocabulary = (nlpAnalysis: any): any => {
   if (!nlpAnalysis || !nlpAnalysis.vocabulary) {
     return { score: 0, diversity: 0, insights: ['Vocabulary analysis unavailable'] };
   }
@@ -197,7 +219,12 @@ export const evaluateVocabulary = (nlpAnalysis) => {
  * @param {Object} weights - Weights for each criterion
  * @returns {number} Weighted overall score
  */
-export const calculateWeightedScore = (scores, weights) => {
+export const calculateWeightedScore = (
+  scores: Question['evaluationCriteria'],
+  weights: Question['evaluationCriteria']
+): number => {
+  if(!scores || !weights)
+    return 0;
   const weightedScore = 
     (scores.accuracy * weights.accuracy) +
     (scores.clarity * weights.clarity) +
@@ -212,7 +239,7 @@ export const calculateWeightedScore = (scores, weights) => {
  * @param {Object} evaluation - Complete evaluation object
  * @returns {Array} Array of improvement suggestions
  */
-export const generateQnASuggestions = (evaluation) => {
+export const generateQnASuggestions = (evaluation: any): any[] => {
   const suggestions = [];
 
   // Keyword coverage suggestions
@@ -277,7 +304,7 @@ export const generateQnASuggestions = (evaluation) => {
  * @param {number} score - Overall score (0-100)
  * @returns {Object} Grade information
  */
-export const getScoreGrade = (score) => {
+export const getScoreGrade = (score: number): any => {
   if (score >= 90) {
     return {
       grade: 'A+',
@@ -330,7 +357,25 @@ export const getScoreGrade = (score) => {
  * @param {number} durationSeconds - Optional time taken to answer
  * @returns {Object} Complete evaluation result
  */
-export const evaluateAnswer = (answer, question, durationSeconds = null) => {
+export interface Question {
+  id?: string;
+  category?: string;
+  difficulty?: string;
+  keywords?: string[];
+  expectedLength?: number;
+  evaluationCriteria?: {
+    accuracy: number;
+    clarity: number;
+    completeness: number;
+    vocabulary: number;
+  };
+}
+
+export const evaluateAnswer = (
+  answer: string,
+  question: Question,
+  durationSeconds: number | null = null
+): any => {
   try {
     if (!answer || !question) {
       console.error('evaluateAnswer: Missing answer or question');
@@ -358,7 +403,7 @@ export const evaluateAnswer = (answer, question, durationSeconds = null) => {
     };
 
     // Calculate weighted overall score
-    const overallScore = calculateWeightedScore(scores, question.evaluationCriteria || {});
+    const overallScore = calculateWeightedScore(scores, question.evaluationCriteria);
 
     // Get grade information
     const grade = getScoreGrade(overallScore);
@@ -385,7 +430,7 @@ export const evaluateAnswer = (answer, question, durationSeconds = null) => {
       category: question.category || 'unknown',
       difficulty: question.difficulty || 'unknown'
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in evaluateAnswer:', error);
     // Return a basic evaluation on error
     return {
@@ -406,7 +451,7 @@ export const evaluateAnswer = (answer, question, durationSeconds = null) => {
       questionId: question?.id || 'unknown',
       category: question?.category || 'unknown',
       difficulty: question?.difficulty || 'unknown',
-      error: error.message
+      error: error?.message
     };
   }
 };

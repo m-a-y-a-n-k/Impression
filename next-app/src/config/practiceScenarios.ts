@@ -3,7 +3,7 @@
  * Defines different practice scenarios with specific feedback criteria
  */
 
-export const PRACTICE_SCENARIOS = {
+export const PRACTICE_SCENARIOS: Record<string, Record<string, any>> = {
   'job-interview': {
     id: 'job-interview',
     name: 'Job Interview',
@@ -187,7 +187,7 @@ export const PRACTICE_SCENARIOS = {
 /**
  * Get scenario by ID
  */
-export const getScenario = (scenarioId) => {
+export const getScenario = (scenarioId: string) => {
   return PRACTICE_SCENARIOS[scenarioId] || PRACTICE_SCENARIOS['job-interview'];
 };
 
@@ -201,7 +201,7 @@ export const getAllScenarioIds = () => {
 /**
  * Get scenario-specific feedback based on score
  */
-export const getScenarioFeedback = (scenarioId, overallScore) => {
+export const getScenarioFeedback = (scenarioId: string, overallScore: number) => {
   const scenario = getScenario(scenarioId);
   const templates = scenario.feedbackTemplates;
   

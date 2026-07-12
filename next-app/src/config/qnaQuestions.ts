@@ -3,32 +3,48 @@
  * Expanded beyond STEM to include Business, History, Arts, Current Affairs, and more
  */
 
-export const QUESTION_CATEGORIES = {
+export const enum QUESTION_CATEGORIES {
   // STEM Categories
-  SCIENCE: 'science',
-  TECHNOLOGY: 'technology',
-  ENGINEERING: 'engineering',
-  MATHEMATICS: 'mathematics',
+  SCIENCE = 'science',
+  TECHNOLOGY = 'technology',
+  ENGINEERING = 'engineering',
+  MATHEMATICS = 'mathematics',
   // Non-STEM Categories
-  BUSINESS: 'business',
-  HISTORY: 'history',
-  ARTS: 'arts',
-  CURRENT_AFFAIRS: 'current_affairs',
-  PSYCHOLOGY: 'psychology',
-  LITERATURE: 'literature'
+  BUSINESS = 'business',
+  HISTORY = 'history',
+  ARTS = 'arts',
+  CURRENT_AFFAIRS = 'current_affairs',
+  PSYCHOLOGY = 'psychology',
+  LITERATURE = 'literature'
 };
 
-export const DIFFICULTY_LEVELS = {
-  BEGINNER: 'beginner',
-  INTERMEDIATE: 'intermediate',
-  ADVANCED: 'advanced'
+export const enum DIFFICULTY_LEVELS {
+  BEGINNER = 'beginner',
+  INTERMEDIATE = 'intermediate',
+  ADVANCED = 'advanced'
 };
+
+export interface Question {
+  id: string,
+  category: QUESTION_CATEGORIES,
+  difficulty: DIFFICULTY_LEVELS,
+  question: string,
+  keywords: string[],
+  expectedLength: number,
+  timeLimit: number,
+  evaluationCriteria: {
+    accuracy: number,
+    clarity: number,
+    completeness: number,
+    vocabulary: number
+  }
+}
 
 /**
  * Question bank organized by category
  * Each question includes a timeLimit in seconds
  */
-export const QUESTION_BANK = {
+export const QUESTION_BANK: Record<QUESTION_CATEGORIES, Array<Question>> = {
   science: [
     // BEGINNER SCIENCE
     {
@@ -1203,14 +1219,14 @@ export const QUESTION_BANK = {
 /**
  * Get all questions from a specific category
  */
-export const getQuestionsByCategory = (category) => {
+export const getQuestionsByCategory = (category: QUESTION_CATEGORIES) => {
   return QUESTION_BANK[category] || [];
 };
 
 /**
  * Get questions by difficulty level
  */
-export const getQuestionsByDifficulty = (difficulty, category = null) => {
+export const getQuestionsByDifficulty = (difficulty: DIFFICULTY_LEVELS, category: QUESTION_CATEGORIES | null = null) => {
   if (category) {
     const categoryQuestions = QUESTION_BANK[category] || [];
     return categoryQuestions.filter(q => q.difficulty === difficulty);
@@ -1223,7 +1239,7 @@ export const getQuestionsByDifficulty = (difficulty, category = null) => {
 /**
  * Get a random question from a category
  */
-export const getRandomQuestion = (category = null, difficulty = null) => {
+export const getRandomQuestion = (category: QUESTION_CATEGORIES | null = null, difficulty: DIFFICULTY_LEVELS | null = null) => {
   let questions;
   
   if (category) {
@@ -1245,7 +1261,7 @@ export const getRandomQuestion = (category = null, difficulty = null) => {
 /**
  * Get question by ID
  */
-export const getQuestionById = (questionId) => {
+export const getQuestionById = (questionId: string) => {
   const allQuestions = Object.values(QUESTION_BANK).flat();
   return allQuestions.find(q => q.id === questionId);
 };
@@ -1260,7 +1276,7 @@ export const getAllCategories = () => {
 /**
  * Get category count
  */
-export const getCategoryQuestionCount = (category, difficulty = null) => {
+export const getCategoryQuestionCount = (category: QUESTION_CATEGORIES, difficulty: DIFFICULTY_LEVELS | null = null) => {
   const questions = QUESTION_BANK[category] || [];
   if (difficulty) {
     return questions.filter(q => q.difficulty === difficulty).length;
@@ -1271,7 +1287,7 @@ export const getCategoryQuestionCount = (category, difficulty = null) => {
 /**
  * Get category icon
  */
-export const getCategoryIcon = (category) => {
+export const getCategoryIcon = (category: QUESTION_CATEGORIES) => {
   const icons = {
     science: '🔬',
     technology: '💻',
@@ -1290,7 +1306,7 @@ export const getCategoryIcon = (category) => {
 /**
  * Get category display name
  */
-export const getCategoryDisplayName = (category) => {
+export const getCategoryDisplayName = (category: QUESTION_CATEGORIES) => {
   const names = {
     science: 'Science',
     technology: 'Technology',
@@ -1309,7 +1325,7 @@ export const getCategoryDisplayName = (category) => {
 /**
  * Get category description
  */
-export const getCategoryDescription = (category) => {
+export const getCategoryDescription = (category: QUESTION_CATEGORIES) => {
   const descriptions = {
     science: 'Explore natural phenomena, biology, chemistry, and physics',
     technology: 'Dive into computing, AI, and digital innovation',
@@ -1328,7 +1344,7 @@ export const getCategoryDescription = (category) => {
 /**
  * Get difficulty color
  */
-export const getDifficultyColor = (difficulty) => {
+export const getDifficultyColor = (difficulty: DIFFICULTY_LEVELS) => {
   const colors = {
     beginner: '#10b981',
     intermediate: '#f59e0b',
@@ -1340,7 +1356,7 @@ export const getDifficultyColor = (difficulty) => {
 /**
  * Get difficulty label
  */
-export const getDifficultyLabel = (difficulty) => {
+export const getDifficultyLabel = (difficulty: DIFFICULTY_LEVELS) => {
   const labels = {
     beginner: 'Beginner',
     intermediate: 'Intermediate',
@@ -1352,7 +1368,7 @@ export const getDifficultyLabel = (difficulty) => {
 /**
  * Get time limit display string
  */
-export const getTimeLimitDisplay = (seconds) => {
+export const getTimeLimitDisplay = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   return `${minutes} min${minutes !== 1 ? 's' : ''}`;
 };
@@ -1360,6 +1376,6 @@ export const getTimeLimitDisplay = (seconds) => {
 /**
  * Get question count by difficulty
  */
-export const getQuestionCountByDifficulty = (difficulty, category = null) => {
+export const getQuestionCountByDifficulty = (difficulty: DIFFICULTY_LEVELS, category: QUESTION_CATEGORIES | null = null) => {
   return getQuestionsByDifficulty(difficulty, category).length;
 };

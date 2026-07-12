@@ -3,7 +3,7 @@
  * Defines supported languages with their properties
  */
 
-export const SUPPORTED_LANGUAGES = {
+export const SUPPORTED_LANGUAGES: Record<string, Record<string, string>> = {
   en: {
     code: 'en',
     name: 'English',
@@ -90,7 +90,7 @@ export const SUPPORTED_LANGUAGES = {
  * Language-specific filler words
  * Each language has its own common filler words
  */
-export const FILLER_WORDS_BY_LANGUAGE = {
+export const FILLER_WORDS_BY_LANGUAGE: Record<string, string[]> = {
   en: [
     'um', 'uh', 'er', 'ah', 'like', 'you know', 'so', 'well',
     'actually', 'basically', 'literally', 'right', 'okay', 'ok',
@@ -148,7 +148,7 @@ export const FILLER_WORDS_BY_LANGUAGE = {
  * @param {string} languageCode - ISO language code
  * @returns {Array} Array of filler words
  */
-export const getFillerWords = (languageCode) => {
+export const getFillerWords = (languageCode: string) => {
   return FILLER_WORDS_BY_LANGUAGE[languageCode] || FILLER_WORDS_BY_LANGUAGE.en;
 };
 
@@ -157,7 +157,7 @@ export const getFillerWords = (languageCode) => {
  * @param {string} languageCode - ISO language code
  * @returns {Object} Language configuration
  */
-export const getLanguageConfig = (languageCode) => {
+export const getLanguageConfig = (languageCode: string) => {
   return SUPPORTED_LANGUAGES[languageCode] || SUPPORTED_LANGUAGES.en;
 };
 
@@ -174,7 +174,7 @@ export const getAllLanguageCodes = () => {
  * @param {string} languageCode - ISO language code
  * @returns {string} Speech recognition language code
  */
-export const getSpeechRecognitionLang = (languageCode) => {
+export const getSpeechRecognitionLang = (languageCode: string) => {
   const config = getLanguageConfig(languageCode);
   return config.speechRecognitionCode;
 };
@@ -184,7 +184,7 @@ export const getSpeechRecognitionLang = (languageCode) => {
  * @param {string} languageCode - ISO language code
  * @returns {boolean} True if RTL language
  */
-export const isRTL = (languageCode) => {
+export const isRTL = (languageCode: string) => {
   const config = getLanguageConfig(languageCode);
   return config.dir === 'rtl';
 };

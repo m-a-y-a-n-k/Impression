@@ -16,9 +16,15 @@
 import { PAYMENT_CONFIG } from '../config/paymentConfig';
 import mockPaymentService from './mockPaymentService';
 
+declare global {
+  interface Window {
+    Razorpay?: any;
+  }
+}
+
 const RAZORPAY_CONFIG = {
-  keyId: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_HERE',
-  keySecret: process.env.REACT_APP_RAZORPAY_KEY_SECRET, // This should only be used on backend
+  keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_HERE',
+  keySecret: process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET, // This should only be used on backend
   currency: 'INR',
   name: 'Impression',
   description: 'Premium Subscription',
@@ -63,7 +69,7 @@ export const loadRazorpay = () => {
  * In production, this should call your backend to create an order
  * For now, we'll use client-side integration
  */
-const createOrder = async (amount, planId, currency = 'INR') => {
+const createOrder = async (amount: number, planId: string, currency: string = 'INR') => {
   // In production, call your backend API:
   // const response = await fetch(`${PAYMENT_CONFIG.apiEndpoint}/create-razorpay-order`, {
   //   method: 'POST',
@@ -85,7 +91,7 @@ const createOrder = async (amount, planId, currency = 'INR') => {
 /**
  * Process payment using Razorpay
  */
-export const processRazorpayPayment = async (options) => {
+export const processRazorpayPayment = async (options: Record<string, any>) => {
   const { 
     amount, 
     planId, 
@@ -122,7 +128,7 @@ export const processRazorpayPayment = async (options) => {
         email: userEmail,
       },
       theme: RAZORPAY_CONFIG.theme,
-      handler: function (response) {
+      handler: function (response: Record<string, any>) {
         // Payment successful
         const paymentData = {
           success: true,
@@ -159,7 +165,7 @@ export const processRazorpayPayment = async (options) => {
     // Open Razorpay checkout
     const razorpayInstance = new window.Razorpay(razorpayOptions);
     
-    razorpayInstance.on('payment.failed', function (response) {
+    razorpayInstance.on('payment.failed', function (response: Record<string, any>) {
       const error = {
         success: false,
         error: response.error.description,
@@ -199,7 +205,7 @@ export const processRazorpayPayment = async (options) => {
         reject(error);
       };
 
-      razorpayInstance.on('payment.failed', function (response) {
+      razorpayInstance.on('payment.failed', function (response: Record<string, any>) {
         const error = new Error(response.error.description);
         if (onFailure) onFailure(error);
         reject(error);
@@ -216,7 +222,7 @@ export const processRazorpayPayment = async (options) => {
  * Verify payment signature (should be done on backend)
  * This ensures the payment response hasn't been tampered with
  */
-export const verifyPaymentSignature = async (paymentData) => {
+export const verifyPaymentSignature = async () => {
   // In production, call your backend:
   // const response = await fetch(`${PAYMENT_CONFIG.apiEndpoint}/verify-payment`, {
   //   method: 'POST',
@@ -234,7 +240,7 @@ export const verifyPaymentSignature = async (paymentData) => {
 /**
  * Process UPI payment through Razorpay
  */
-export const processUPIPayment = async (options) => {
+export const processUPIPayment = async (options: Record<string, any>) => {
   const { amount, planId, upiId, userEmail, userName } = options;
 
   try {
@@ -260,7 +266,7 @@ export const processUPIPayment = async (options) => {
 /**
  * Process Net Banking payment through Razorpay
  */
-export const processNetBankingPayment = async (options) => {
+export const processNetBankingPayment = async (options: Record<string, any>) => {
   const { amount, planId, bankId, userEmail, userName } = options;
 
   try {
@@ -285,7 +291,7 @@ export const processNetBankingPayment = async (options) => {
 /**
  * Process Card payment through Razorpay
  */
-export const processCardPayment = async (options) => {
+export const processCardPayment = async (options: Record<string, any>) => {
   const { amount, planId, userEmail, userName } = options;
 
   try {

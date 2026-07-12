@@ -12,6 +12,12 @@
 import { PAYMENT_CONFIG } from '../config/paymentConfig';
 import mockPaymentService from './mockPaymentService';
 
+declare global {
+  interface Window {
+    Stripe?: any;
+  }
+}
+
 // In production, these should be environment variables
 // Create a .env file with:
 // REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_live_...
@@ -19,18 +25,18 @@ import mockPaymentService from './mockPaymentService';
 // REACT_APP_STRIPE_PRO_PRICE_ID=price_...
 // REACT_APP_ENABLE_BETA_TESTING=false
 
-const STRIPE_CONFIG = {
+const STRIPE_CONFIG: Record<string, any> = {
   // Use test key for development
-  publishableKey: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE',
+  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE',
   
   // Price IDs from Stripe Dashboard
   prices: {
-    premium: process.env.REACT_APP_STRIPE_PREMIUM_PRICE_ID || 'price_premium_monthly',
-    pro: process.env.REACT_APP_STRIPE_PRO_PRICE_ID || 'price_pro_monthly'
+    premium: process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID || 'price_premium_monthly',
+    pro: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || 'price_pro_monthly'
   },
   
   // Your backend API endpoint for creating checkout sessions
-  apiEndpoint: process.env.REACT_APP_API_ENDPOINT || 'https://your-backend.com/api',
+  apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT || 'https://your-backend.com/api',
   
   // Check if beta testing is enabled
   isBetaTesting: PAYMENT_CONFIG.isBetaTesting
@@ -41,7 +47,7 @@ const STRIPE_CONFIG = {
  * This would typically redirect to Stripe Checkout
  * Uses mock payment service in beta testing mode
  */
-export const initiateCheckout = async (planId, userEmail = null, amount = 0) => {
+export const initiateCheckout = async (planId: string, userEmail: string | null = null, amount: number = 0) => {
   try {
     // Check if beta testing is enabled
     if (STRIPE_CONFIG.isBetaTesting) {
@@ -115,7 +121,7 @@ export const loadStripe = () => {
  * Call your backend to verify the subscription
  * Uses mock verification in beta testing mode
  */
-export const verifySubscription = async (customerId) => {
+export const verifySubscription = async (customerId: string) => {
   try {
     // Check if beta testing is enabled
     if (STRIPE_CONFIG.isBetaTesting) {
@@ -141,7 +147,7 @@ export const verifySubscription = async (customerId) => {
 /**
  * Create customer portal session for subscription management
  */
-export const createPortalSession = async (customerId) => {
+export const createPortalSession = async (customerId: string) => {
   try {
     const response = await fetch(`${STRIPE_CONFIG.apiEndpoint}/create-portal-session`, {
       method: 'POST',

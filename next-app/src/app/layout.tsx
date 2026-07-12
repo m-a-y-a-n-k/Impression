@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Impression | AI Communication Coach",
     description: "Master the art of conversation with real-time feedback.",
-    url: "https://impression-app.com",
+    url: "https://mnarulabuilds.github.io/Impression/",
     siteName: "Impression",
     locale: "en_US",
     type: "website",

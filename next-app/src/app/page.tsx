@@ -13,7 +13,7 @@ import UserMenu from "@/components/UserMenu";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useSiteAudio } from "@/hooks/useSiteAudio";
 
-function MainApp() {
+const MainApp = () => {
   const fetchIntroStatus = () => {
     if (typeof window !== "undefined") {
       return sessionStorage.getItem("intro-done") ? false : true;

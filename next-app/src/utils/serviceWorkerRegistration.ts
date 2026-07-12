@@ -7,7 +7,7 @@ const isLocalhost = Boolean(
   )
 );
 
-export function register(config) {
+export function register(config: Record<string, any>) {
   if ('serviceWorker' in navigator) {
     const publicUrl = new URL(process.env.PUBLIC_URL || '', window.location.href);
     if (publicUrl.origin !== window.location.origin) {
@@ -32,7 +32,7 @@ export function register(config) {
   }
 }
 
-function registerValidSW(swUrl, config) {
+function registerValidSW(swUrl: string, config: Record<string, any>) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
@@ -66,7 +66,7 @@ function registerValidSW(swUrl, config) {
     });
 }
 
-function checkValidServiceWorker(swUrl, config) {
+function checkValidServiceWorker(swUrl: string, config: Record<string, any>) {
   fetch(swUrl, {
     headers: { 'Service-Worker': 'script' },
   })
